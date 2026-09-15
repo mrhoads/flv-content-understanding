@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>FirstLook Verify</title>
+    <link rel="stylesheet" href="/static/styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="brand"><span class="brand-mark">FL</span> FirstLook Verify</div>
+      <div class="secure-pill">Secure evidence intake</div>
+    </header>
+
+    <main>
+      <section class="hero">
+        <p class="eyebrow">PROGRESSIVE CONTENT UNDERSTANDING</p>
+        <h1>Verify vehicle evidence without the paperwork chase.</h1>
+        <p>
+          A friendly intake experience for customers and a grounded evidence
+          assistant for claims teams.
+        </p>
+      </section>
+
+      <nav class="tabs" aria-label="Demo views">
+        <button class="tab active" data-target="customer-panel">Customer intake</button>
+        <button class="tab" data-target="employee-panel">Employee review</button>
+      </nav>
+
+      <section id="customer-panel" class="panel active">
+        <div class="workspace">
+          <aside class="steps">
+            <h2>Your verification</h2>
+            <ol>
+              <li class="done"><span>1</span><div><strong>Start</strong><small>Open a secure case</small></div></li>
+              <li id="step-upload"><span>2</span><div><strong>Upload</strong><small>Vehicle image or document</small></div></li>
+              <li id="step-review"><span>3</span><div><strong>Review</strong><small>Answer one clarifying question</small></div></li>
+            </ol>
+            <div class="privacy-note">
+              <strong>Your information is protected</strong>
+              <p>Files are encrypted before storage and are available only to authorized reviewers.</p>
+            </div>
+          </aside>
+
+          <div class="chat-card">
+            <div class="chat-heading">
+              <div class="agent-avatar">A</div>
+              <div><strong>Avery</strong><small>Verification assistant</small></div>
+              <span class="online">Online</span>
+            </div>
+            <div id="customer-chat" class="chat-body">
+              <div class="message assistant">
+                Welcome! Select <strong>Start verification</strong> and I’ll guide you through the next step.
+              </div>
+            </div>
+            <div id="start-area" class="start-area">
+              <input id="customer-name" placeholder="Your name" maxlength="100" required />
+              <button id="start-case" class="primary">Start verification</button>
+            </div>
+            <div id="upload-area" class="upload-area hidden">
+              <label class="drop-zone" for="evidence-file">
+                <span class="upload-icon">↑</span>
+                <strong>Choose a vehicle photo or document</strong>
+                <small>JPG, PNG, WEBP, TIFF, or PDF · up to 15 MB</small>
+              </label>
+              <input id="evidence-file" type="file" accept="image/jpeg,image/png,image/webp,image/tiff,application/pdf" />
+            </div>
+            <form id="customer-message-form" class="message-form hidden">
+              <input id="customer-message" placeholder="Type your response…" maxlength="2000" />
+              <button class="send" aria-label="Send">➜</button>
+            </form>
+          </div>
+        </div>
+      </section>
+
+      <section id="employee-panel" class="panel">
+        <div class="employee-grid">
+          <aside class="case-list-card">
+            <div class="section-heading"><div><p class="eyebrow">INTERNAL</p><h2>Evidence cases</h2></div></div>
+            <label>Employee access key<input id="employee-key" type="password" placeholder="Paste the Key Vault access key" autocomplete="off" /></label>
+            <button id="load-cases" class="secondary">Load authorized cases</button>
+            <div id="case-list" class="case-list"><p class="muted">Authenticate to view cases.</p></div>
+          </aside>
+          <div class="review-card">
+            <div class="section-heading"><div><p class="eyebrow">GROUNDED Q&amp;A</p><h2>Ask about submitted evidence</h2></div><span id="selected-case" class="case-chip">No case selected</span></div>
+            <div id="analysis-preview" class="analysis-preview">
+              <div class="empty-state"><span>⌕</span><h3>Select a case</h3><p>Ask about VINs, document fields, visible damage, confidence, or missing evidence.</p></div>
+            </div>
+            <form id="employee-form" class="employee-form">
+              <input id="employee-question" placeholder="e.g. Does the VIN match across the submitted evidence?" maxlength="2000" />
+              <button class="primary">Ask evidence agent</button>
+            </form>
+          </div>
+        </div>
+      </section>
+    </main>
+    <footer>Demo only · Human review remains required for coverage and authenticity decisions.</footer>
+    <script src="/static/app.js"></script>
+  </body>
+</html>

@@ -1,0 +1,70 @@
+{
+  "description": "Classify and extract state registration, title, insurance, and other vehicle documents.",
+  "baseAnalyzerId": "prebuilt-document",
+  "models": {
+    "completion": "gpt-4.1-mini"
+  },
+  "config": {
+    "returnDetails": true,
+    "estimateFieldSourceAndConfidence": true,
+    "tableFormat": "html"
+  },
+  "fieldSchema": {
+    "fields": {
+      "DocumentType": {
+        "type": "string",
+        "method": "classify",
+        "enum": ["Registration", "Title", "InsuranceCard", "BillOfSale", "Other"]
+      },
+      "IssuingState": {
+        "type": "string",
+        "method": "extract"
+      },
+      "RegisteredOwner": {
+        "type": "string",
+        "method": "extract"
+      },
+      "VIN": {
+        "type": "string",
+        "method": "extract"
+      },
+      "LicensePlate": {
+        "type": "string",
+        "method": "extract"
+      },
+      "TitleNumber": {
+        "type": "string",
+        "method": "extract"
+      },
+      "Year": {
+        "type": "integer",
+        "method": "extract"
+      },
+      "Make": {
+        "type": "string",
+        "method": "extract"
+      },
+      "Model": {
+        "type": "string",
+        "method": "extract"
+      },
+      "IssueDate": {
+        "type": "date",
+        "method": "extract"
+      },
+      "ExpirationDate": {
+        "type": "date",
+        "method": "extract"
+      },
+      "Lienholder": {
+        "type": "string",
+        "method": "extract"
+      },
+      "TitleBrand": {
+        "type": "string",
+        "method": "extract"
+      }
+    }
+  }
+}
+

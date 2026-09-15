@@ -1,0 +1,30 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "environmentName": {
+      "value": "flv-demo-dev-e9fd"
+    },
+    "location": {
+      "value": "northcentralus"
+    },
+    "sessionId": {
+      "value": "e9fdeddd-2634-4c0e-968f-a62843c368a4"
+    },
+    "deployedBy": {
+      "value": "Mike Rhoads"
+    },
+    "createdAt": {
+      "value": "2026-09-09T15:52:11Z"
+    },
+    "deployerObjectId": {
+      "value": "e9f2edd0-b31b-4388-9da7-88dd9c9ed5cb"
+    },
+    "containerImage": {
+      "value": "mcr.microsoft.com/azuredocs/containerapps-helloworld:latest"
+    },
+    "isPlaceholder": {
+      "value": true
+    }
+  }
+}

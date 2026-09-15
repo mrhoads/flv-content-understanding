@@ -1,0 +1,56 @@
+{
+  "description": "Extract vehicle identity, condition, and related-item evidence from first-look images.",
+  "baseAnalyzerId": "prebuilt-image",
+  "models": {
+    "completion": "gpt-4.1-mini"
+  },
+  "config": {
+    "returnDetails": true,
+    "estimateFieldSourceAndConfidence": true
+  },
+  "fieldSchema": {
+    "fields": {
+      "VehicleType": {
+        "type": "string",
+        "method": "classify",
+        "enum": ["PassengerCar", "Truck", "Van", "Motorcycle", "Trailer", "Other"]
+      },
+      "Year": {
+        "type": "integer",
+        "method": "generate"
+      },
+      "Make": {
+        "type": "string",
+        "method": "generate"
+      },
+      "Model": {
+        "type": "string",
+        "method": "generate"
+      },
+      "Color": {
+        "type": "string",
+        "method": "generate"
+      },
+      "VIN": {
+        "type": "string",
+        "method": "generate",
+        "description": "Only extract a VIN when it is visibly readable in the image."
+      },
+      "LicensePlate": {
+        "type": "string",
+        "method": "generate"
+      },
+      "VisibleDamage": {
+        "type": "string",
+        "method": "generate",
+        "description": "Describe visible damage or state that no obvious damage is visible."
+      },
+      "RelatedItems": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}
