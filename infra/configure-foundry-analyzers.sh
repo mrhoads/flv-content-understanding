@@ -105,3 +105,4 @@ put_analyzer() {
 
 put_analyzer "flvVehicleAnalyzer" "${SCRIPT_DIR}/analyzers/vehicle-image.json"
 put_analyzer "flvVehicleDocumentAnalyzer" "${SCRIPT_DIR}/analyzers/vehicle-document.json"
+put_analyzer "flvCommercialVideoAnalyzer" "${SCRIPT_DIR}/analyzers/commercial-video.json"

@@ -1,0 +1,91 @@
+{
+  "description": "Extract advertising, character, audio, product, and brand metadata from short commercial videos.",
+  "baseAnalyzerId": "prebuilt-video",
+  "models": {
+    "completion": "gpt-4.1-mini"
+  },
+  "config": {
+    "returnDetails": true,
+    "enableSegment": false
+  },
+  "fieldSchema": {
+    "description": "Extract structured commercial-analysis attributes from the full video.",
+    "fields": {
+      "AdvertiserBrand": {
+        "type": "string",
+        "method": "generate",
+        "description": "Primary advertiser or brand promoted in the video."
+      },
+      "VisibleProducts": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "method": "generate",
+        "description": "Products, services, devices, apps, logos, UI elements, or branded assets visibly shown or clearly referenced."
+      },
+      "Characters": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "method": "generate",
+        "description": "Named or role-based characters visible or speaking in the video. Use role descriptions when names are not available."
+      },
+      "CharacterRoles": {
+        "type": "string",
+        "method": "generate",
+        "description": "Summarize the main character roles and how they contribute to the commercial."
+      },
+      "MusicAndAudio": {
+        "type": "string",
+        "method": "generate",
+        "description": "Describe audible music, jingles, sound effects, crowd noise, TV audio, voiceover, and tone. If no music is clearly audible, say so."
+      },
+      "Setting": {
+        "type": "string",
+        "method": "generate",
+        "description": "Describe the main locations and environments shown in the commercial."
+      },
+      "KeyActions": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "method": "generate",
+        "description": "Important visual actions or story beats that occur in the commercial."
+      },
+      "OnScreenText": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "method": "generate",
+        "description": "Readable text, captions, disclaimers, logos, slogans, or end-card copy shown on screen."
+      },
+      "CommercialMessage": {
+        "type": "string",
+        "method": "generate",
+        "description": "Central advertising message, offer, or call to action."
+      },
+      "HumorMechanism": {
+        "type": "string",
+        "method": "generate",
+        "description": "Explain what makes the commercial humorous, including recurring jokes, character behavior, or situational irony."
+      },
+      "SportsOrEntertainmentReferences": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "method": "generate",
+        "description": "Sports, entertainment, TV, streaming, or game-watching references in the video."
+      },
+      "BrandSafetyNotes": {
+        "type": "string",
+        "method": "generate",
+        "description": "Mention any potentially sensitive visual or spoken content. If none is apparent, say no obvious brand-safety concerns are visible or spoken."
+      }
+    }
+  }
+}
