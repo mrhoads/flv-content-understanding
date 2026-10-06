@@ -24,6 +24,9 @@ param containerImage string = 'mcr.microsoft.com/azuredocs/containerapps-hellowo
 @description('Set false after the application image is built and Key Vault secrets are populated.')
 param isPlaceholder bool = true
 
+@description('Principal ID of the Microsoft Fabric workspace identity, granted read-only access to the cu-results container for OneLake shortcut ingestion. Leave empty until the Fabric workspace identity is enabled.')
+param fabricWorkspaceIdentityPrincipalId string = ''
+
 // Standard tags applied to all resources
 var commonTags = {
   'app-onboard-skill': 'true'
@@ -115,6 +118,17 @@ module storage 'modules/storage.bicep' = {
   }
 }
 
+// Additional container for Content Understanding JSON results consumed by Microsoft
+// Fabric via a OneLake shortcut (read-only, no SAS/keys; see fabric/README.md).
+module cuResultsContainer 'modules/blob-container.bicep' = {
+  scope: resourceGroup
+  name: 'cuResultsContainer-${uniqueString(subscription().id, resourceGroup.id)}'
+  params: {
+    storageAccountName: storage.outputs.name
+    containerName: 'cu-results'
+  }
+}
+
 // Deploy Key Vault
 module keyVault 'modules/key-vault.bicep' = {
   scope: resourceGroup
@@ -194,6 +208,7 @@ module roleAssignments 'modules/role-assignments.bicep' = {
     documentIntelligenceAccountName: documentIntelligence.outputs.accountName
     managedIdentityPrincipalId: managedIdentity.outputs.principalId
     deployerObjectId: deployerObjectId
+    fabricWorkspaceIdentityPrincipalId: fabricWorkspaceIdentityPrincipalId
   }
 }
 
@@ -250,3 +265,6 @@ output contentUnderstandingEndpoint string = contentUnderstanding.outputs.accoun
 
 @description('Document Intelligence Endpoint')
 output documentIntelligenceEndpoint string = documentIntelligence.outputs.accountEndpoint
+
+@description('Content Understanding results container name used by the Fabric OneLake shortcut')
+output cuResultsContainerName string = cuResultsContainer.outputs.name
