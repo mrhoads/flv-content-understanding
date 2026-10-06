@@ -68,7 +68,7 @@ message, run:
 
 ```bash
 export CONTENT_UNDERSTANDING_ENDPOINT="https://aif-flv-cu-dev-e9fd04.services.ai.azure.com"
-export AZURE_STORAGE_ACCOUNT_URL="https://stflvdemodeve9fd.blob.core.windows.net/"
+export AZURE_STORAGE_ACCOUNT_URL="https://stflvfabricdeve9fd.blob.core.windows.net/"
 
 bash infra/configure-foundry-analyzers.sh
 

@@ -5,7 +5,7 @@
 - `main.bicep` — subscription-scoped orchestration and exact resource group creation
 - `main.parameters.json` — non-secret deployment parameters
 - `modules/*.bicep` — Container Apps, ACR, identity, storage, Key Vault, monitoring, Foundry, Content Understanding, Document Intelligence, and RBAC
-- `modules/blob-container.bicep` — reusable module for additional containers on an existing storage account (currently unused; `modules/storage.bicep` creates its own container directly)
+- `modules/blob-container.bicep` — reusable module for additional containers on an existing storage account (currently unused; `modules/storage.bicep` creates its containers directly from a `containerNames` array)
 - `bicepconfig.json` — LF formatting configuration
 
 ## Container
@@ -26,7 +26,7 @@
 - `set-demo-secrets.sh` — generates and stores the two application secrets in Key Vault
 - `DEPLOYMENT_GUIDE.md` — two-phase manual deployment and verification procedure
 - `grant-fabric-workspace-access.sh` — grants a Microsoft Fabric workspace identity
-  read-only, no-secrets access to the `cu-results` container on the dedicated,
-  HNS-enabled Fabric storage account (see `../fabric/README.md`)
+  read-only, no-secrets access to the `cu-results` container on the single
+  HNS-enabled storage account (see `../fabric/README.md`)
 
 All taggable resources receive `securityControl=Ignore` and `app-onboard-skill=true`.
