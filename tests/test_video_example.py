@@ -112,10 +112,14 @@ def test_commercial_video_analyzer_extracts_advertising_fields():
     assert {
         "AdvertiserBrand",
         "VisibleProducts",
+        "InsuranceProductsMentioned",
         "Characters",
         "MusicAndAudio",
         "OnScreenText",
         "CommercialMessage",
+        "CallToAction",
+        "EmotionSentiment",
+        "CompetitorsMentioned",
     }.issubset(fields)
 
 

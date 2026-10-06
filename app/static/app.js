@@ -156,17 +156,10 @@ byId("customer-message-form").addEventListener("submit", async (event) => {
 });
 
 byId("load-cases").addEventListener("click", async () => {
-  const key = byId("employee-key").value.trim();
   const list = byId("case-list");
-  if (!key) {
-    list.innerHTML = '<p class="muted">Enter the employee access key from Azure Key Vault.</p>';
-    return;
-  }
   list.innerHTML = '<p class="muted">Loading…</p>';
   try {
-    const result = await api("/api/employee/cases", {
-      headers: { "X-Employee-Key": key },
-    });
+    const result = await api("/api/employee/cases");
     list.innerHTML = result.cases.length
       ? result.cases.map((item) => `
           <article class="case-item" data-case="${escapeHtml(item.id)}">
@@ -175,12 +168,30 @@ byId("load-cases").addEventListener("click", async () => {
           </article>`).join("")
       : '<p class="muted">No cases have been submitted.</p>';
     document.querySelectorAll(".case-item").forEach((item) => {
-      item.addEventListener("click", () => {
+      item.addEventListener("click", async () => {
         document.querySelectorAll(".case-item").forEach((caseItem) => caseItem.classList.remove("active"));
         item.classList.add("active");
         selectedEmployeeCase = item.dataset.case;
         byId("selected-case").textContent = `Case ${selectedEmployeeCase.slice(0, 8)}`;
-        byId("analysis-preview").innerHTML = '<div class="empty-state"><span>✓</span><h3>Case selected</h3><p>Ask a question and the internal agent will answer only from submitted evidence.</p></div>';
+        byId("analysis-preview").innerHTML = '<div class="empty-state"><p>Summarizing uploaded evidence…</p></div>';
+        try {
+          const result = await api("/api/employee/summary", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ case_id: selectedEmployeeCase }),
+          });
+          const answer = document.createElement("div");
+          answer.className = "answer";
+          const eyebrow = document.createElement("p");
+          eyebrow.className = "eyebrow";
+          eyebrow.textContent = "UPLOAD SUMMARY";
+          answer.append(eyebrow, renderAgentAnswer(result.summary));
+          byId("analysis-preview").replaceChildren(answer);
+        } catch (error) {
+          byId("analysis-preview").innerHTML = `<div class="empty-state"><p>${escapeHtml(error.message)}</p></div>`;
+        }
       });
     });
   } catch (error) {
@@ -191,19 +202,13 @@ byId("load-cases").addEventListener("click", async () => {
 byId("employee-form").addEventListener("submit", async (event) => {
   event.preventDefault();
   const question = byId("employee-question").value.trim();
-  const key = byId("employee-key").value.trim();
   if (!selectedEmployeeCase || !question) return;
-  if (!key) {
-    byId("analysis-preview").innerHTML = '<div class="empty-state"><p>Enter the employee access key from Azure Key Vault.</p></div>';
-    return;
-  }
   byId("analysis-preview").innerHTML = '<div class="empty-state"><p>Reviewing grounded evidence…</p></div>';
   try {
     const result = await api("/api/employee/query", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "X-Employee-Key": key,
       },
       body: JSON.stringify({ case_id: selectedEmployeeCase, question }),
     });

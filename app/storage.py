@@ -49,8 +49,9 @@ class LocalObjectStorage(ObjectStorage):
         base = self._path(prefix)
         if not base.exists():
             return []
+        root = self.root.resolve()
         return [
-            str(path.relative_to(self.root))
+            str(path.relative_to(root))
             for path in base.rglob("*")
             if path.is_file()
         ]

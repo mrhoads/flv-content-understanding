@@ -5,6 +5,7 @@ python-dotenv>=1.1,<2
 cryptography>=45,<47
 httpx>=0.28,<1
 azure-identity>=1.23,<2
+azure-ai-contentunderstanding>=1.0.0b1,<2
 azure-storage-blob>=12.26,<13
 azure-ai-projects>=2.3,<3
 openai>=3,<4

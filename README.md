@@ -32,7 +32,8 @@ It creates a `ContentUnderstandingClient`, calls `begin_analyze` with an
 `AnalysisInput`, prints each detected segment and summary, and writes the full JSON
 and RAG-ready Markdown results to `output/video-analysis/`. By default it uses the
 custom `flvCommercialVideoAnalyzer`, so `analysis.json` includes structured
-commercial fields such as `Characters`, `VisibleProducts`, and `MusicAndAudio`.
+commercial fields such as `Characters`, `VisibleProducts`,
+`InsuranceProductsMentioned`, and `MusicAndAudio`.
 
 Authenticate to Azure and set the Content Understanding endpoint:
 
@@ -80,6 +81,12 @@ The analyzer definition is in `infra/analyzers/commercial-video.json`. It uses
 adding optional scene-level segmentation. You can still run the generic prebuilt
 video search analyzer with `--analyzer-id prebuilt-videoSearch` when you only need
 transcript, key-frame, and summary output.
+
+Set `CONTENT_UNDERSTANDING_UPDATE_EXISTING_ANALYZERS=true` before running
+`infra/configure-foundry-analyzers.sh` when you need to push field-schema changes
+to analyzers that already exist in Content Understanding. Set
+`CONTENT_UNDERSTANDING_UPDATE_ANALYZER_IDS` to a comma-separated analyzer ID list
+when you want to replace only specific analyzers.
 
 ## Azure architecture
 

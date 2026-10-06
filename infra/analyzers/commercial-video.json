@@ -24,6 +24,22 @@
         "method": "generate",
         "description": "Products, services, devices, apps, logos, UI elements, or branded assets visibly shown or clearly referenced."
       },
+      "CompetitorsMentioned": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "method": "generate",
+        "description": "Competitor brands or products explicitly named, shown, or clearly referenced in the commercial. Return an empty array if none are identified."
+      },
+      "InsuranceProductsMentioned": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "method": "generate",
+        "description": "Insurance products explicitly mentioned, visibly shown, or clearly implied in the commercial, such as home insurance, auto insurance, renters insurance, life insurance, or bundled home and auto."
+      },
       "Characters": {
         "type": "array",
         "items": {
@@ -68,10 +84,20 @@
         "method": "generate",
         "description": "Central advertising message, offer, or call to action."
       },
+      "CallToAction": {
+        "type": "string",
+        "method": "generate",
+        "description": "Specific action the commercial asks or encourages viewers to take, such as visiting a website, calling, downloading an app, or purchasing. If none is stated or implied, say no clear call to action."
+      },
       "HumorMechanism": {
         "type": "string",
         "method": "generate",
         "description": "Explain what makes the commercial humorous, including recurring jokes, character behavior, or situational irony."
+      },
+      "EmotionSentiment": {
+        "type": "string",
+        "method": "generate",
+        "description": "Describe the dominant emotion or sentiment conveyed by the commercial and, when useful, how it changes across the video."
       },
       "SportsOrEntertainmentReferences": {
         "type": "array",

@@ -5,7 +5,7 @@ from pathlib import Path
 from typing import Annotated
 from uuid import uuid4
 
-from fastapi import Depends, FastAPI, File, Header, HTTPException, UploadFile
+from fastapi import Depends, FastAPI, File, HTTPException, UploadFile
 from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, Field
@@ -43,6 +43,20 @@ class MessageRequest(BaseModel):
 class EmployeeQuestion(BaseModel):
     case_id: str = Field(min_length=1, max_length=64)
     question: str = Field(min_length=1, max_length=2000)
+
+
+class EmployeeCaseRequest(BaseModel):
+    case_id: str = Field(min_length=1, max_length=64)
+
+
+def employee_prompt(case: dict[str, object], instruction: str) -> str:
+    return (
+        "You are the internal FLV evidence assistant for insurance employees. Answer only "
+        "from the supplied case context. Distinguish extracted facts from inferences, "
+        "mention confidence or missing evidence, and never make the final coverage, fraud, "
+        "or legal-authenticity decision. Refer to filenames when useful.\n"
+        f"Employee instruction: {instruction}\nCase context: {compact_case_context(case)}"
+    )
 
 
 def build_dependencies(settings: Settings) -> dict[str, object]:
@@ -95,16 +109,9 @@ def services() -> dict[str, object]:
     return app.state.services
 
 
-def employee_access(
-    x_employee_key: Annotated[str | None, Header()] = None,
-    svc: dict[str, object] = Depends(services),
-) -> None:
-    settings: Settings = svc["settings"]
-    if x_employee_key != settings.internal_access_key:
-        raise HTTPException(
-            status_code=401,
-            detail="The employee access key is missing or invalid.",
-        )
+def employee_access() -> None:
+    """Employee Review is intentionally unauthenticated for this demo deployment."""
+    return
 
 
 @app.get("/")
@@ -252,14 +259,33 @@ async def employee_query(
     except (FileNotFoundError, KeyError):
         raise HTTPException(status_code=404, detail="Case not found")
     settings: Settings = svc["settings"]
-    prompt = (
-        "You are the internal FLV evidence assistant for insurance employees. Answer the "
-        "question only from the supplied case context. Distinguish extracted facts from "
-        "inferences, mention confidence or missing evidence, and never make the final "
-        "coverage, fraud, or legal-authenticity decision. Refer to filenames when useful.\n"
-        f"Employee question: {request.question}\nCase context: {compact_case_context(case)}"
-    )
+    prompt = employee_prompt(case, request.question)
     text = await svc["agents"].ask(
         settings.employee_agent_name or "employee-evidence", prompt
     )
     return {"answer": text}
+
+
+@app.post("/api/employee/summary", dependencies=[Depends(employee_access)])
+async def employee_summary(
+    request: EmployeeCaseRequest,
+    svc: dict[str, object] = Depends(services),
+) -> dict[str, str]:
+    repository: CaseRepository = svc["repository"]
+    try:
+        case = repository.get(request.case_id)
+    except (FileNotFoundError, KeyError):
+        raise HTTPException(status_code=404, detail="Case not found")
+    settings: Settings = svc["settings"]
+    prompt = employee_prompt(
+        case,
+        "Summarize what was uploaded in this case. Describe each file, the extracted "
+        "vehicle or document details, confidence or missing evidence, and any notable "
+        "follow-up needed. For driver licenses and other identity documents, prioritize "
+        "the Document Intelligence results and present document fields; do not use a "
+        "vehicle-details format. Do not ask a question.",
+    )
+    text = await svc["agents"].ask(
+        settings.employee_agent_name or "employee-evidence", prompt
+    )
+    return {"summary": text}

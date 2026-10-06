@@ -1,0 +1,125 @@
+# Azure Deployment Plan
+
+- Status: Deployed and Verified
+- Mode: MODIFY
+- Target: Existing Azure Container App `ca-flv-demo-dev-e9fd`
+- Resource group: `demo-prg-flv-rg`
+- Subscription: `c8fad4c4-3897-42b5-bbc2-5d96f255f209`
+- Region: `northcentralus`
+- Change: Route identity-document uploads through Document Intelligence `prebuilt-idDocument`, detect ambiguous identity images from OCR text, normalize Azure `analyzeResult` responses, and suppress vehicle fields from identity-document summaries. Employee Review remains unauthenticated while encrypted case data, managed identity, private storage, and existing UI behavior are preserved.
+- Security: This is intentionally an open demo deployment. Preserve managed identity, Key Vault secret references, private storage, and existing ingress settings; do not treat the app as production-safe.
+- Validation: Build the image, run the available local checks, push to the existing private ACR, update the Container App, and verify the new revision and health endpoint.
+- Current Azure baseline: `crflvdemodeve9fd.azurecr.io/flv-demo:20260915.6` on revision `ca-flv-demo-dev-e9fd--20260915-6`.
+- Rollback: Repoint the Container App to image `crflvdemodeve9fd.azurecr.io/flv-demo:20260915.6` if a later revision fails verification.
+
+## Validation checklist
+
+- [x] All validation checks pass
+  - [x] 1. Core Validation (CLI, auth, build, validate, what-if) — unique deployment validation and what-if passed
+  - [x] 2. Docker Build (if containerized) — remote ACR build is used because Docker is unavailable locally
+  - [x] 3. Azure Policy Validation
+- [x] 1. Core Validation (CLI, auth, build, validate, what-if)
+- [x] 2. Linting (optional)
+- [x] 3. Azure Policy Validation
+- [x] 4. Remote image build and push
+- [x] 5. Container App revision update
+- [x] 6. Post-deployment health check
+  - Run `az bicep build --file infra/main.bicep`.
+  - Run subscription deployment validation and what-if with unique deployment names.
+  - Run `az bicep lint --file infra/main.bicep` when supported.
+  - Review Azure Policy assignments for the target subscription and resource group.
+
+## Prior deployment baseline
+
+- Status: Verified
+- Identities checked: `id-flv-demo-dev-e9fd` and deployer user
+- Roles confirmed: Key Vault Secrets User/Officer, AcrPull, Storage Blob Data Contributor, Cognitive Services User, Foundry Agent Consumer
+- Issues: None found in the static review
+
+## Validation Proof
+
+- `python3 -m compileall -q app tests`: PASS
+- `node --check app/static/app.js`: PASS
+- Targeted pytest: NOT AVAILABLE locally (`pytest` is not installed)
+- Existing deployed image: `crflvdemodeve9fd.azurecr.io/flv-demo:20260915.1`
+- Existing healthy revision: `ca-flv-demo-dev-e9fd--0000010`
+- `az account show`: PASS; target subscription authenticated
+- `az bicep build --file infra/main.bicep`: PASS with non-blocking BCP081 warnings
+- `az bicep lint --file infra/main.bicep`: PASS with non-blocking BCP081 warnings
+- `az deployment sub validate --name flv-demo-validate-20260915-summary ...`: PASS
+- `az deployment sub what-if --name flv-demo-whatif-20260915-summary ...`: PASS; preview completed without deployment errors
+- Azure Policy assignment review: PASS; target subscription policies queried
+- Static RBAC review: PASS; managed identity retains Key Vault, ACR, Blob Storage, Foundry, Content Understanding, and Document Intelligence roles
+- Browser cache fix validation: PASS; Python compilation, JavaScript syntax, and diff checks completed
+- `az deployment sub validate --name flv-demo-validate-20260915-cachefix ...`: PASS
+- `az deployment sub what-if --name flv-demo-whatif-20260915-cachefix ...`: PASS; status `Succeeded`
+- Remote ACR build: PASS; image `crflvdemodeve9fd.azurecr.io/flv-demo:20260915.2`
+- Image digest: `sha256:2f5e1e676e0873c6b0f2feb2b9ecc107816677da9cc35d405e6015298cef8f0c`
+- Container App update: PASS; revision `ca-flv-demo-dev-e9fd--0000011`
+- Revision state: `Running` / `Healthy`
+- Health endpoint: PASS; `https://ca-flv-demo-dev-e9fd.ashysea-8bf3a2e5.northcentralus.azurecontainerapps.io/health`
+- Employee Review summary smoke test: PASS; authenticated cases listing and summary request returned HTTP success with a non-empty summary
+- Live RBAC verification: PASS; managed identity roles include Key Vault Secrets User, AcrPull, Storage Blob Data Contributor, Foundry Agent Consumer, and Cognitive Services User
+- Remote ACR build: PASS; image `crflvdemodeve9fd.azurecr.io/flv-demo:20260915.3`
+- Image digest: `sha256:8404451903b03bec62794ec51e86bbab234ea12e94d04fbbb8d90e181530fa81`
+- Container App update: PASS; revision `ca-flv-demo-dev-e9fd--20260915-3`
+- Revision state: `Running` / `Healthy`; 100% traffic routed to latest revision
+- Health endpoint: PASS; `https://ca-flv-demo-dev-e9fd.ashysea-8bf3a2e5.northcentralus.azurecontainerapps.io/health`
+- Cache-busted asset: PASS; live HTML references `/static/app.js?v=20260915.3`
+- Employee Review summary smoke test: PASS; 10 cases listed and authenticated summary returned 1,539 characters
+- Live RBAC verification: PASS; user-assigned identity `id-flv-demo-dev-e9fd` retains required Key Vault, ACR, Blob Storage, Foundry, and Cognitive Services roles
+- Local targeted tests: PASS; `.venv/bin/pytest -q tests/test_demo.py` (7 passed)
+- Local syntax/build checks: PASS; Python compileall, JavaScript syntax check, and `git diff --check`
+- Bicep build: PASS with non-blocking BCP081 warnings
+- Unique subscription deployment validation: PASS; `flv-demo-validate-20260915-demo-auth`
+- Unique subscription what-if: PASS; `flv-demo-whatif-20260915-demo-auth`
+- Azure Policy assignment review: PASS; target subscription policy assignments queried
+- Static RBAC review: PASS; managed identity roles in Bicep retain Key Vault, ACR, Blob Storage, Foundry, Content Understanding, and Document Intelligence access
+- Final validation: `az deployment sub validate --name flv-demo-validate-20260915-final ...`: PASS
+- Final what-if: `az deployment sub what-if --name flv-demo-whatif-20260915-final ...`: PASS; completed without deployment errors
+- Targeted tests: `.venv/bin/pytest -q tests/test_demo.py`: PASS; 7 passed
+- Python and JavaScript checks: PASS; compileall, `node --check`, and `git diff --check`
+- Final static RBAC review: PASS; required managed identity roles remain declared in `infra/modules/role-assignments.bicep`
+- Remote ACR build: PASS; image `crflvdemodeve9fd.azurecr.io/flv-demo:20260915.4`
+- Image digest: `sha256:8fc0d5fafff9272a92cd819f3a573a4186eaadd28ddaa704b1e9c027e945f014`
+- Container App update: PASS; revision `ca-flv-demo-dev-e9fd--20260915-4`
+- Revision state: `Running` / `Healthy`; 100% traffic routed to latest revision
+- Health endpoint: PASS; `https://ca-flv-demo-dev-e9fd.ashysea-8bf3a2e5.northcentralus.azurecontainerapps.io/health` returned Azure mode with Azure storage
+- Live page verification: PASS; updated heading, description, `FLV Agent`, `Submitted Evidence`, removed access-key input, and `/static/app.js?v=20260915.4` are present
+- Employee Review authorization verification: PASS; Azure deployment returned HTTP 401 without the production `X-Employee-Key`, confirming authentication remains enabled outside `DEMO_MODE`
+- Live RBAC verification: PASS; `id-flv-demo-dev-e9fd` has Key Vault Secrets User, AcrPull, Storage Blob Data Contributor, Foundry Agent Consumer, and Cognitive Services User on Foundry, Content Understanding, and Document Intelligence
+- Authentication removal validation: PASS; subscription deployment validation and what-if completed with unique names `flv-demo-validate-20260915-open-review` and `flv-demo-whatif-20260915-open-review`
+- Authentication removal tests: PASS; `.venv/bin/pytest -q tests/test_demo.py` (7 passed), Python compilation, JavaScript syntax, and `git diff --check`
+- Authentication removal static RBAC review: PASS; managed identity and resource roles remain unchanged
+- Remote ACR build: PASS; image `crflvdemodeve9fd.azurecr.io/flv-demo:20260915.5`
+- Image digest: `sha256:3d81768e8e247fa630a778d3bb3d8b10e18a05220d3ecf15f5721d774fdda877`
+- Container App update: PASS; revision `ca-flv-demo-dev-e9fd--20260915-5`
+- Revision state: `Running` / `Healthy`; 100% traffic routed to latest revision
+- Health endpoint: PASS; Azure mode with Azure storage
+- Unauthenticated Employee Review verification: PASS; `/api/employee/cases` returned HTTP 200 without headers and `/api/employee/summary` returned a non-empty summary without headers
+- Live RBAC verification: PASS; managed identity retains ACR pull access and existing service roles
+- Driver's-license handling validation: PASS; `.venv/bin/pytest -q tests/test_demo.py` (9 passed), Python compilation, JavaScript syntax check, and `git diff --check`
+- Unique subscription deployment validation: PASS; `flv-demo-validate-20260915-license`
+- Unique subscription what-if: PASS; `flv-demo-whatif-20260915-license`
+- Static RBAC review: PASS; required managed identity role assignments remain declared in `infra/modules/role-assignments.bicep`
+- Remote ACR build: PASS; image `crflvdemodeve9fd.azurecr.io/flv-demo:20260915.6`
+- Image digest: `sha256:06d10d3de1777fa32a17f65fe70e7c857737fcf03df68d2de882099a08a4ebe1`
+- Container App update: PASS; revision `ca-flv-demo-dev-e9fd--20260915-6`
+- Revision state: `Provisioned` / `Healthy` / `Running`; 100% traffic routed to latest revision
+- Health endpoint: PASS; Azure mode with Azure storage
+- Unauthenticated Employee Review verification: PASS; `/api/employee/cases` returned HTTP 200 and `/api/employee/summary` returned a non-empty response without headers
+- Live page verification: PASS; current demo copy and no access-key input are present
+- Live RBAC verification: PASS; managed identity has `AcrPull` and existing service roles
+- Driver's-license smoke check: PASS; live `DriverLicense.png` case is recognized by filename and the response includes a Document Intelligence section. Existing case data predates this deployment and has no stored Document Intelligence fields, so it reports those fields as unavailable rather than claiming new OCR results.
+- ID-document routing tests: PASS; `.venv/bin/pytest -q tests/test_demo.py` (12 passed), Python compilation, JavaScript syntax, and `git diff --check`
+- ID-document subscription validation: PASS; `flv-demo-validate-20260915-idmodel`
+- ID-document subscription what-if: PASS; `flv-demo-whatif-20260915-idmodel`
+- ID-document static RBAC review: PASS; required managed identity role assignments remain declared
+- Remote ACR build: PASS; image `crflvdemodeve9fd.azurecr.io/flv-demo:20260915.7`
+- Image digest: `sha256:c96c7859b414ae9472100e594ba344d6ce0b8d42eda118bb5298ea23f23802f4`
+- Container App update: PASS; revision `ca-flv-demo-dev-e9fd--20260915-7`
+- Revision state: `Provisioned` / `Healthy`; scale-to-zero behavior verified; 100% traffic routed to latest revision
+- Health endpoint: PASS; Azure mode with Azure storage
+- Unauthenticated Employee Review verification: PASS; `/api/employee/cases` returned HTTP 200 without headers
+- ID-document production regression: PASS; case `91222bda74e24e259393add0e3d472bc` is summarized as `identity-document`, includes Document Intelligence OCR results, and does not present vehicle fields as extracted evidence
+- Live RBAC verification: PASS; managed identity retains Key Vault Secrets User, AcrPull, Storage Blob Data Contributor, Foundry Agent Consumer, and Cognitive Services User

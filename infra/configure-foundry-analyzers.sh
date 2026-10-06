@@ -7,6 +7,8 @@ MODEL_DEPLOYMENT="${CONTENT_UNDERSTANDING_MODEL_DEPLOYMENT:-gpt-4-1-mini-cu-flv}
 EMBEDDING_DEPLOYMENT="${CONTENT_UNDERSTANDING_EMBEDDING_DEPLOYMENT:-text-embedding-3-large-cu-flv}"
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 TOKEN="$(az account get-access-token --scope https://cognitiveservices.azure.com/.default --query accessToken -o tsv)"
+UPDATE_EXISTING_ANALYZERS="${CONTENT_UNDERSTANDING_UPDATE_EXISTING_ANALYZERS:-false}"
+UPDATE_ANALYZER_IDS="${CONTENT_UNDERSTANDING_UPDATE_ANALYZER_IDS:-}"
 
 curl --fail --silent --show-error \
   --request PATCH \
@@ -62,6 +64,67 @@ poll_analyzer_ready() {
   return 1
 }
 
+poll_analyzer_deleted() {
+  local analyzer_url="$1"
+  for _ in $(seq 1 90); do
+    local status_code
+    status_code="$(curl --silent --output /dev/null --write-out '%{http_code}' \
+      -H "Authorization: Bearer ${TOKEN}" \
+      "${analyzer_url}")"
+    case "${status_code}" in
+      404) return 0 ;;
+      200) ;;
+      *)
+        echo "Unexpected status checking analyzer deletion: ${status_code}" >&2
+        return 1
+        ;;
+    esac
+    sleep 2
+  done
+  echo "Timed out waiting for analyzer deletion: ${analyzer_url}" >&2
+  return 1
+}
+
+delete_analyzer() {
+  local analyzer_url="$1"
+  local headers
+  headers="$(mktemp)"
+  trap 'rm -f "${headers}"' RETURN
+
+  curl --fail --silent --show-error \
+    --dump-header "${headers}" \
+    --request DELETE \
+    -H "Authorization: Bearer ${TOKEN}" \
+    "${analyzer_url}" \
+    >/dev/null
+
+  local operation_url
+  operation_url="$(awk 'BEGIN {IGNORECASE=1} /^operation-location:/ {$1=""; sub(/^ /,""); gsub(/\r/,""); print}' "${headers}")"
+  if [[ -n "${operation_url}" ]]; then
+    poll_operation "${operation_url}"
+  fi
+  poll_analyzer_deleted "${analyzer_url}"
+  rm -f "${headers}"
+}
+
+should_update_analyzer() {
+  local analyzer_id="$1"
+  if [[ "${UPDATE_EXISTING_ANALYZERS}" != "true" ]]; then
+    return 1
+  fi
+  if [[ -z "${UPDATE_ANALYZER_IDS}" ]]; then
+    return 0
+  fi
+  local id
+  IFS=',' read -ra ids <<<"${UPDATE_ANALYZER_IDS}"
+  for id in "${ids[@]}"; do
+    if [[ "${id}" == "${analyzer_id}" ]]; then
+      return 0
+    fi
+  done
+  return 1
+}
+
 put_analyzer() {
   local analyzer_id="$1"
   local schema_file="$2"
@@ -70,12 +133,16 @@ put_analyzer() {
   existing_status="$(curl --silent --output /dev/null --write-out '%{http_code}' \
     -H "Authorization: Bearer ${TOKEN}" \
     "${analyzer_url}")"
-  if [[ "${existing_status}" == "200" ]]; then
+  if [[ "${existing_status}" == "200" ]] && ! should_update_analyzer "${analyzer_id}"; then
     poll_analyzer_ready "${analyzer_url}"
     echo "Analyzer ${analyzer_id} already exists and is ready"
     return 0
   fi
-  if [[ "${existing_status}" != "404" ]]; then
+  if [[ "${existing_status}" == "200" ]] && should_update_analyzer "${analyzer_id}"; then
+    echo "Analyzer ${analyzer_id} already exists; replacing because analyzer updates are enabled"
+    delete_analyzer "${analyzer_url}"
+  fi
+  if [[ "${existing_status}" != "200" && "${existing_status}" != "404" ]]; then
     echo "Unexpected status checking analyzer ${analyzer_id}: ${existing_status}" >&2
     return 1
   fi
