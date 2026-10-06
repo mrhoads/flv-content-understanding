@@ -5,3 +5,4 @@ __pycache__/
 .demo-data/
 .local-secrets/
 .copilot-azure/
+.DS_Store
