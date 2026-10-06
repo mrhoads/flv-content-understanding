@@ -25,6 +25,7 @@ DEFAULT_OUTPUT_DIR = REPOSITORY_ROOT / "output" / "video-analysis"
 DEFAULT_ANALYZER_ID = "flvCommercialVideoAnalyzer"
 DEFAULT_API_VERSION = "2025-11-01"
 DEFAULT_STAGING_CONTAINER = "cu-video-staging"
+DEFAULT_FABRIC_CONTAINER = "cu-results"
 SUPPORTED_VIDEO_SUFFIXES = {".mp4", ".m4v", ".flv", ".wmv", ".asf", ".avi", ".mkv", ".mov"}
 
 
@@ -307,6 +308,42 @@ def write_artifacts(
     return json_path, markdown_path
 
 
+def upload_fabric_result(
+    *,
+    json_path: Path,
+    fabric_storage_account_url: str,
+    container_name: str,
+    campaign_name: str,
+    credential: object,
+) -> str:
+    """Upload CU result JSON to the dedicated, HNS-enabled Fabric storage account.
+
+    Fabric reads this container read-only through a OneLake ADLS Gen2 shortcut
+    (see fabric/README.md). The blob key shape matches that shortcut's expected
+    layout: cu-results/<campaign_name>/<id>.json.
+    """
+    from azure.core.exceptions import ResourceExistsError
+    from azure.storage.blob import BlobServiceClient, ContentSettings
+
+    service = BlobServiceClient(
+        account_url=fabric_storage_account_url, credential=credential
+    )
+    container = service.get_container_client(container_name)
+    try:
+        container.create_container()
+    except ResourceExistsError:
+        pass
+
+    blob_name = f"{campaign_name}/{uuid4().hex}.json"
+    blob_client = container.get_blob_client(blob_name)
+    blob_client.upload_blob(
+        json_path.read_bytes(),
+        overwrite=True,
+        content_settings=ContentSettings(content_type="application/json"),
+    )
+    return blob_client.url
+
+
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
         description=(
@@ -341,6 +378,24 @@ def parse_args() -> argparse.Namespace:
         or DEFAULT_STAGING_CONTAINER,
     )
     parser.add_argument("--output-dir", type=Path, default=DEFAULT_OUTPUT_DIR)
+    parser.add_argument(
+        "--fabric-storage-account-url",
+        default=os.getenv("FABRIC_STORAGE_ACCOUNT_URL"),
+        help=(
+            "Dedicated, HNS-enabled Blob account URL whose cu-results container "
+            "Fabric reads via a OneLake shortcut. Defaults to "
+            "FABRIC_STORAGE_ACCOUNT_URL. Omit to skip uploading to Fabric."
+        ),
+    )
+    parser.add_argument(
+        "--fabric-container",
+        default=os.getenv("FABRIC_RESULTS_CONTAINER") or DEFAULT_FABRIC_CONTAINER,
+    )
+    parser.add_argument(
+        "--campaign-name",
+        default=os.getenv("CAMPAIGN_NAME", "uncategorized"),
+        help="Used as the cu-results/<campaign-name>/ folder for Fabric reporting.",
+    )
     parser.add_argument("--analyzer-id", default=DEFAULT_ANALYZER_ID)
     parser.add_argument(
         "--api-version",
@@ -362,9 +417,10 @@ def main() -> None:
     if not args.endpoint:
         raise SystemExit("Set CONTENT_UNDERSTANDING_ENDPOINT or pass --endpoint.")
 
+    credential = build_credential(args.app_env)
     result = analyze_video(
         endpoint=args.endpoint,
-        credential=build_credential(args.app_env),
+        credential=credential,
         video_path=None
         if args.video_url
         else prepare_video_for_content_understanding(args.video, args.output_dir),
@@ -389,6 +445,21 @@ def main() -> None:
             print(f"  Summary: {segment['summary']}")
     print(f"JSON: {json_path}")
     print(f"Markdown: {markdown_path}")
+
+    if args.fabric_storage_account_url:
+        fabric_url = upload_fabric_result(
+            json_path=json_path,
+            fabric_storage_account_url=args.fabric_storage_account_url,
+            container_name=args.fabric_container,
+            campaign_name=args.campaign_name,
+            credential=credential,
+        )
+        print(f"Fabric: {fabric_url}")
+    else:
+        print(
+            "Fabric: skipped (set --fabric-storage-account-url or "
+            "FABRIC_STORAGE_ACCOUNT_URL to upload results for Fabric to consume)"
+        )
 
 
 if __name__ == "__main__":

@@ -88,11 +88,15 @@ to provision:
 
 - A new, dedicated, **HNS-enabled** storage account, **`stflvfabricdeve9fd`**,
   with a **`cu-results`** Blob container (`infra/modules/storage.bicep`, wired
-  from `infra/main.bicep`). This is where CU JSON output for campaign videos
-  should be written, one blob per analyzed video, suggested key shape:
-  `cu-results/<campaign_name>/<video-id>.json`. It's separate from the
+  from `infra/main.bicep`). `examples/analyze_video.py` uploads CU JSON output
+  for campaign videos here automatically (one blob per analyzed video), key
+  shape: `cu-results/<campaign_name>/<id>.json`. It's separate from the
   production `stflvdemodeve9fd` account so enabling HNS never touches that
   account's Defender for Storage malware-scanning blob tags (see above).
+- RBAC so both the app's managed identity and the deployer (running the
+  example locally with `az login`/`DefaultAzureCredential`) have
+  `Storage Blob Data Contributor` on `stflvfabricdeve9fd` and can write result
+  JSON (`infra/modules/role-assignments.bicep`).
 - An optional, idempotent RBAC grant: pass `fabricWorkspaceIdentityPrincipalId`
   as a bicep parameter once you know it (see step 2 below) and redeploy, or run
   `infra/grant-fabric-workspace-access.sh <principal-id>` directly — both grant
@@ -102,6 +106,27 @@ to provision:
 
 Nothing else in the app changes. `DEMO_MODE=true` continues to work with no
 Azure dependency at all; the Fabric pieces are opt-in and additive.
+
+## Writing CU results for Fabric to consume
+
+`examples/analyze_video.py` now uploads its result JSON to `stflvfabricdeve9fd`
+automatically whenever `--fabric-storage-account-url`
+(or `FABRIC_STORAGE_ACCOUNT_URL`) is set, in addition to its usual local
+`output/video-analysis/analysis.json`:
+
+```bash
+export CONTENT_UNDERSTANDING_ENDPOINT="https://aif-flv-cu-dev-e9fd04.cognitiveservices.azure.com/"
+export AZURE_STORAGE_ACCOUNT_URL="https://stflvdemodeve9fd.blob.core.windows.net"
+export FABRIC_STORAGE_ACCOUNT_URL="https://stflvfabricdeve9fd.blob.core.windows.net"
+export CAMPAIGN_NAME="progressive-dr-rick"
+
+python examples/analyze_video.py --video-url "https://<public-or-sas-url-to-a-video>"
+```
+
+This writes `cu-results/<CAMPAIGN_NAME>/<id>.json`, exactly the blob the
+OneLake shortcut below exposes at `Files/cu-results/<CAMPAIGN_NAME>/<id>.json`.
+`--fabric-container` overrides the container name (default `cu-results`) if
+you ever rename it.
 
 ## One-time manual setup in Fabric (no Bicep/ARM support for these item types yet)
 

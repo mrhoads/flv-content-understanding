@@ -98,6 +98,30 @@ resource fabricWorkspaceStorageReaderRole 'Microsoft.Authorization/roleAssignmen
   }
 }
 
+// The app's managed identity writes CU result JSON into the cu-results container
+// (consumed read-only by the Fabric OneLake shortcut above).
+resource managedIdentityFabricStorageRole 'Microsoft.Authorization/roleAssignments@2022-04-01' = if (!empty(fabricStorageAccountId)) {
+  scope: fabricStorage
+  name: guid(fabricStorageAccountId, managedIdentityPrincipalId, storageBlobDataContributor)
+  properties: {
+    roleDefinitionId: subscriptionResourceId('Microsoft.Authorization/roleDefinitions', storageBlobDataContributor)
+    principalId: managedIdentityPrincipalId
+    principalType: 'ServicePrincipal'
+  }
+}
+
+// The deployer can also write CU result JSON when running examples/analyze_video.py
+// locally with DefaultAzureCredential (az login).
+resource deployerFabricStorageRole 'Microsoft.Authorization/roleAssignments@2022-04-01' = if (!empty(fabricStorageAccountId)) {
+  scope: fabricStorage
+  name: guid(fabricStorageAccountId, deployerObjectId, storageBlobDataContributor)
+  properties: {
+    roleDefinitionId: subscriptionResourceId('Microsoft.Authorization/roleDefinitions', storageBlobDataContributor)
+    principalId: deployerObjectId
+    principalType: 'User'
+  }
+}
+
 resource foundryAccount 'Microsoft.CognitiveServices/accounts@2025-06-01' existing = {
   name: foundryAccountName
 }
@@ -205,3 +229,9 @@ output appIdentityAgentConsumerRoleId string = managedIdentityAgentConsumerRole.
 
 @description('Fabric Workspace Identity Storage Reader Role Assignment ID (empty when not granted yet)')
 output fabricWorkspaceStorageReaderRoleId string = (!empty(fabricWorkspaceIdentityPrincipalId) && !empty(fabricStorageAccountId)) ? fabricWorkspaceStorageReaderRole.id : ''
+
+@description('App Identity Fabric Storage Contributor Role Assignment ID (empty when fabricStorageAccountId not supplied)')
+output appIdentityFabricStorageRoleId string = !empty(fabricStorageAccountId) ? managedIdentityFabricStorageRole.id : ''
+
+@description('Deployer Fabric Storage Contributor Role Assignment ID (empty when fabricStorageAccountId not supplied)')
+output deployerFabricStorageRoleId string = !empty(fabricStorageAccountId) ? deployerFabricStorageRole.id : ''
