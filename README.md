@@ -88,6 +88,16 @@ to analyzers that already exist in Content Understanding. Set
 `CONTENT_UNDERSTANDING_UPDATE_ANALYZER_IDS` to a comma-separated analyzer ID list
 when you want to replace only specific analyzers.
 
+## Report on marketing campaigns in Microsoft Fabric
+
+The `flvCommercialVideoAnalyzer` fields (brand, products, competitors, sentiment,
+call-to-action, etc.) are structured for marketing reporting. See
+[`fabric/README.md`](fabric/README.md) for the plan and steps to land historic
+campaign analysis results in a Fabric Lakehouse (via a OneLake shortcut and a
+flattening notebook — no SAS tokens or keys, consistent with this repo's
+managed-identity-only storage account) for Power BI reporting, with a later
+phase to join in simulated engagement data for marketing-effectiveness analysis.
+
 ## Azure architecture
 
 ```text

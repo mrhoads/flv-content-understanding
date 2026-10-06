@@ -1,11 +1,17 @@
 param keyVaultName string
 param containerRegistryId string
 param storageAccountId string
+
+@description('Resource ID of the dedicated, HNS-enabled storage account used for the Fabric OneLake shortcut. Leave empty to skip the grant.')
+param fabricStorageAccountId string = ''
 param foundryAccountName string
 param contentUnderstandingAccountName string
 param documentIntelligenceAccountName string
 param managedIdentityPrincipalId string
 param deployerObjectId string
+
+@description('Principal ID of the Microsoft Fabric workspace identity. Leave empty to skip; grant later with infra/grant-fabric-workspace-access.sh once the Fabric workspace identity exists.')
+param fabricWorkspaceIdentityPrincipalId string = ''
 
 resource keyVault 'Microsoft.KeyVault/vaults@2026-05-15' existing = {
   name: keyVaultName
@@ -18,6 +24,7 @@ var storageBlobDataContributor = 'ba92f5b4-2d11-453d-a403-e96b0029c9fe'
 var acrPull = '7f951dda-4ed3-4680-a7ca-43fe172d538d'
 var cognitiveServicesUser = 'a97b65f3-24c7-4388-baec-2e87135dc908'
 var foundryAgentConsumer = 'eed3b665-ab3a-47b6-8f48-c9382fb1dad6'
+var storageBlobDataReader = '2a2b9908-6ea1-4ae2-8e65-a410df84e7d1'
 
 // Deployer gets Key Vault Secrets Officer
 resource deployerKeyVaultRole 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
@@ -71,6 +78,24 @@ resource managedIdentityStorageRole 'Microsoft.Authorization/roleAssignments@202
 // Get reference to storage account
 resource storage 'Microsoft.Storage/storageAccounts@2026-06-01' existing = {
   name: last(split(storageAccountId, '/'))
+}
+
+// Fabric workspace identity gets read-only access to the cu-results container (on the
+// dedicated, HNS-enabled Fabric storage account) via a OneLake shortcut. No SAS/keys
+// are used because the storage account disables shared key access. Only created when
+// both the identity principal ID and the Fabric storage account ID are supplied.
+resource fabricStorage 'Microsoft.Storage/storageAccounts@2026-06-01' existing = if (!empty(fabricStorageAccountId)) {
+  name: !empty(fabricStorageAccountId) ? last(split(fabricStorageAccountId, '/')) : 'placeholder'
+}
+
+resource fabricWorkspaceStorageReaderRole 'Microsoft.Authorization/roleAssignments@2022-04-01' = if (!empty(fabricWorkspaceIdentityPrincipalId) && !empty(fabricStorageAccountId)) {
+  scope: fabricStorage
+  name: guid(fabricStorageAccountId, fabricWorkspaceIdentityPrincipalId, storageBlobDataReader)
+  properties: {
+    roleDefinitionId: subscriptionResourceId('Microsoft.Authorization/roleDefinitions', storageBlobDataReader)
+    principalId: fabricWorkspaceIdentityPrincipalId
+    principalType: 'ServicePrincipal'
+  }
 }
 
 resource foundryAccount 'Microsoft.CognitiveServices/accounts@2025-06-01' existing = {
@@ -177,3 +202,6 @@ output appIdentityDocumentIntelligenceRoleId string = managedIdentityDocumentInt
 
 @description('App Identity Foundry Agent Consumer Role Assignment ID')
 output appIdentityAgentConsumerRoleId string = managedIdentityAgentConsumerRole.id
+
+@description('Fabric Workspace Identity Storage Reader Role Assignment ID (empty when not granted yet)')
+output fabricWorkspaceStorageReaderRoleId string = (!empty(fabricWorkspaceIdentityPrincipalId) && !empty(fabricStorageAccountId)) ? fabricWorkspaceStorageReaderRole.id : ''
