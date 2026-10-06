@@ -35,7 +35,13 @@ resource modelDeployment 'Microsoft.CognitiveServices/accounts/deployments@2025-
   name: modelDeploymentName
   sku: {
     name: 'Standard'
-    capacity: 10
+    // Video analysis bursts many short vision-model calls in a tight window;
+    // capacity 10 (10K TPM) and even 150 (150K TPM) both hit RateLimit 429s
+    // analyzing a single 48s commercial because the regional "Standard" SKU's
+    // RPM is checked over 1-10 second windows, not just per-minute totals.
+    // Raised to 1000 (well under the regional OpenAI.Standard.gpt4.1-mini
+    // quota of 5000) to give enough burst headroom for real workloads.
+    capacity: 1000
   }
   properties: {
     model: {

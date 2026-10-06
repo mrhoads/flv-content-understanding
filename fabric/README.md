@@ -128,6 +128,33 @@ OneLake shortcut below exposes at `Files/cu-results/<CAMPAIGN_NAME>/<id>.json`.
 `--fabric-container` overrides the container name (default `cu-results`) if
 you ever rename it.
 
+### Troubleshooting: `RuntimeError: Content Understanding returned no video segments`
+
+This means the underlying operation actually **failed**, not that the video
+format was rejected — the SDK's `poller.result()` doesn't raise on a
+`Failed` operation status, so the script only sees the (empty) `contents`
+list. To see the real error, poll the `operation-location` URL from the
+`analyze` response directly and read its top-level `error` field.
+
+The most common cause is a `429 RateLimit` from the `gpt-4-1-mini-cu-flv`
+model deployment: video analysis issues many vision-model calls in a tight
+burst (checked over 1-10 second windows), so even a short (~48s) commercial
+can exceed a low deployment capacity. If you see this, increase the
+deployment's capacity (`infra/modules/content-understanding.bicep`'s
+`modelDeployment.sku.capacity`, currently `1000`) and redeploy, or bump it
+directly for a quick retest:
+
+```bash
+az cognitiveservices account deployment create \
+  --name aif-flv-cu-dev-e9fd04 -g <resource-group> \
+  --deployment-name gpt-4-1-mini-cu-flv \
+  --model-name gpt-4.1-mini --model-version 2025-04-14 --model-format OpenAI \
+  --sku-name Standard --sku-capacity 1000
+```
+
+Check `az cognitiveservices usage list --location <region>` for the regional
+`OpenAI.Standard.gpt4.1-mini` quota ceiling before raising capacity further.
+
 ## One-time manual setup in Fabric (no Bicep/ARM support for these item types yet)
 
 1. **Create (or reuse) a Fabric workspace** on a capacity that supports

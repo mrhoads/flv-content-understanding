@@ -6,3 +6,4 @@ __pycache__/
 .local-secrets/
 .copilot-azure/
 .DS_Store
+output/
