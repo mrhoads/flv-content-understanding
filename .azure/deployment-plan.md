@@ -133,3 +133,31 @@
 - Deployed with `az deployment sub create ... --parameters containerImage=crflvdemodeve9fd.azurecr.io/flv-demo:20260915.7 isPlaceholder=false` (two runs: first deploy, then a follow-up output-only fix for `cuResultsContainerName`, which had incorrectly returned the storage account name instead of the container name).
 - Post-deploy verification: PASS; `stflvfabricdeve9fd` has `isHnsEnabled: true`, `allowSharedKeyAccess: false`, and a `cu-results` container; `stflvdemodeve9fd` still reports `isHnsEnabled: false` (unchanged); `/health` still returns `{"status":"ok","mode":"azure","storage":"azure"}`.
 - `fabric/README.md`, `infra/MANIFEST.md`, and `infra/grant-fabric-workspace-access.sh` updated to reference `stflvfabricdeve9fd` and its DFS endpoint (`https://stflvfabricdeve9fd.dfs.core.windows.net`) instead of the production account.
+
+## 2026-10-06: Fabric upload RBAC + examples/analyze_video.py upload step
+
+- Gap found: `examples/analyze_video.py` wrote CU result JSON only to local disk; nothing uploaded it to `stflvfabricdeve9fd`'s `cu-results` container, so there was no real data for the Fabric OneLake shortcut/notebook to read.
+- `infra/modules/role-assignments.bicep`: added `managedIdentityFabricStorageRole` and `deployerFabricStorageRole`, granting `Storage Blob Data Contributor` on `stflvfabricdeve9fd` to the app's managed identity and the deployer (for local runs via `az login`/`DefaultAzureCredential`).
+- Validation: `az bicep build` (only pre-existing BCP081 warnings), `az deployment sub validate` PASS, `az deployment sub what-if` confirmed a single `Create` (the new managed-identity role assignment on `stflvfabricdeve9fd`; the deployer role assignment fell into What-If's "Unsupported" (unanalyzable dynamic GUID) bucket, consistent with other role assignments in this template).
+- Deployed with `az deployment sub create ... --parameters containerImage=crflvdemodeve9fd.azurecr.io/flv-demo:20260915.7 isPlaceholder=false`.
+- Post-deploy verification: PASS; `az role assignment list` on `stflvfabricdeve9fd` shows `Storage Blob Data Contributor` for both the app's managed identity and the deployer user, alongside the existing Fabric workspace identity `Storage Blob Data Reader` grants.
+- `examples/analyze_video.py`: added `upload_fabric_result()` and wired it into the CLI behind `--fabric-storage-account-url`/`FABRIC_STORAGE_ACCOUNT_URL`, writing `cu-results/<campaign_name>/<id>.json` (`--campaign-name`/`CAMPAIGN_NAME`, default `uncategorized`; `--fabric-container`/`FABRIC_RESULTS_CONTAINER`, default `cu-results`). Skips the upload (prints a note) when the Fabric storage account URL isn't set, so the example still works standalone.
+- Targeted tests: `.venv/bin/pytest -q tests/test_video_example.py`: PASS; 9 passed.
+- Operational note: this change was first made, deployed, and verified on 2026-10-06, then accidentally reverted locally by a stray `git checkout main -- .` against a stale local `main` ref (this worktree's local `main` branch was pinned to the pre-PR-merge commit, not `origin/main`). The Azure deployment was unaffected (the RBAC was already live); only the Bicep/Python source needed to be reconstructed and recommitted.
+
+## 2026-10-06 (cont'd): End-to-end test + gpt-4.1-mini deployment capacity fix
+
+- Ran the first real end-to-end test: `examples/analyze_video.py --video "<local Progressive 'Dr. Rick' commercial>"` with `FABRIC_STORAGE_ACCOUNT_URL` set.
+- Hit `RuntimeError: Content Understanding returned no video segments...`. Root-caused by polling the `analyze` operation's `operation-location` directly: the SDK's `poller.result()` does not raise when the CU operation status is `Failed` — it only returns the (empty) `contents` list — masking the real error: `429 RateLimit` ("The deployment has exceeded its token or request rate quota.") on the `gpt-4-1-mini-cu-flv` model deployment.
+- `infra/modules/content-understanding.bicep`: raised `modelDeployment.sku.capacity` from `10` → `150` → `1000` (regional `OpenAI.Standard.gpt4.1-mini` quota ceiling is `5000`; confirmed via `az cognitiveservices usage list --location eastus2`). Capacity 150 still 429'd (video analysis issues a tight burst of vision-model calls, and RPM is checked over 1-10s windows, not just per-minute totals); capacity 1000 succeeded.
+- Verified live: `az cognitiveservices account deployment create ... --sku-capacity 1000` applied in-place, `az bicep build` passed cleanly (only pre-existing BCP081 warnings).
+- Re-ran the end-to-end test successfully: CU extracted `AdvertiserBrand: Progressive`, correctly identified Dr. Rick and other characters, products, and the commercial message; result JSON uploaded to `stflvfabricdeve9fd`'s `cu-results/dr-rick-tuning-in/<id>.json` (confirmed via `az storage blob list`).
+- Documented the failure mode and fix in `fabric/README.md` under a new "Troubleshooting" subsection.
+
+## 2026-10-06 (cont'd): Notebook abfss path bug fix + README refresh
+
+- Live notebook run surfaced `[Errno 2] No such file or directory: '/lakehouse/default/abfss://...@onelake.dfs.fabric.microsoft.com/.../Files/cu-results/<campaign>/<id>.json'` even though the blob existed in storage.
+- Root cause: `notebookutils.fs.ls()` returns absolute `abfss://...Files/...` URIs, not paths relative to the shortcut. Cell 6 was naively prefixing that absolute path with `/lakehouse/default/`, doubling it.
+- Fix: added `to_local_path()` in cell 6 to extract everything from `/Files/` onward and rebuild as `/lakehouse/default/Files/...`. Verified JSON validity, committed `6fb9a74`.
+- Confirmed live: notebook ran successfully end-to-end against the real `dr-rick-tuning-in` result JSON.
+- `fabric/README.md` updated: new troubleshooting entries for the `notebookutils.fs.open()` AttributeError and the abfss path bug (both already fixed in the notebook, documented for future maintainers), plus a note under the Fabric setup steps on iterating on the notebook via the Fabric Data Engineering VS Code extension instead of re-uploading through the browser each time.

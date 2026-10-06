@@ -88,11 +88,15 @@ to provision:
 
 - A new, dedicated, **HNS-enabled** storage account, **`stflvfabricdeve9fd`**,
   with a **`cu-results`** Blob container (`infra/modules/storage.bicep`, wired
-  from `infra/main.bicep`). This is where CU JSON output for campaign videos
-  should be written, one blob per analyzed video, suggested key shape:
-  `cu-results/<campaign_name>/<video-id>.json`. It's separate from the
+  from `infra/main.bicep`). `examples/analyze_video.py` uploads CU JSON output
+  for campaign videos here automatically (one blob per analyzed video), key
+  shape: `cu-results/<campaign_name>/<id>.json`. It's separate from the
   production `stflvdemodeve9fd` account so enabling HNS never touches that
   account's Defender for Storage malware-scanning blob tags (see above).
+- RBAC so both the app's managed identity and the deployer (running the
+  example locally with `az login`/`DefaultAzureCredential`) have
+  `Storage Blob Data Contributor` on `stflvfabricdeve9fd` and can write result
+  JSON (`infra/modules/role-assignments.bicep`).
 - An optional, idempotent RBAC grant: pass `fabricWorkspaceIdentityPrincipalId`
   as a bicep parameter once you know it (see step 2 below) and redeploy, or run
   `infra/grant-fabric-workspace-access.sh <principal-id>` directly — both grant
@@ -102,6 +106,76 @@ to provision:
 
 Nothing else in the app changes. `DEMO_MODE=true` continues to work with no
 Azure dependency at all; the Fabric pieces are opt-in and additive.
+
+## Writing CU results for Fabric to consume
+
+`examples/analyze_video.py` now uploads its result JSON to `stflvfabricdeve9fd`
+automatically whenever `--fabric-storage-account-url`
+(or `FABRIC_STORAGE_ACCOUNT_URL`) is set, in addition to its usual local
+`output/video-analysis/analysis.json`:
+
+```bash
+export CONTENT_UNDERSTANDING_ENDPOINT="https://aif-flv-cu-dev-e9fd04.cognitiveservices.azure.com/"
+export AZURE_STORAGE_ACCOUNT_URL="https://stflvdemodeve9fd.blob.core.windows.net"
+export FABRIC_STORAGE_ACCOUNT_URL="https://stflvfabricdeve9fd.blob.core.windows.net"
+export CAMPAIGN_NAME="progressive-dr-rick"
+
+python examples/analyze_video.py --video-url "https://<public-or-sas-url-to-a-video>"
+```
+
+This writes `cu-results/<CAMPAIGN_NAME>/<id>.json`, exactly the blob the
+OneLake shortcut below exposes at `Files/cu-results/<CAMPAIGN_NAME>/<id>.json`.
+`--fabric-container` overrides the container name (default `cu-results`) if
+you ever rename it.
+
+### Troubleshooting: `RuntimeError: Content Understanding returned no video segments`
+
+This means the underlying operation actually **failed**, not that the video
+format was rejected — the SDK's `poller.result()` doesn't raise on a
+`Failed` operation status, so the script only sees the (empty) `contents`
+list. To see the real error, poll the `operation-location` URL from the
+`analyze` response directly and read its top-level `error` field.
+
+The most common cause is a `429 RateLimit` from the `gpt-4-1-mini-cu-flv`
+model deployment: video analysis issues many vision-model calls in a tight
+burst (checked over 1-10 second windows), so even a short (~48s) commercial
+can exceed a low deployment capacity. If you see this, increase the
+deployment's capacity (`infra/modules/content-understanding.bicep`'s
+`modelDeployment.sku.capacity`, currently `1000`) and redeploy, or bump it
+directly for a quick retest:
+
+```bash
+az cognitiveservices account deployment create \
+  --name aif-flv-cu-dev-e9fd04 -g <resource-group> \
+  --deployment-name gpt-4-1-mini-cu-flv \
+  --model-name gpt-4.1-mini --model-version 2025-04-14 --model-format OpenAI \
+  --sku-name Standard --sku-capacity 1000
+```
+
+Check `az cognitiveservices usage list --location <region>` for the regional
+`OpenAI.Standard.gpt4.1-mini` quota ceiling before raising capacity further.
+
+### Troubleshooting: notebook errors reading shortcut files
+
+The ingestion notebook (`fabric/notebooks/campaign_insights_ingestion.ipynb`)
+reads files from the `cu-results` OneLake shortcut using plain Python `open()`
+against the attached default Lakehouse's local filesystem mount, because
+`notebookutils.fs` has **no `open()` method** (only `ls`, `cp`, `mv`, `rm`,
+`mkdirs`, `head`, `put`, `append`, `exists`, `mount`/`unmount` — `head()` caps
+reads at 100 KB, which risks truncating larger CU result JSON). If you see
+`AttributeError: module 'notebookutils.fs' has no attribute 'open'`, that's the
+symptom of calling `notebookutils.fs.open(...)` instead.
+
+Separately, `notebookutils.fs.ls()` returns **absolute**
+`abfss://<workspace-id>@onelake.dfs.fabric.microsoft.com/<item-id>/Files/...`
+paths, not paths relative to the shortcut. Naively prefixing that with
+`/lakehouse/default/` (the local mount point) produces a broken, doubled path
+like `/lakehouse/default/abfss://.../Files/cu-results/...json` and fails with
+`[Errno 2] No such file or directory`. The notebook's `to_local_path()` helper
+(cell 6) strips everything up to and including `/Files/` and rebuilds the path
+as `/lakehouse/default/Files/...` before calling `open()`. If you ever rewrite
+this cell, keep that conversion — don't pass the raw `notebookutils.fs.ls()`
+path straight to `open()`.
 
 ## One-time manual setup in Fabric (no Bicep/ARM support for these item types yet)
 
@@ -141,6 +215,15 @@ Azure dependency at all; the Fabric pieces are opt-in and additive.
    it (Notebook's own schedule, or a simple Fabric Data Pipeline with a single
    Notebook activity) to run after each batch of new campaign videos is
    analyzed.
+   - **Iterating on the notebook without re-uploading each change**: install
+     the **Fabric Data Engineering** VS Code extension, sign in, and
+     **Download** the workspace notebook locally (copy this repo's
+     `fabric/notebooks/campaign_insights_ingestion.ipynb` content over the
+     downloaded file to keep git as the source of truth). Select the
+     **Microsoft Fabric Runtime** kernel (with the Lakehouse from step 4 set
+     as default) to run cells against the real remote Spark session, then use
+     **Publish** in the extension to push a finished change back to the
+     workspace notebook before committing the same file to git.
 8. **Build the report**: create a Power BI report or Fabric semantic model on
    `campaign_insights` (e.g., mention counts by `AdvertiserBrand`/
    `CompetitorsMentioned`, `EmotionSentiment` distribution, `CallToAction`
