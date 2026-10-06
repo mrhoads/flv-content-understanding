@@ -108,18 +108,32 @@ Azure dependency at all; the Fabric pieces are opt-in and additive.
 1. **Create (or reuse) a Fabric workspace** on a capacity that supports
    Lakehouses, notebooks, and workspace identity.
 2. **Enable workspace identity**: Workspace settings → *Workspace identity* →
-   *Create*. Copy the resulting principal/object ID.
+   *Create*. Copy the resulting principal/object ID. Workspace identity is
+   tied to the workspace itself — if you ever delete and recreate the
+   workspace, re-enabling workspace identity mints a **new** object ID, and
+   any existing RBAC grant (step 3) becomes stale and must be re-run with the
+   new ID.
 3. **Grant storage access**: run
    `./infra/grant-fabric-workspace-access.sh <principal-id-from-step-2>`
    (or redeploy `main.bicep` with that value in `fabricWorkspaceIdentityPrincipalId`).
 4. **Create a Lakehouse**, e.g. `lh_marketing_campaigns`.
-5. **Add a OneLake shortcut**: in the Lakehouse's `Files` pane → *New shortcut* →
-   *Azure Data Lake Storage Gen2* → connect to `stflvfabricdeve9fd`'s **DFS
-   endpoint** (`https://stflvfabricdeve9fd.dfs.core.windows.net`) → sub-path
-   `cu-results` → when prompted, **create a new connection** with
-   authentication kind **Workspace Identity** (no key or SAS needed because of
-   the RBAC grant in step 3). Name it so its path is `Files/cu-results` to
-   match the notebook default.
+5. **Add a OneLake shortcut**: in the Lakehouse's **Lake view**, expand and
+   **right-click directly on the `Files` folder** (not the Lakehouse root —
+   invoking *New shortcut* from the wrong level creates a top-level artifact
+   sibling to `Files`/`Tables` instead of nesting under `Files`, which Fabric
+   rejects at read time) → *New shortcut* → *Azure Data Lake Storage Gen2*.
+   - **URL**: `https://stflvfabricdeve9fd.dfs.core.windows.net`
+   - **Connection**: *Create new connection* → name it (e.g.
+     `stflvfabricdeve9fd-workspace-identity`) → **Authentication kind**:
+     **Workspace Identity** (no key or SAS needed because of the RBAC grant in
+     step 3).
+   - **Next** → browse into the storage account and **check the box** next to
+     the `cu-results` container (don't type a path).
+   - **Next** → on the review page, confirm the shortcut name is `cu-results`
+     (edit via the pencil icon if it defaulted to something else) → **Create**.
+   - Verify in the Explorer pane that the shortcut appears **nested inside
+     `Files`** (with a small link icon), i.e. its path is `Files/cu-results`,
+     matching the notebook's `SHORTCUT_PATH` default.
 6. **Import the notebook**: Workspace → *Import* → *Notebook* →
    `fabric/notebooks/campaign_insights_ingestion.ipynb`. Attach it to the
    Lakehouse from step 4 as its default Lakehouse.
