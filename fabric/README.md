@@ -155,6 +155,28 @@ az cognitiveservices account deployment create \
 Check `az cognitiveservices usage list --location <region>` for the regional
 `OpenAI.Standard.gpt4.1-mini` quota ceiling before raising capacity further.
 
+### Troubleshooting: notebook errors reading shortcut files
+
+The ingestion notebook (`fabric/notebooks/campaign_insights_ingestion.ipynb`)
+reads files from the `cu-results` OneLake shortcut using plain Python `open()`
+against the attached default Lakehouse's local filesystem mount, because
+`notebookutils.fs` has **no `open()` method** (only `ls`, `cp`, `mv`, `rm`,
+`mkdirs`, `head`, `put`, `append`, `exists`, `mount`/`unmount` — `head()` caps
+reads at 100 KB, which risks truncating larger CU result JSON). If you see
+`AttributeError: module 'notebookutils.fs' has no attribute 'open'`, that's the
+symptom of calling `notebookutils.fs.open(...)` instead.
+
+Separately, `notebookutils.fs.ls()` returns **absolute**
+`abfss://<workspace-id>@onelake.dfs.fabric.microsoft.com/<item-id>/Files/...`
+paths, not paths relative to the shortcut. Naively prefixing that with
+`/lakehouse/default/` (the local mount point) produces a broken, doubled path
+like `/lakehouse/default/abfss://.../Files/cu-results/...json` and fails with
+`[Errno 2] No such file or directory`. The notebook's `to_local_path()` helper
+(cell 6) strips everything up to and including `/Files/` and rebuilds the path
+as `/lakehouse/default/Files/...` before calling `open()`. If you ever rewrite
+this cell, keep that conversion — don't pass the raw `notebookutils.fs.ls()`
+path straight to `open()`.
+
 ## One-time manual setup in Fabric (no Bicep/ARM support for these item types yet)
 
 1. **Create (or reuse) a Fabric workspace** on a capacity that supports
@@ -193,6 +215,15 @@ Check `az cognitiveservices usage list --location <region>` for the regional
    it (Notebook's own schedule, or a simple Fabric Data Pipeline with a single
    Notebook activity) to run after each batch of new campaign videos is
    analyzed.
+   - **Iterating on the notebook without re-uploading each change**: install
+     the **Fabric Data Engineering** VS Code extension, sign in, and
+     **Download** the workspace notebook locally (copy this repo's
+     `fabric/notebooks/campaign_insights_ingestion.ipynb` content over the
+     downloaded file to keep git as the source of truth). Select the
+     **Microsoft Fabric Runtime** kernel (with the Lakehouse from step 4 set
+     as default) to run cells against the real remote Spark session, then use
+     **Publish** in the extension to push a finished change back to the
+     workspace notebook before committing the same file to git.
 8. **Build the report**: create a Power BI report or Fabric semantic model on
    `campaign_insights` (e.g., mention counts by `AdvertiserBrand`/
    `CompetitorsMentioned`, `EmotionSentiment` distribution, `CallToAction`

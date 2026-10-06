@@ -153,3 +153,11 @@
 - Verified live: `az cognitiveservices account deployment create ... --sku-capacity 1000` applied in-place, `az bicep build` passed cleanly (only pre-existing BCP081 warnings).
 - Re-ran the end-to-end test successfully: CU extracted `AdvertiserBrand: Progressive`, correctly identified Dr. Rick and other characters, products, and the commercial message; result JSON uploaded to `stflvfabricdeve9fd`'s `cu-results/dr-rick-tuning-in/<id>.json` (confirmed via `az storage blob list`).
 - Documented the failure mode and fix in `fabric/README.md` under a new "Troubleshooting" subsection.
+
+## 2026-10-06 (cont'd): Notebook abfss path bug fix + README refresh
+
+- Live notebook run surfaced `[Errno 2] No such file or directory: '/lakehouse/default/abfss://...@onelake.dfs.fabric.microsoft.com/.../Files/cu-results/<campaign>/<id>.json'` even though the blob existed in storage.
+- Root cause: `notebookutils.fs.ls()` returns absolute `abfss://...Files/...` URIs, not paths relative to the shortcut. Cell 6 was naively prefixing that absolute path with `/lakehouse/default/`, doubling it.
+- Fix: added `to_local_path()` in cell 6 to extract everything from `/Files/` onward and rebuild as `/lakehouse/default/Files/...`. Verified JSON validity, committed `6fb9a74`.
+- Confirmed live: notebook ran successfully end-to-end against the real `dr-rick-tuning-in` result JSON.
+- `fabric/README.md` updated: new troubleshooting entries for the `notebookutils.fs.open()` AttributeError and the abfss path bug (both already fixed in the notebook, documented for future maintainers), plus a note under the Fabric setup steps on iterating on the notebook via the Fabric Data Engineering VS Code extension instead of re-uploading through the browser each time.
