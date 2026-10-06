@@ -13,7 +13,10 @@ set -euo pipefail
 
 FABRIC_PRINCIPAL_ID="${1:?Usage: $0 <fabric-workspace-identity-object-id>}"
 RESOURCE_GROUP="demo-prg-flv-rg"
-STORAGE_ACCOUNT_NAME="stflvdemodeve9fd"
+# Dedicated, HNS-enabled storage account for the Fabric OneLake shortcut. Not the
+# production flv-content account: ADLS Gen2 (HNS) requires no blob index tags, and the
+# production account has Defender for Storage malware-scanning tags on its blobs.
+STORAGE_ACCOUNT_NAME="stflvfabricdeve9fd"
 
 STORAGE_ACCOUNT_ID=$(az storage account show \
   --name "$STORAGE_ACCOUNT_NAME" \

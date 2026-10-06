@@ -44,6 +44,7 @@ var containerAppEnvName = 'cae-flv-demo-dev-e9fd'
 var containerRegistryName = 'crflvdemodeve9fd'
 var managedIdentityName = 'id-flv-demo-dev-e9fd'
 var storageAccountName = 'stflvdemodeve9fd'
+var fabricStorageAccountName = 'stflvfabricdeve9fd'
 var keyVaultName = 'kv-flv-demo-dev-e9fd'
 var logAnalyticsName = 'log-flv-demo-dev-e9fd'
 var appInsightsName = 'appi-flv-demo-dev-e9fd'
@@ -120,12 +121,20 @@ module storage 'modules/storage.bicep' = {
 
 // Additional container for Content Understanding JSON results consumed by Microsoft
 // Fabric via a OneLake shortcut (read-only, no SAS/keys; see fabric/README.md).
-module cuResultsContainer 'modules/blob-container.bicep' = {
+// This is a separate, dedicated storage account (not the production flv-content
+// account) because ADLS Gen2 OneLake shortcuts require Hierarchical Namespace (HNS),
+// which is incompatible with blob index tags. The production account has Defender for
+// Storage malware-scanning tags on its blobs, so HNS cannot be enabled there without
+// disrupting that security control.
+module fabricStorage 'modules/storage.bicep' = {
   scope: resourceGroup
-  name: 'cuResultsContainer-${uniqueString(subscription().id, resourceGroup.id)}'
+  name: 'fabricStorage-${uniqueString(subscription().id, resourceGroup.id)}'
   params: {
-    storageAccountName: storage.outputs.name
+    location: location
+    storageAccountName: fabricStorageAccountName
     containerName: 'cu-results'
+    isHnsEnabled: true
+    tags: commonTags
   }
 }
 
@@ -203,6 +212,7 @@ module roleAssignments 'modules/role-assignments.bicep' = {
     keyVaultName: keyVault.outputs.vaultName
     containerRegistryId: containerRegistry.outputs.registryId
     storageAccountId: storage.outputs.storageAccountId
+    fabricStorageAccountId: fabricStorage.outputs.storageAccountId
     foundryAccountName: foundry.outputs.accountName
     contentUnderstandingAccountName: contentUnderstanding.outputs.accountName
     documentIntelligenceAccountName: documentIntelligence.outputs.accountName
@@ -267,4 +277,10 @@ output contentUnderstandingEndpoint string = contentUnderstanding.outputs.accoun
 output documentIntelligenceEndpoint string = documentIntelligence.outputs.accountEndpoint
 
 @description('Content Understanding results container name used by the Fabric OneLake shortcut')
-output cuResultsContainerName string = cuResultsContainer.outputs.name
+output cuResultsContainerName string = fabricStorage.outputs.containerName
+
+@description('Fabric storage account name (dedicated, HNS-enabled, for the cu-results OneLake shortcut)')
+output fabricStorageAccountName string = fabricStorage.outputs.name
+
+@description('Fabric storage account DFS (ADLS Gen2) endpoint - use this URL when creating the OneLake shortcut')
+output fabricStorageDfsEndpoint string = fabricStorage.outputs.dfsEndpoint

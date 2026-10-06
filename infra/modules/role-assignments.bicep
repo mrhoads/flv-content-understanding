@@ -1,6 +1,9 @@
 param keyVaultName string
 param containerRegistryId string
 param storageAccountId string
+
+@description('Resource ID of the dedicated, HNS-enabled storage account used for the Fabric OneLake shortcut. Leave empty to skip the grant.')
+param fabricStorageAccountId string = ''
 param foundryAccountName string
 param contentUnderstandingAccountName string
 param documentIntelligenceAccountName string
@@ -77,12 +80,17 @@ resource storage 'Microsoft.Storage/storageAccounts@2026-06-01' existing = {
   name: last(split(storageAccountId, '/'))
 }
 
-// Fabric workspace identity gets read-only access to the cu-results container via a
-// OneLake shortcut. No SAS/keys are used because the storage account disables shared
-// key access. Only created when the identity principal ID is supplied.
-resource fabricWorkspaceStorageReaderRole 'Microsoft.Authorization/roleAssignments@2022-04-01' = if (!empty(fabricWorkspaceIdentityPrincipalId)) {
-  scope: storage
-  name: guid(storage.id, fabricWorkspaceIdentityPrincipalId, storageBlobDataReader)
+// Fabric workspace identity gets read-only access to the cu-results container (on the
+// dedicated, HNS-enabled Fabric storage account) via a OneLake shortcut. No SAS/keys
+// are used because the storage account disables shared key access. Only created when
+// both the identity principal ID and the Fabric storage account ID are supplied.
+resource fabricStorage 'Microsoft.Storage/storageAccounts@2026-06-01' existing = if (!empty(fabricStorageAccountId)) {
+  name: !empty(fabricStorageAccountId) ? last(split(fabricStorageAccountId, '/')) : 'placeholder'
+}
+
+resource fabricWorkspaceStorageReaderRole 'Microsoft.Authorization/roleAssignments@2022-04-01' = if (!empty(fabricWorkspaceIdentityPrincipalId) && !empty(fabricStorageAccountId)) {
+  scope: fabricStorage
+  name: guid(fabricStorageAccountId, fabricWorkspaceIdentityPrincipalId, storageBlobDataReader)
   properties: {
     roleDefinitionId: subscriptionResourceId('Microsoft.Authorization/roleDefinitions', storageBlobDataReader)
     principalId: fabricWorkspaceIdentityPrincipalId
@@ -196,4 +204,4 @@ output appIdentityDocumentIntelligenceRoleId string = managedIdentityDocumentInt
 output appIdentityAgentConsumerRoleId string = managedIdentityAgentConsumerRole.id
 
 @description('Fabric Workspace Identity Storage Reader Role Assignment ID (empty when not granted yet)')
-output fabricWorkspaceStorageReaderRoleId string = !empty(fabricWorkspaceIdentityPrincipalId) ? fabricWorkspaceStorageReaderRole.id : ''
+output fabricWorkspaceStorageReaderRoleId string = (!empty(fabricWorkspaceIdentityPrincipalId) && !empty(fabricStorageAccountId)) ? fabricWorkspaceStorageReaderRole.id : ''

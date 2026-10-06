@@ -34,6 +34,19 @@ sample to this repo's no-secrets posture:
   identity** (a system-assigned Entra ID identity for the whole workspace) with
   a single `Storage Blob Data Reader` RBAC role grant. No key, SAS, or app
   registration secret is created anywhere.
+- **`cu-results` lives in its own, dedicated storage account** (`stflvfabricdeve9fd`),
+  separate from the app's production `stflvdemodeve9fd` account. ADLS Gen2
+  OneLake shortcuts require **Hierarchical Namespace (HNS)** enabled on the
+  storage account, and HNS is permanently incompatible with **Blob Index
+  Tags**. The production account has blob index tags from Defender for
+  Storage's malware-scanning feature (`Malware Scanning scan result` /
+  `scan time UTC`, applied to every uploaded blob), so enabling HNS there would
+  either require stripping those tags one-time and opting into the preview
+  "Blob Tags for Hierarchical Namespace" feature (to keep Defender tagging
+  working on every future upload), or would otherwise break Defender's malware
+  scanning going forward. A new, dedicated account avoids both: it's
+  HNS-enabled from creation, holds only CU result JSON (no user-uploaded
+  content), and needs no change to the production account's security posture.
 - **A Fabric notebook still does the transform**, flattening the nested CU JSON
   (`contents[].fields`) into a queryable Delta table, same purpose as the
   sample's notebook — just not the half that calls Content Understanding.
@@ -49,7 +62,8 @@ Content Understanding analyzer (flvCommercialVideoAnalyzer)
   authenticated with managed identity / DefaultAzureCredential
     |
     v
-Azure Blob Storage: cu-results/<campaign_name>/<id>.json   (new container, no public access)
+Azure Blob Storage (dedicated, HNS-enabled account "stflvfabricdeve9fd"):
+  cu-results/<campaign_name>/<id>.json   (new account + container, no public access)
     |
     | OneLake Shortcut (Fabric workspace identity, Storage Blob Data Reader -- no secrets)
     v
@@ -72,16 +86,19 @@ Marketing effectiveness analysis
 Run `infra/main.bicep` (same process as today — see `infra/DEPLOYMENT_GUIDE.md`)
 to provision:
 
-- A new Blob container, **`cu-results`**, in the existing storage account
-  (`infra/modules/blob-container.bicep`, wired from `infra/main.bicep`). This is
-  where CU JSON output for campaign videos should be written, one blob per
-  analyzed video, suggested key shape:
-  `cu-results/<campaign_name>/<video-id>.json`.
+- A new, dedicated, **HNS-enabled** storage account, **`stflvfabricdeve9fd`**,
+  with a **`cu-results`** Blob container (`infra/modules/storage.bicep`, wired
+  from `infra/main.bicep`). This is where CU JSON output for campaign videos
+  should be written, one blob per analyzed video, suggested key shape:
+  `cu-results/<campaign_name>/<video-id>.json`. It's separate from the
+  production `stflvdemodeve9fd` account so enabling HNS never touches that
+  account's Defender for Storage malware-scanning blob tags (see above).
 - An optional, idempotent RBAC grant: pass `fabricWorkspaceIdentityPrincipalId`
   as a bicep parameter once you know it (see step 2 below) and redeploy, or run
   `infra/grant-fabric-workspace-access.sh <principal-id>` directly — both grant
-  `Storage Blob Data Reader` on the storage account to the Fabric workspace
-  identity, scoped to the whole account (Blob RBAC isn't container-scoped).
+  `Storage Blob Data Reader` on the `stflvfabricdeve9fd` storage account to the
+  Fabric workspace identity, scoped to the whole account (Blob RBAC isn't
+  container-scoped).
 
 Nothing else in the app changes. `DEMO_MODE=true` continues to work with no
 Azure dependency at all; the Fabric pieces are opt-in and additive.
@@ -97,10 +114,12 @@ Azure dependency at all; the Fabric pieces are opt-in and additive.
    (or redeploy `main.bicep` with that value in `fabricWorkspaceIdentityPrincipalId`).
 4. **Create a Lakehouse**, e.g. `lh_marketing_campaigns`.
 5. **Add a OneLake shortcut**: in the Lakehouse's `Files` pane → *New shortcut* →
-   *Azure Data Lake Storage Gen2* → point at the storage account's `cu-results`
-   container → authentication method **Organizational account / Workspace
-   identity** (no key or SAS needed because of the RBAC grant in step 3).
-   Name it so its path is `Files/cu-results` to match the notebook default.
+   *Azure Data Lake Storage Gen2* → connect to `stflvfabricdeve9fd`'s **DFS
+   endpoint** (`https://stflvfabricdeve9fd.dfs.core.windows.net`) → sub-path
+   `cu-results` → when prompted, **create a new connection** with
+   authentication kind **Workspace Identity** (no key or SAS needed because of
+   the RBAC grant in step 3). Name it so its path is `Files/cu-results` to
+   match the notebook default.
 6. **Import the notebook**: Workspace → *Import* → *Notebook* →
    `fabric/notebooks/campaign_insights_ingestion.ipynb`. Attach it to the
    Lakehouse from step 4 as its default Lakehouse.
@@ -123,7 +142,9 @@ cu-results/<campaign_name>/<video-id>.json
 ```
 
 using `AzureBlobObjectStorage`-style managed-identity upload (see
-`app/storage.py` for the existing pattern) against the `cu-results` container.
+`app/storage.py` for the existing pattern) against the `cu-results` container
+in the **`stflvfabricdeve9fd`** storage account (not the app's production
+`stflvdemodeve9fd` account).
 `campaign_name` becomes a column in `campaign_insights` automatically (the
 notebook derives it from the blob path), so group videos into a folder per
 campaign for reporting.
@@ -143,12 +164,15 @@ generator notebook plus the join logic.
 
 ## Files added by this change
 
-- `infra/modules/blob-container.bicep` — creates an additional container on the
-  existing storage account.
+- `infra/modules/storage.bicep` — creates the dedicated, HNS-enabled
+  `stflvfabricdeve9fd` storage account and its `cu-results` container
+  (reused from the production storage module via an `isHnsEnabled` parameter).
 - `infra/main.bicep` / `infra/modules/role-assignments.bicep` — wire up the
-  `cu-results` container and the optional Fabric workspace identity RBAC grant.
+  Fabric storage account, its `cu-results` container, and the optional Fabric
+  workspace identity RBAC grant (scoped to the Fabric account only).
 - `infra/grant-fabric-workspace-access.sh` — one-shot script to grant
-  `Storage Blob Data Reader` once the Fabric workspace identity exists.
+  `Storage Blob Data Reader` on `stflvfabricdeve9fd` once the Fabric workspace
+  identity exists.
 - `fabric/notebooks/campaign_insights_ingestion.ipynb` — Fabric PySpark
   notebook that flattens CU JSON from the shortcut into the `campaign_insights`
   Delta table. Schema-agnostic: new analyzer fields show up as new columns.
