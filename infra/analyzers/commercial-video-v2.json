@@ -51,10 +51,10 @@
       "KnownCharacters": {
         "type": "array",
         "items": {
-          "type": "string"
+          "type": "string",
+          "method": "classify",
+          "enum": ["Flo", "Jamie", "Mara", "Alan", "DrRick"]
         },
-        "method": "classify",
-        "enum": ["Flo", "Jamie", "Mara", "Alan", "DrRick"],
         "description": "NEW in v2: which of Progressive's recurring campaign characters (Flo, Jamie, Mara, Alan, Dr. Rick) appear in this video, for reliable filtering/aggregation by character across a campaign. Returns an empty array if none of these recurring characters appear. Extend this enum as new recurring characters are introduced; characters outside this known roster are still captured in full in `Characters`."
       },
       "CharacterRoles": {
