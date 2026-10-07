@@ -121,13 +121,40 @@
         "method": "generate",
         "description": "RENAMED in v2 (was EmotionSentiment): describe the dominant emotion or sentiment conveyed by the commercial and, when useful, how it changes across the video. SentimentCategory now carries the classifiable value."
       },
-      "SportsOrEntertainmentReferences": {
+      "HasSportsReference": {
+        "type": "string",
+        "method": "classify",
+        "enum": ["Yes", "No"],
+        "description": "CHANGED in v2 (was free-text SportsOrEntertainmentReferences): classifies whether the commercial references a sport, sports league, athlete, game broadcast, or sporting event, so presence can be aggregated reliably without string matching. Answer No for general entertainment/celebrity references that are not sports-related; see EntertainmentReferences for those."
+      },
+      "SportsTypes": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "method": "classify",
+          "enum": [
+            "Football",
+            "Basketball",
+            "Baseball",
+            "Hockey",
+            "Soccer",
+            "Golf",
+            "Tennis",
+            "MotorsportsRacing",
+            "Boxing",
+            "Olympics",
+            "Other"
+          ]
+        },
+        "description": "NEW in v2: every specific sport referenced in the video (for example via a league name, athlete, game broadcast, or equipment), when HasSportsReference is Yes. This is a multi-label field - include every sport that applies, not just the first one found. Use `Other` for a sport not in this list. Returns an empty array when HasSportsReference is No."
+      },
+      "EntertainmentReferences": {
         "type": "array",
         "items": {
           "type": "string"
         },
         "method": "generate",
-        "description": "Sports, entertainment, TV, streaming, or game-watching references in the video."
+        "description": "RENAMED/NARROWED in v2 (was SportsOrEntertainmentReferences): non-sports entertainment references in the video, such as a celebrity spokesperson, TV show, streaming service, movie, or game-watching context. Sports-specific references belong in HasSportsReference/SportsTypes instead."
       },
       "BrandSafetyFlag": {
         "type": "string",

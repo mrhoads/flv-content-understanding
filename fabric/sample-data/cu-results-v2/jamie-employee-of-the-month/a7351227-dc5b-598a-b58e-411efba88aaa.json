@@ -4,7 +4,7 @@
   "result": {
     "analyzerId": "cuCommercialVideoAnalyzerV2",
     "apiVersion": "2025-11-01",
-    "createdAt": "2026-01-19T00:40:29Z",
+    "createdAt": "2026-08-06T03:20:32Z",
     "contents": [
       {
         "kind": "audioVisual",
@@ -15,7 +15,7 @@
           "AdvertiserBrand": {
             "type": "string",
             "valueString": "Progressive Insurance",
-            "confidence": 0.97
+            "confidence": 0.91
           },
           "VisibleProducts": {
             "type": "array",
@@ -23,20 +23,20 @@
               {
                 "type": "string",
                 "valueString": "Progressive Store shelf display",
-                "confidence": 0.97
+                "confidence": 0.88
               },
               {
                 "type": "string",
                 "valueString": "Employee of the Month plaque",
-                "confidence": 0.97
+                "confidence": 0.88
               }
             ],
-            "confidence": 0.97
+            "confidence": 0.88
           },
           "CompetitorsMentioned": {
             "type": "array",
             "valueArray": [],
-            "confidence": 0.85
+            "confidence": 0.81
           },
           "InsuranceProductsMentioned": {
             "type": "array",
@@ -44,10 +44,10 @@
               {
                 "type": "string",
                 "valueString": "Auto insurance",
-                "confidence": 0.95
+                "confidence": 0.94
               }
             ],
-            "confidence": 0.95
+            "confidence": 0.94
           },
           "Characters": {
             "type": "array",
@@ -71,30 +71,30 @@
               {
                 "type": "string",
                 "valueString": "Flo",
-                "confidence": 0.94
+                "confidence": 0.95
               },
               {
                 "type": "string",
                 "valueString": "Jamie",
-                "confidence": 0.94
+                "confidence": 0.95
               }
             ],
-            "confidence": 0.94
+            "confidence": 0.95
           },
           "CharacterRoles": {
             "type": "string",
             "valueString": "Jamie is an eager, slightly overconfident Progressive Store employee; Flo is his more composed coworker.",
-            "confidence": 0.91
+            "confidence": 0.88
           },
           "MusicAndAudio": {
             "type": "string",
             "valueString": "Light comedic instrumental sting with a small fanfare cue.",
-            "confidence": 0.82
+            "confidence": 0.95
           },
           "Setting": {
             "type": "string",
             "valueString": "The Progressive Store checkout area.",
-            "confidence": 0.97
+            "confidence": 0.96
           },
           "KeyActions": {
             "type": "array",
@@ -102,20 +102,20 @@
               {
                 "type": "string",
                 "valueString": "Jamie holds up his employee-of-the-month plaque",
-                "confidence": 0.84
+                "confidence": 0.88
               },
               {
                 "type": "string",
                 "valueString": "Jamie over-explains the honor to shoppers",
-                "confidence": 0.84
+                "confidence": 0.88
               },
               {
                 "type": "string",
                 "valueString": "Flo redirects the shoppers to checkout",
-                "confidence": 0.84
+                "confidence": 0.88
               }
             ],
-            "confidence": 0.84
+            "confidence": 0.88
           },
           "OnScreenText": {
             "type": "array",
@@ -123,15 +123,15 @@
               {
                 "type": "string",
                 "valueString": "Progressive.com",
-                "confidence": 0.89
+                "confidence": 0.98
               }
             ],
-            "confidence": 0.89
+            "confidence": 0.98
           },
           "CommercialMessage": {
             "type": "string",
             "valueString": "Progressive employees (even Jamie) are there to help you save.",
-            "confidence": 0.95
+            "confidence": 0.88
           },
           "HasCallToAction": {
             "type": "string",
@@ -141,37 +141,47 @@
           "CallToActionType": {
             "type": "string",
             "valueString": "GetAQuote",
-            "confidence": 0.86
+            "confidence": 0.96
           },
           "HumorMechanism": {
             "type": "string",
             "valueString": "Jamie's over-the-top self-congratulation played against Flo's deadpan.",
-            "confidence": 0.95
+            "confidence": 0.84
           },
           "SentimentCategory": {
             "type": "string",
             "valueString": "Positive",
-            "confidence": 0.93
+            "confidence": 0.95
           },
           "SentimentNarrative": {
             "type": "string",
             "valueString": "Comedic and lighthearted.",
-            "confidence": 0.94
+            "confidence": 0.95
           },
-          "SportsOrEntertainmentReferences": {
+          "HasSportsReference": {
+            "type": "string",
+            "valueString": "No",
+            "confidence": 0.89
+          },
+          "SportsTypes": {
             "type": "array",
             "valueArray": [],
-            "confidence": 0.8
+            "confidence": 0.92
+          },
+          "EntertainmentReferences": {
+            "type": "array",
+            "valueArray": [],
+            "confidence": 0.81
           },
           "BrandSafetyFlag": {
             "type": "string",
             "valueString": "Clear",
-            "confidence": 0.98
+            "confidence": 0.92
           },
           "BrandSafetyNotes": {
             "type": "string",
             "valueString": "No obvious brand-safety concerns are visible or spoken.",
-            "confidence": 0.95
+            "confidence": 0.94
           },
           "BrandMentionCount": {
             "type": "integer",

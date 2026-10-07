@@ -243,6 +243,7 @@ Understanding field schema changes what you get back for identical footage:
 | `BrandSafetyNotes` (string)                  | `BrandSafetyFlag` (Clear/ReviewRecommended) + `BrandSafetyNotes` (string) | A reviewer can filter to flagged rows instead of reading every note. |
 | *(none)*                                      | `BrandMentionCount` (integer)  | New quantitative field for trend lines that v1's all-text/array schema couldn't produce. |
 | *(none, covered by free-text `Characters`)*  | `KnownCharacters` (multi-select enum: Flo, Jamie, Mara, Alan, Dr. Rick) | Flags which recurring campaign characters appear, for reliable filtering/aggregation by character, while `Characters` keeps capturing the full cast (including any character outside that roster) as free text. |
+| `SportsOrEntertainmentReferences` (array, mixed sports/entertainment) | `HasSportsReference` (Yes/No) + `SportsTypes` (multi-select enum: Football, Basketball, Baseball, Hockey, Soccer, Golf, Tennis, MotorsportsRacing, Boxing, Olympics, Other) + `EntertainmentReferences` (array, non-sports) | Splits a single mixed free-text array into a chartable sports presence/type signal plus a narrower free-text field for celebrity/TV/streaming mentions that aren't sports. |
 
 All other fields (brand, products, competitors, setting, etc.) are unchanged,
 so most of the schema is stable and only the fields that benefit from

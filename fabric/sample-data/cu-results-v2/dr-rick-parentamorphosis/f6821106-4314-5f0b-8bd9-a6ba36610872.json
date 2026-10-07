@@ -4,7 +4,7 @@
   "result": {
     "analyzerId": "cuCommercialVideoAnalyzerV2",
     "apiVersion": "2025-11-01",
-    "createdAt": "2026-01-10T15:40:29Z",
+    "createdAt": "2026-05-26T12:20:32Z",
     "contents": [
       {
         "kind": "audioVisual",
@@ -15,7 +15,7 @@
           "AdvertiserBrand": {
             "type": "string",
             "valueString": "Progressive Insurance",
-            "confidence": 0.96
+            "confidence": 0.97
           },
           "VisibleProducts": {
             "type": "array",
@@ -36,7 +36,7 @@
           "CompetitorsMentioned": {
             "type": "array",
             "valueArray": [],
-            "confidence": 0.89
+            "confidence": 0.79
           },
           "InsuranceProductsMentioned": {
             "type": "array",
@@ -44,15 +44,15 @@
               {
                 "type": "string",
                 "valueString": "Home insurance",
-                "confidence": 0.89
+                "confidence": 0.88
               },
               {
                 "type": "string",
                 "valueString": "Auto insurance",
-                "confidence": 0.89
+                "confidence": 0.88
               }
             ],
-            "confidence": 0.89
+            "confidence": 0.88
           },
           "Characters": {
             "type": "array",
@@ -60,20 +60,20 @@
               {
                 "type": "string",
                 "valueString": "Dr. Rick",
-                "confidence": 0.98
+                "confidence": 0.91
               },
               {
                 "type": "string",
                 "valueString": "young homeowner",
-                "confidence": 0.98
+                "confidence": 0.91
               },
               {
                 "type": "string",
                 "valueString": "neighbor",
-                "confidence": 0.98
+                "confidence": 0.91
               }
             ],
-            "confidence": 0.98
+            "confidence": 0.91
           },
           "KnownCharacters": {
             "type": "array",
@@ -81,10 +81,10 @@
               {
                 "type": "string",
                 "valueString": "DrRick",
-                "confidence": 0.88
+                "confidence": 0.96
               }
             ],
-            "confidence": 0.88
+            "confidence": 0.96
           },
           "CharacterRoles": {
             "type": "string",
@@ -94,12 +94,12 @@
           "MusicAndAudio": {
             "type": "string",
             "valueString": "Soft mock-clinical piano underscore with a long drawn-out 'mmm' reaction sound effect from the neighbor.",
-            "confidence": 0.93
+            "confidence": 0.9
           },
           "Setting": {
             "type": "string",
             "valueString": "A suburban driveway, homeowner kneeling by a parked car.",
-            "confidence": 0.83
+            "confidence": 0.95
           },
           "KeyActions": {
             "type": "array",
@@ -107,25 +107,25 @@
               {
                 "type": "string",
                 "valueString": "Homeowner over-explains tire pressure to a visibly bored neighbor",
-                "confidence": 0.85
+                "confidence": 0.9
               },
               {
                 "type": "string",
                 "valueString": "Dr. Rick steps between them",
-                "confidence": 0.85
+                "confidence": 0.9
               },
               {
                 "type": "string",
                 "valueString": "Dr. Rick offers a shorter, kinder way to say it",
-                "confidence": 0.85
+                "confidence": 0.9
               },
               {
                 "type": "string",
                 "valueString": "Neighbor thanks Dr. Rick and walks away",
-                "confidence": 0.85
+                "confidence": 0.9
               }
             ],
-            "confidence": 0.85
+            "confidence": 0.9
           },
           "OnScreenText": {
             "type": "array",
@@ -133,65 +133,75 @@
               {
                 "type": "string",
                 "valueString": "Parentamorphosis",
-                "confidence": 0.88
+                "confidence": 0.87
               },
               {
                 "type": "string",
                 "valueString": "Progressive.com/home",
-                "confidence": 0.88
+                "confidence": 0.87
               }
             ],
-            "confidence": 0.88
+            "confidence": 0.87
           },
           "CommercialMessage": {
             "type": "string",
             "valueString": "Dr. Rick helps new homeowners catch parent habits before they talk someone's ear off.",
-            "confidence": 0.86
+            "confidence": 0.82
           },
           "HasCallToAction": {
             "type": "string",
             "valueString": "Yes",
-            "confidence": 0.96
+            "confidence": 0.93
           },
           "CallToActionType": {
             "type": "string",
             "valueString": "GetAQuote",
-            "confidence": 0.96
+            "confidence": 0.97
           },
           "HumorMechanism": {
             "type": "string",
             "valueString": "Deadpan escalation of an ordinary over-explaining habit.",
-            "confidence": 0.85
+            "confidence": 0.91
           },
           "SentimentCategory": {
             "type": "string",
             "valueString": "Mixed",
-            "confidence": 0.88
+            "confidence": 0.96
           },
           "SentimentNarrative": {
             "type": "string",
             "valueString": "Light cringe-comedy resolving into warmth.",
             "confidence": 0.96
           },
-          "SportsOrEntertainmentReferences": {
+          "HasSportsReference": {
+            "type": "string",
+            "valueString": "No",
+            "confidence": 0.88
+          },
+          "SportsTypes": {
             "type": "array",
             "valueArray": [],
-            "confidence": 0.71
+            "confidence": 0.84
+          },
+          "EntertainmentReferences": {
+            "type": "array",
+            "valueArray": [],
+            "confidence": 0.72
           },
           "BrandSafetyFlag": {
             "type": "string",
             "valueString": "Clear",
-            "confidence": 0.96
+            "confidence": 0.97
           },
           "BrandSafetyNotes": {
             "type": "string",
             "valueString": "No obvious brand-safety concerns are visible or spoken.",
-            "confidence": 0.97
+            "confidence": 0.98
           },
           "BrandMentionCount": {
             "type": "integer",
             "valueInteger": 1,
-            "confidence": 0.86
+            "confidence": 0.9
           }
         }
       }

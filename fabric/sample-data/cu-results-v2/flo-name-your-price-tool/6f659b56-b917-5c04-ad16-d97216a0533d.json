@@ -4,7 +4,7 @@
   "result": {
     "analyzerId": "cuCommercialVideoAnalyzerV2",
     "apiVersion": "2025-11-01",
-    "createdAt": "2026-08-12T11:40:29Z",
+    "createdAt": "2026-01-10T09:20:32Z",
     "contents": [
       {
         "kind": "audioVisual",
@@ -15,7 +15,7 @@
           "AdvertiserBrand": {
             "type": "string",
             "valueString": "Progressive Insurance",
-            "confidence": 0.96
+            "confidence": 0.99
           },
           "VisibleProducts": {
             "type": "array",
@@ -23,20 +23,20 @@
               {
                 "type": "string",
                 "valueString": "Name Your Price Tool kiosk",
-                "confidence": 0.94
+                "confidence": 0.95
               },
               {
                 "type": "string",
                 "valueString": "Progressive Store shelf display",
-                "confidence": 0.94
+                "confidence": 0.95
               }
             ],
-            "confidence": 0.94
+            "confidence": 0.95
           },
           "CompetitorsMentioned": {
             "type": "array",
             "valueArray": [],
-            "confidence": 0.78
+            "confidence": 0.7
           },
           "InsuranceProductsMentioned": {
             "type": "array",
@@ -44,10 +44,10 @@
               {
                 "type": "string",
                 "valueString": "Auto insurance",
-                "confidence": 0.89
+                "confidence": 0.96
               }
             ],
-            "confidence": 0.89
+            "confidence": 0.96
           },
           "Characters": {
             "type": "array",
@@ -55,10 +55,10 @@
               {
                 "type": "string",
                 "valueString": "Flo",
-                "confidence": 0.93
+                "confidence": 0.96
               }
             ],
-            "confidence": 0.93
+            "confidence": 0.96
           },
           "KnownCharacters": {
             "type": "array",
@@ -66,25 +66,25 @@
               {
                 "type": "string",
                 "valueString": "Flo",
-                "confidence": 0.98
+                "confidence": 0.92
               }
             ],
-            "confidence": 0.98
+            "confidence": 0.92
           },
           "CharacterRoles": {
             "type": "string",
             "valueString": "Flo delivers a calm, solo closing-time moment.",
-            "confidence": 0.9
+            "confidence": 0.85
           },
           "MusicAndAudio": {
             "type": "string",
             "valueString": "Slow, mellow instrumental wind-down with soft footstep sound effects.",
-            "confidence": 0.97
+            "confidence": 0.92
           },
           "Setting": {
             "type": "string",
             "valueString": "The Progressive Store at night, aisle lights dimming in sequence.",
-            "confidence": 0.95
+            "confidence": 0.82
           },
           "KeyActions": {
             "type": "array",
@@ -92,15 +92,15 @@
               {
                 "type": "string",
                 "valueString": "Flo walks the aisle switching off kiosk lights",
-                "confidence": 0.8
+                "confidence": 0.88
               },
               {
                 "type": "string",
                 "valueString": "Flo pauses at the last kiosk and smiles at the camera",
-                "confidence": 0.8
+                "confidence": 0.88
               }
             ],
-            "confidence": 0.8
+            "confidence": 0.88
           },
           "OnScreenText": {
             "type": "array",
@@ -108,25 +108,25 @@
               {
                 "type": "string",
                 "valueString": "Progressive.com -- anytime",
-                "confidence": 0.95
+                "confidence": 0.91
               },
               {
                 "type": "string",
                 "valueString": "Name Your Price Tool",
-                "confidence": 0.95
+                "confidence": 0.91
               }
             ],
-            "confidence": 0.95
+            "confidence": 0.91
           },
           "CommercialMessage": {
             "type": "string",
             "valueString": "Progressive's price tool is available online any time, day or night.",
-            "confidence": 0.92
+            "confidence": 0.97
           },
           "HasCallToAction": {
             "type": "string",
             "valueString": "Yes",
-            "confidence": 0.95
+            "confidence": 0.98
           },
           "CallToActionType": {
             "type": "string",
@@ -136,37 +136,47 @@
           "HumorMechanism": {
             "type": "string",
             "valueString": "Mild deadpan delivered to an empty store as if it were a full crowd.",
-            "confidence": 0.88
+            "confidence": 0.85
           },
           "SentimentCategory": {
             "type": "string",
             "valueString": "Positive",
-            "confidence": 0.86
+            "confidence": 0.87
           },
           "SentimentNarrative": {
             "type": "string",
             "valueString": "Calm and quietly warm.",
-            "confidence": 0.88
+            "confidence": 0.96
           },
-          "SportsOrEntertainmentReferences": {
+          "HasSportsReference": {
+            "type": "string",
+            "valueString": "No",
+            "confidence": 0.96
+          },
+          "SportsTypes": {
             "type": "array",
             "valueArray": [],
-            "confidence": 0.8
+            "confidence": 0.84
+          },
+          "EntertainmentReferences": {
+            "type": "array",
+            "valueArray": [],
+            "confidence": 0.84
           },
           "BrandSafetyFlag": {
             "type": "string",
             "valueString": "Clear",
-            "confidence": 0.99
+            "confidence": 0.95
           },
           "BrandSafetyNotes": {
             "type": "string",
             "valueString": "No obvious brand-safety concerns are visible or spoken.",
-            "confidence": 0.98
+            "confidence": 0.91
           },
           "BrandMentionCount": {
             "type": "integer",
             "valueInteger": 1,
-            "confidence": 0.88
+            "confidence": 0.95
           }
         }
       }

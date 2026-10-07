@@ -4,7 +4,7 @@
   "result": {
     "analyzerId": "cuCommercialVideoAnalyzerV2",
     "apiVersion": "2025-11-01",
-    "createdAt": "2026-09-09T18:40:29Z",
+    "createdAt": "2025-12-30T14:20:32Z",
     "contents": [
       {
         "kind": "audioVisual",
@@ -15,7 +15,7 @@
           "AdvertiserBrand": {
             "type": "string",
             "valueString": "Progressive Insurance",
-            "confidence": 0.96
+            "confidence": 0.9
           },
           "VisibleProducts": {
             "type": "array",
@@ -23,15 +23,15 @@
               {
                 "type": "string",
                 "valueString": "Bundle discount price tag signage",
-                "confidence": 0.92
+                "confidence": 0.98
               }
             ],
-            "confidence": 0.92
+            "confidence": 0.98
           },
           "CompetitorsMentioned": {
             "type": "array",
             "valueArray": [],
-            "confidence": 0.71
+            "confidence": 0.87
           },
           "InsuranceProductsMentioned": {
             "type": "array",
@@ -39,10 +39,10 @@
               {
                 "type": "string",
                 "valueString": "Bundled home and auto",
-                "confidence": 0.96
+                "confidence": 0.99
               }
             ],
-            "confidence": 0.96
+            "confidence": 0.99
           },
           "Characters": {
             "type": "array",
@@ -50,10 +50,10 @@
               {
                 "type": "string",
                 "valueString": "Flo",
-                "confidence": 0.97
+                "confidence": 0.98
               }
             ],
-            "confidence": 0.97
+            "confidence": 0.98
           },
           "KnownCharacters": {
             "type": "array",
@@ -61,10 +61,10 @@
               {
                 "type": "string",
                 "valueString": "Flo",
-                "confidence": 0.86
+                "confidence": 0.96
               }
             ],
-            "confidence": 0.86
+            "confidence": 0.96
           },
           "CharacterRoles": {
             "type": "string",
@@ -74,12 +74,12 @@
           "MusicAndAudio": {
             "type": "string",
             "valueString": "Short upbeat jingle sting, no lyrics.",
-            "confidence": 0.9
+            "confidence": 0.89
           },
           "Setting": {
             "type": "string",
             "valueString": "The Progressive Store checkout counter.",
-            "confidence": 0.83
+            "confidence": 0.84
           },
           "KeyActions": {
             "type": "array",
@@ -87,15 +87,15 @@
               {
                 "type": "string",
                 "valueString": "Flo holds up a combined policy box",
-                "confidence": 0.83
+                "confidence": 0.87
               },
               {
                 "type": "string",
                 "valueString": "Flo points to the discount price tag",
-                "confidence": 0.83
+                "confidence": 0.87
               }
             ],
-            "confidence": 0.83
+            "confidence": 0.87
           },
           "OnScreenText": {
             "type": "array",
@@ -103,47 +103,57 @@
               {
                 "type": "string",
                 "valueString": "Bundle & Save",
-                "confidence": 0.91
+                "confidence": 0.86
               },
               {
                 "type": "string",
                 "valueString": "Progressive.com",
-                "confidence": 0.91
+                "confidence": 0.86
               }
             ],
-            "confidence": 0.91
+            "confidence": 0.86
           },
           "CommercialMessage": {
             "type": "string",
             "valueString": "Bundling is still the fastest way to save with Progressive.",
-            "confidence": 0.96
+            "confidence": 0.87
           },
           "HasCallToAction": {
             "type": "string",
             "valueString": "Yes",
-            "confidence": 0.91
+            "confidence": 0.99
           },
           "CallToActionType": {
             "type": "string",
             "valueString": "PurchaseNow",
-            "confidence": 0.96
+            "confidence": 0.88
           },
           "HumorMechanism": {
             "type": "string",
             "valueString": "Quick callback to the bundling premise for familiarity.",
-            "confidence": 0.92
+            "confidence": 0.91
           },
           "SentimentCategory": {
             "type": "string",
             "valueString": "Positive",
-            "confidence": 0.86
+            "confidence": 0.91
           },
           "SentimentNarrative": {
             "type": "string",
             "valueString": "Brisk and upbeat.",
-            "confidence": 0.92
+            "confidence": 0.88
           },
-          "SportsOrEntertainmentReferences": {
+          "HasSportsReference": {
+            "type": "string",
+            "valueString": "No",
+            "confidence": 0.97
+          },
+          "SportsTypes": {
+            "type": "array",
+            "valueArray": [],
+            "confidence": 0.95
+          },
+          "EntertainmentReferences": {
             "type": "array",
             "valueArray": [],
             "confidence": 0.82
@@ -151,7 +161,7 @@
           "BrandSafetyFlag": {
             "type": "string",
             "valueString": "Clear",
-            "confidence": 0.9
+            "confidence": 0.96
           },
           "BrandSafetyNotes": {
             "type": "string",
@@ -161,7 +171,7 @@
           "BrandMentionCount": {
             "type": "integer",
             "valueInteger": 1,
-            "confidence": 0.95
+            "confidence": 0.89
           }
         }
       }
