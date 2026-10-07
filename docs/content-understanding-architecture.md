@@ -67,7 +67,7 @@ flowchart LR
     G --> I
 ```
 
-## How this repo's four analyzers fit the pattern
+## How this repo's five analyzers fit the pattern
 
 | Analyzer (`infra/analyzers/*.json`)         | Base analyzer         | Modality | Purpose |
 | --------------------------------------------- | ---------------------- | -------- | ------- |
@@ -75,12 +75,13 @@ flowchart LR
 | `vehicle-document.json` (`flvVehicleDocumentAnalyzer`) | `prebuilt-document` | Document | Extract title/registration fields from an uploaded vehicle document. |
 | `commercial-video.json` (`flvCommercialVideoAnalyzer`, v1) | `prebuilt-video` | Video | Extract marketing attributes (brand, sentiment, CTA, humor) as mostly free text. |
 | `commercial-video-v2.json` (`cuCommercialVideoAnalyzerV2`) | `prebuilt-video` | Video | Same marketing use case; evolves select v1 fields from free text to classified enums and adds quantitative fields. See `fabric/README.md`'s "Comparing analyzer schema versions" section. |
+| `commercial-video-v3.json` (`cuCommercialVideoAnalyzerV3`) | `prebuilt-video` | Video | Same v2 schema, but `KnownCharacters` adds a visual/role description (clothing, setting, mannerisms) per recurring character, so a character can be identified even when the video never says or displays their name — see "Describing characters by appearance, not just name" below. |
 
-Two different analyzers over the same modality (video, here) is exactly the
+Three different analyzers over the same modality (video, here) is exactly the
 mechanism this repo uses to demo **schema evolution**: the same input video
 produces different structured output shapes depending only on which
 analyzer's field schema you call it with — nothing about Content
-Understanding itself changes between v1 and v2.
+Understanding itself changes between v1, v2, and v3.
 
 ## Why field schema design matters
 
@@ -93,3 +94,23 @@ Understanding itself changes between v1 and v2.
   for reporting, alongside free-text fields for detail and quantitative
   fields (counts, scores) for trending — exactly the mix in
   `commercial-video-v2.json`.
+
+## Describing characters by appearance, not just name
+
+Content Understanding grounds a `classify` field's answer in what the video
+actually shows/says, not in memorized trivia about a franchise's characters.
+`cuCommercialVideoAnalyzerV2`'s `KnownCharacters` field worked well for
+characters whose name is spoken or shown on screen (for example "Flo"), but
+missed a character in a clip where no one ever said or displayed their name —
+even though the character was clearly visible, playing their usual role.
+
+`cuCommercialVideoAnalyzerV3` addresses this by describing each roster
+character's distinctive visual appearance, setting, and mannerisms directly
+in the field description (for example "older man in a cardigan, hosting a
+support-group-style session, coaching other on-screen adults who are
+'becoming their parents'" for Dr. Rick), so the model has a recognition path
+that doesn't depend on the name being said or shown. This trades a small
+amount of precision risk (a lookalike character could be misclassified) for
+materially better recall on name-free clips — a realistic schema-design
+tradeoff to demo alongside the v1-to-v2 generate-vs-classify comparison.
+

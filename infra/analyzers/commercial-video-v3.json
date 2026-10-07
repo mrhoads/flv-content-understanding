@@ -1,0 +1,177 @@
+{
+  "description": "V3 schema for commercial-video analysis. Evolves infra/analyzers/commercial-video-v2.json (cuCommercialVideoAnalyzerV2) to improve recall of recurring characters that aren't named on screen: KnownCharacters now includes a visual/role description per roster member (clothing, setting, mannerisms) instead of relying on the character's name being spoken or displayed. See docs/content-understanding-architecture.md and fabric/README.md for the side-by-side comparison.",
+  "baseAnalyzerId": "prebuilt-video",
+  "models": {
+    "completion": "gpt-4.1-mini"
+  },
+  "config": {
+    "returnDetails": true,
+    "enableSegment": false
+  },
+  "fieldSchema": {
+    "description": "Extract structured commercial-analysis attributes from the full video, with classified sentiment/CTA/brand-safety fields, new quantitative scoring fields, and visually-grounded known-character recognition (v3).",
+    "fields": {
+      "AdvertiserBrand": {
+        "type": "string",
+        "method": "generate",
+        "description": "Primary advertiser or brand promoted in the video."
+      },
+      "VisibleProducts": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "method": "generate",
+        "description": "Products, services, devices, apps, logos, UI elements, or branded assets visibly shown or clearly referenced."
+      },
+      "CompetitorsMentioned": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "method": "generate",
+        "description": "Competitor brands or products explicitly named, shown, or clearly referenced in the commercial. Return an empty array if none are identified."
+      },
+      "InsuranceProductsMentioned": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "method": "generate",
+        "description": "Insurance products explicitly mentioned, visibly shown, or clearly implied in the commercial, such as home insurance, auto insurance, renters insurance, life insurance, or bundled home and auto."
+      },
+      "Characters": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "method": "generate",
+        "description": "Named or role-based characters visible or speaking in the video. Use role descriptions when names are not available. This includes any character not in the known-roster `KnownCharacters` enum below, so new or one-off characters are still captured here."
+      },
+      "KnownCharacters": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "method": "classify",
+          "enum": ["Flo", "Jamie", "Mara", "Alan", "DrRick"]
+        },
+        "description": "CHANGED in v3 (was name/dialogue-dependent in v2): EVERY one of Progressive's recurring campaign characters who appears or speaks anywhere in this video, identified by visual appearance and role as well as by spoken/on-screen name - do not require the character's name to be said or shown on screen. Use these recognition cues: `Flo` - young woman with dark hair in a retro updo, wearing a white Progressive-branded apron/smock over a blue top, working a bright white-and-blue Progressive store counter/register. `Jamie` - young man in a navy-blue Progressive polo shirt, Flo's co-worker at the same store counter, calm and good-natured, often the target of Flo's jokes. `Mara` - young woman in a navy-blue Progressive polo shirt, another store co-worker, dry/deadpan comedic foil to Flo and Jamie. `Alan` - Flo's former store co-worker turned competitor, smug/slick demeanor, typically shown outside the Progressive store context pitching a rival angle. `DrRick` - an older man in a cardigan or sweater, calm therapist-like demeanor, hosts or addresses a support-group-style session (sometimes labeled 'Parentamorphosis' on screen) coaching other on-screen adults who are 'becoming their parents', frequently speaking directly to camera or to a seated group; identify him by this host/coach role and setting even when no one says the name 'Dr. Rick' and even when other characters (for example a younger man he is coaching) are also present and named elsewhere in the video. This is a multi-label field: multiple characters routinely co-star in the same commercial (for example Flo and Mara together), so do not stop after finding one match - check the full video, the visual cues above, and the `Characters` field for every name in the roster, including secondary or supporting characters with less screen time, and include each one you find. Returns an empty array only if none of these recurring characters appear. Extend this enum and its recognition cues as new recurring characters are introduced; characters outside this known roster are still captured in full in `Characters`."
+      },
+      "CharacterRoles": {
+        "type": "string",
+        "method": "generate",
+        "description": "Summarize the main character roles and how they contribute to the commercial."
+      },
+      "MusicAndAudio": {
+        "type": "string",
+        "method": "generate",
+        "description": "Describe audible music, jingles, sound effects, crowd noise, TV audio, voiceover, and tone. If no music is clearly audible, say so."
+      },
+      "Setting": {
+        "type": "string",
+        "method": "generate",
+        "description": "Describe the main locations and environments shown in the commercial."
+      },
+      "KeyActions": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "method": "generate",
+        "description": "Important visual actions or story beats that occur in the commercial."
+      },
+      "OnScreenText": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "method": "generate",
+        "description": "Readable text, captions, disclaimers, logos, slogans, or end-card copy shown on screen."
+      },
+      "CommercialMessage": {
+        "type": "string",
+        "method": "generate",
+        "description": "Central advertising message, offer, or call to action."
+      },
+      "HasCallToAction": {
+        "type": "string",
+        "method": "classify",
+        "enum": ["Yes", "No"],
+        "description": "CHANGED in v2 (was free-text CallToAction string): classifies whether the commercial asks or encourages viewers to take a specific action, so presence can be aggregated reliably without string matching."
+      },
+      "CallToActionType": {
+        "type": "string",
+        "method": "classify",
+        "enum": ["VisitWebsite", "PhoneCall", "AppDownload", "PurchaseNow", "VisitStore", "GetAQuote", "None"],
+        "description": "NEW in v2: the category of requested action, when HasCallToAction is Yes. Use None when HasCallToAction is No."
+      },
+      "HumorMechanism": {
+        "type": "string",
+        "method": "generate",
+        "description": "Explain what makes the commercial humorous, including recurring jokes, character behavior, or situational irony."
+      },
+      "SentimentCategory": {
+        "type": "string",
+        "method": "classify",
+        "enum": ["Positive", "Neutral", "Negative", "Mixed"],
+        "description": "CHANGED in v2 (was free-text EmotionSentiment string): classifies the dominant sentiment into a fixed category so sentiment distribution can be charted directly, instead of parsing free text."
+      },
+      "SentimentNarrative": {
+        "type": "string",
+        "method": "generate",
+        "description": "RENAMED in v2 (was EmotionSentiment): describe the dominant emotion or sentiment conveyed by the commercial and, when useful, how it changes across the video. SentimentCategory now carries the classifiable value."
+      },
+      "HasSportsReference": {
+        "type": "string",
+        "method": "classify",
+        "enum": ["Yes", "No"],
+        "description": "CHANGED in v2 (was free-text SportsOrEntertainmentReferences): classifies whether the commercial references a sport, sports league, athlete, game broadcast, or sporting event, so presence can be aggregated reliably without string matching. Answer No for general entertainment/celebrity references that are not sports-related; see EntertainmentReferences for those."
+      },
+      "SportsTypes": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "method": "classify",
+          "enum": [
+            "Football",
+            "Basketball",
+            "Baseball",
+            "Hockey",
+            "Soccer",
+            "Golf",
+            "Tennis",
+            "MotorsportsRacing",
+            "Boxing",
+            "Olympics",
+            "Other"
+          ]
+        },
+        "description": "NEW in v2: every specific sport referenced in the video (for example via a league name, athlete, game broadcast, or equipment), when HasSportsReference is Yes. This is a multi-label field - include every sport that applies, not just the first one found. Use `Other` for a sport not in this list. Returns an empty array when HasSportsReference is No."
+      },
+      "EntertainmentReferences": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "method": "generate",
+        "description": "RENAMED/NARROWED in v2 (was SportsOrEntertainmentReferences): non-sports entertainment references in the video, such as a celebrity spokesperson, TV show, streaming service, movie, or game-watching context. Sports-specific references belong in HasSportsReference/SportsTypes instead."
+      },
+      "BrandSafetyFlag": {
+        "type": "string",
+        "method": "classify",
+        "enum": ["Clear", "ReviewRecommended"],
+        "description": "NEW in v2: a reviewable flag derived from brand-safety concerns, so a report can filter to videos needing a human look instead of reading free text for every row."
+      },
+      "BrandSafetyNotes": {
+        "type": "string",
+        "method": "generate",
+        "description": "Mention any potentially sensitive visual or spoken content. If none is apparent, say no obvious brand-safety concerns are visible or spoken."
+      },
+      "BrandMentionCount": {
+        "type": "integer",
+        "method": "generate",
+        "description": "NEW in v2: total count of distinct brand or product mentions (advertiser plus competitors), as a single aggregation-ready number for reporting trends over time."
+      }
+    }
+  }
+}

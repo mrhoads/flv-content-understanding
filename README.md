@@ -102,7 +102,10 @@ Understanding results for well-known Progressive campaigns (Flo, Dr. Rick, The
 Motaur, Jamie, Baker Mayfield) so you can demo this reporting pipeline without
 an Azure deployment or real commercial footage. A second, schema-evolved
 analyzer (`cuCommercialVideoAnalyzerV2`) is also included so you can compare
-how the same video's structured output changes when the field schema changes —
+how the same video's structured output changes when the field schema changes,
+and a third (`cuCommercialVideoAnalyzerV3`) further improves recall of
+recurring characters who aren't named on screen by describing their visual
+appearance/role instead of relying on their name being spoken or displayed —
 see [`docs/content-understanding-architecture.md`](docs/content-understanding-architecture.md).
 
 ## Content Understanding architecture

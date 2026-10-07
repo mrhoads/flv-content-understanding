@@ -181,3 +181,8 @@ put_analyzer "flvCommercialVideoAnalyzer" "${SCRIPT_DIR}/analyzers/commercial-vi
 # prefix (useful once the live flvCommercialVideoAnalyzer is retired).
 put_analyzer "cuCommercialVideoAnalyzer" "${SCRIPT_DIR}/analyzers/commercial-video.json"
 put_analyzer "cuCommercialVideoAnalyzerV2" "${SCRIPT_DIR}/analyzers/commercial-video-v2.json"
+# cuCommercialVideoAnalyzerV3 evolves v2's KnownCharacters field with
+# visual/role recognition cues (clothing, setting, mannerisms) per roster
+# character, so a character can be identified even when the video never
+# says or displays their name (see docs/content-understanding-architecture.md).
+put_analyzer "cuCommercialVideoAnalyzerV3" "${SCRIPT_DIR}/analyzers/commercial-video-v3.json"
