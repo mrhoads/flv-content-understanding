@@ -1,0 +1,175 @@
+{
+  "id": "ee3d3820-e6f6-54f1-8230-ec4ff939fae7",
+  "status": "Succeeded",
+  "result": {
+    "analyzerId": "cuCommercialVideoAnalyzerV2",
+    "apiVersion": "2025-11-01",
+    "createdAt": "2026-09-05T02:40:29Z",
+    "contents": [
+      {
+        "kind": "audioVisual",
+        "startTimeMs": 0,
+        "endTimeMs": 15000,
+        "markdown": "## Jamie's quick elevator-pitch recap\n\nA 15-second cut-down: Jamie tries to deliver a rapid-fire elevator pitch about savings before Flo gently cuts him off to wrap the ad.",
+        "fields": {
+          "AdvertiserBrand": {
+            "type": "string",
+            "valueString": "Progressive Insurance",
+            "confidence": 0.94
+          },
+          "VisibleProducts": {
+            "type": "array",
+            "valueArray": [
+              {
+                "type": "string",
+                "valueString": "Progressive Store shelf display",
+                "confidence": 0.9
+              }
+            ],
+            "confidence": 0.9
+          },
+          "CompetitorsMentioned": {
+            "type": "array",
+            "valueArray": [],
+            "confidence": 0.78
+          },
+          "InsuranceProductsMentioned": {
+            "type": "array",
+            "valueArray": [
+              {
+                "type": "string",
+                "valueString": "Auto insurance",
+                "confidence": 0.9
+              }
+            ],
+            "confidence": 0.9
+          },
+          "Characters": {
+            "type": "array",
+            "valueArray": [
+              {
+                "type": "string",
+                "valueString": "Jamie",
+                "confidence": 0.94
+              },
+              {
+                "type": "string",
+                "valueString": "Flo",
+                "confidence": 0.94
+              }
+            ],
+            "confidence": 0.94
+          },
+          "KnownCharacters": {
+            "type": "array",
+            "valueArray": [
+              {
+                "type": "string",
+                "valueString": "Flo",
+                "confidence": 0.97
+              },
+              {
+                "type": "string",
+                "valueString": "Jamie",
+                "confidence": 0.97
+              }
+            ],
+            "confidence": 0.97
+          },
+          "CharacterRoles": {
+            "type": "string",
+            "valueString": "Jamie rushes an over-enthusiastic pitch; Flo closes it out.",
+            "confidence": 0.91
+          },
+          "MusicAndAudio": {
+            "type": "string",
+            "valueString": "Fast comedic instrumental sting that cuts off abruptly.",
+            "confidence": 0.93
+          },
+          "Setting": {
+            "type": "string",
+            "valueString": "The Progressive Store checkout counter.",
+            "confidence": 0.95
+          },
+          "KeyActions": {
+            "type": "array",
+            "valueArray": [
+              {
+                "type": "string",
+                "valueString": "Jamie rushes through a pitch",
+                "confidence": 0.94
+              },
+              {
+                "type": "string",
+                "valueString": "Flo cuts him off with a smile",
+                "confidence": 0.94
+              }
+            ],
+            "confidence": 0.94
+          },
+          "OnScreenText": {
+            "type": "array",
+            "valueArray": [
+              {
+                "type": "string",
+                "valueString": "Progressive.com",
+                "confidence": 0.9
+              }
+            ],
+            "confidence": 0.9
+          },
+          "CommercialMessage": {
+            "type": "string",
+            "valueString": "Progressive's team is there to help you save, even in a hurry.",
+            "confidence": 0.8
+          },
+          "HasCallToAction": {
+            "type": "string",
+            "valueString": "Yes",
+            "confidence": 0.93
+          },
+          "CallToActionType": {
+            "type": "string",
+            "valueString": "GetAQuote",
+            "confidence": 0.95
+          },
+          "HumorMechanism": {
+            "type": "string",
+            "valueString": "Jamie's rapid-fire overeagerness cut short by Flo.",
+            "confidence": 0.92
+          },
+          "SentimentCategory": {
+            "type": "string",
+            "valueString": "Positive",
+            "confidence": 0.97
+          },
+          "SentimentNarrative": {
+            "type": "string",
+            "valueString": "Quick and lighthearted.",
+            "confidence": 0.88
+          },
+          "SportsOrEntertainmentReferences": {
+            "type": "array",
+            "valueArray": [],
+            "confidence": 0.86
+          },
+          "BrandSafetyFlag": {
+            "type": "string",
+            "valueString": "Clear",
+            "confidence": 0.95
+          },
+          "BrandSafetyNotes": {
+            "type": "string",
+            "valueString": "No obvious brand-safety concerns are visible or spoken.",
+            "confidence": 0.95
+          },
+          "BrandMentionCount": {
+            "type": "integer",
+            "valueInteger": 1,
+            "confidence": 0.88
+          }
+        }
+      }
+    ]
+  }
+}

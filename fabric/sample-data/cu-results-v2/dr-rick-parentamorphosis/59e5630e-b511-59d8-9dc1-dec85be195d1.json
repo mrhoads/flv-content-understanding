@@ -1,0 +1,190 @@
+{
+  "id": "59e5630e-b511-59d8-9dc1-dec85be195d1",
+  "status": "Succeeded",
+  "result": {
+    "analyzerId": "cuCommercialVideoAnalyzerV2",
+    "apiVersion": "2025-11-01",
+    "createdAt": "2026-05-25T03:40:29Z",
+    "contents": [
+      {
+        "kind": "audioVisual",
+        "startTimeMs": 0,
+        "endTimeMs": 30000,
+        "markdown": "## Dr. Rick catches a garage-sale pricing habit\n\nDr. Rick observes a homeowner meticulously price-tagging every item at a garage sale down to the penny and intervenes with a support-group-style lesson.",
+        "fields": {
+          "AdvertiserBrand": {
+            "type": "string",
+            "valueString": "Progressive Insurance",
+            "confidence": 0.91
+          },
+          "VisibleProducts": {
+            "type": "array",
+            "valueArray": [
+              {
+                "type": "string",
+                "valueString": "Price-tag gun",
+                "confidence": 0.92
+              },
+              {
+                "type": "string",
+                "valueString": "Dr. Rick's clipboard",
+                "confidence": 0.92
+              }
+            ],
+            "confidence": 0.92
+          },
+          "CompetitorsMentioned": {
+            "type": "array",
+            "valueArray": [],
+            "confidence": 0.79
+          },
+          "InsuranceProductsMentioned": {
+            "type": "array",
+            "valueArray": [
+              {
+                "type": "string",
+                "valueString": "Home insurance",
+                "confidence": 0.98
+              }
+            ],
+            "confidence": 0.98
+          },
+          "Characters": {
+            "type": "array",
+            "valueArray": [
+              {
+                "type": "string",
+                "valueString": "Dr. Rick",
+                "confidence": 0.98
+              },
+              {
+                "type": "string",
+                "valueString": "young homeowner",
+                "confidence": 0.98
+              }
+            ],
+            "confidence": 0.98
+          },
+          "KnownCharacters": {
+            "type": "array",
+            "valueArray": [
+              {
+                "type": "string",
+                "valueString": "DrRick",
+                "confidence": 0.85
+              }
+            ],
+            "confidence": 0.85
+          },
+          "CharacterRoles": {
+            "type": "string",
+            "valueString": "Dr. Rick counsels the homeowner through a classic 'parent habit' relapse during a driveway garage sale.",
+            "confidence": 0.91
+          },
+          "MusicAndAudio": {
+            "type": "string",
+            "valueString": "Light acoustic guitar underscore; a kazoo-like sound effect plays each time the price-tag gun clicks.",
+            "confidence": 0.9
+          },
+          "Setting": {
+            "type": "string",
+            "valueString": "A suburban driveway during a weekend garage sale.",
+            "confidence": 0.82
+          },
+          "KeyActions": {
+            "type": "array",
+            "valueArray": [
+              {
+                "type": "string",
+                "valueString": "Homeowner price-tags items down to the penny",
+                "confidence": 0.9
+              },
+              {
+                "type": "string",
+                "valueString": "Neighbors look on, mildly concerned",
+                "confidence": 0.9
+              },
+              {
+                "type": "string",
+                "valueString": "Dr. Rick steps in with a clipboard and a gentle lesson",
+                "confidence": 0.9
+              },
+              {
+                "type": "string",
+                "valueString": "Homeowner loosens up and rounds a price to a whole dollar",
+                "confidence": 0.9
+              }
+            ],
+            "confidence": 0.9
+          },
+          "OnScreenText": {
+            "type": "array",
+            "valueArray": [
+              {
+                "type": "string",
+                "valueString": "Parentamorphosis",
+                "confidence": 0.92
+              },
+              {
+                "type": "string",
+                "valueString": "Progressive.com/home",
+                "confidence": 0.92
+              }
+            ],
+            "confidence": 0.92
+          },
+          "CommercialMessage": {
+            "type": "string",
+            "valueString": "Progressive helps new homeowners recognize parent habits before they take hold.",
+            "confidence": 0.82
+          },
+          "HasCallToAction": {
+            "type": "string",
+            "valueString": "Yes",
+            "confidence": 0.93
+          },
+          "CallToActionType": {
+            "type": "string",
+            "valueString": "GetAQuote",
+            "confidence": 0.86
+          },
+          "HumorMechanism": {
+            "type": "string",
+            "valueString": "Treating obsessive garage-sale pricing as a clinical symptom.",
+            "confidence": 0.8
+          },
+          "SentimentCategory": {
+            "type": "string",
+            "valueString": "Mixed",
+            "confidence": 0.89
+          },
+          "SentimentNarrative": {
+            "type": "string",
+            "valueString": "Comedic discomfort resolving into relief.",
+            "confidence": 0.88
+          },
+          "SportsOrEntertainmentReferences": {
+            "type": "array",
+            "valueArray": [],
+            "confidence": 0.82
+          },
+          "BrandSafetyFlag": {
+            "type": "string",
+            "valueString": "Clear",
+            "confidence": 0.93
+          },
+          "BrandSafetyNotes": {
+            "type": "string",
+            "valueString": "No obvious brand-safety concerns are visible or spoken.",
+            "confidence": 0.99
+          },
+          "BrandMentionCount": {
+            "type": "integer",
+            "valueInteger": 1,
+            "confidence": 0.95
+          }
+        }
+      }
+    ]
+  }
+}

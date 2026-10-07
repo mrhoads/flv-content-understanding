@@ -173,3 +173,11 @@ put_analyzer() {
 put_analyzer "flvVehicleAnalyzer" "${SCRIPT_DIR}/analyzers/vehicle-image.json"
 put_analyzer "flvVehicleDocumentAnalyzer" "${SCRIPT_DIR}/analyzers/vehicle-document.json"
 put_analyzer "flvCommercialVideoAnalyzer" "${SCRIPT_DIR}/analyzers/commercial-video.json"
+
+# New analyzers use the current cu- naming convention (the three analyzers
+# above keep their original flv*-prefixed IDs because they are already
+# deployed and in use by the live demo; see README.md's naming note).
+# cuCommercialVideoAnalyzer deploys the same v1 schema under the new cu-
+# prefix (useful once the live flvCommercialVideoAnalyzer is retired).
+put_analyzer "cuCommercialVideoAnalyzer" "${SCRIPT_DIR}/analyzers/commercial-video.json"
+put_analyzer "cuCommercialVideoAnalyzerV2" "${SCRIPT_DIR}/analyzers/commercial-video-v2.json"

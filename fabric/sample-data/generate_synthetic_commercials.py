@@ -1036,7 +1036,7 @@ def upload_results(
             campaign_name = file_path.parent.name
             url = upload_fabric_result(
                 json_path=file_path,
-                fabric_storage_account_url=fabric_storage_account_url,
+                storage_account_url=fabric_storage_account_url,
                 container_name=fabric_container,
                 campaign_name=campaign_name,
                 credential=credential,

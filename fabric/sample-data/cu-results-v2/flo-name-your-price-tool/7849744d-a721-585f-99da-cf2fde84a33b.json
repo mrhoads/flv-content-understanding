@@ -1,0 +1,195 @@
+{
+  "id": "7849744d-a721-585f-99da-cf2fde84a33b",
+  "status": "Succeeded",
+  "result": {
+    "analyzerId": "cuCommercialVideoAnalyzerV2",
+    "apiVersion": "2025-11-01",
+    "createdAt": "2026-08-28T08:40:29Z",
+    "contents": [
+      {
+        "kind": "audioVisual",
+        "startTimeMs": 0,
+        "endTimeMs": 30000,
+        "markdown": "## Flo compares coverage tiers side by side\n\nA shopper is torn between a 'Basic' and a 'Plus' coverage box, so Flo slides the Name Your Price Tool's budget dial back and forth to show how the shelf options change in real time.",
+        "fields": {
+          "AdvertiserBrand": {
+            "type": "string",
+            "valueString": "Progressive Insurance",
+            "confidence": 0.98
+          },
+          "VisibleProducts": {
+            "type": "array",
+            "valueArray": [
+              {
+                "type": "string",
+                "valueString": "Name Your Price Tool kiosk",
+                "confidence": 0.87
+              },
+              {
+                "type": "string",
+                "valueString": "Basic coverage box",
+                "confidence": 0.87
+              },
+              {
+                "type": "string",
+                "valueString": "Plus coverage box",
+                "confidence": 0.87
+              }
+            ],
+            "confidence": 0.87
+          },
+          "CompetitorsMentioned": {
+            "type": "array",
+            "valueArray": [],
+            "confidence": 0.79
+          },
+          "InsuranceProductsMentioned": {
+            "type": "array",
+            "valueArray": [
+              {
+                "type": "string",
+                "valueString": "Auto insurance",
+                "confidence": 0.97
+              }
+            ],
+            "confidence": 0.97
+          },
+          "Characters": {
+            "type": "array",
+            "valueArray": [
+              {
+                "type": "string",
+                "valueString": "Flo",
+                "confidence": 0.91
+              },
+              {
+                "type": "string",
+                "valueString": "shopper customer",
+                "confidence": 0.91
+              }
+            ],
+            "confidence": 0.91
+          },
+          "KnownCharacters": {
+            "type": "array",
+            "valueArray": [
+              {
+                "type": "string",
+                "valueString": "Flo",
+                "confidence": 0.9
+              }
+            ],
+            "confidence": 0.9
+          },
+          "CharacterRoles": {
+            "type": "string",
+            "valueString": "Flo is the upbeat Progressive spokesperson and store guide; the shopper is an indecisive customer comparing two coverage tiers.",
+            "confidence": 0.92
+          },
+          "MusicAndAudio": {
+            "type": "string",
+            "valueString": "Light plucky instrumental under the dialogue, with a soft chime each time the shopper slides the budget dial.",
+            "confidence": 0.93
+          },
+          "Setting": {
+            "type": "string",
+            "valueString": "The Progressive Store, between two side-by-side coverage kiosks.",
+            "confidence": 0.92
+          },
+          "KeyActions": {
+            "type": "array",
+            "valueArray": [
+              {
+                "type": "string",
+                "valueString": "Shopper picks up the Basic box, then the Plus box",
+                "confidence": 0.81
+              },
+              {
+                "type": "string",
+                "valueString": "Flo slides the kiosk's budget dial back and forth",
+                "confidence": 0.81
+              },
+              {
+                "type": "string",
+                "valueString": "Shelf display updates to show the matching coverage tier",
+                "confidence": 0.81
+              },
+              {
+                "type": "string",
+                "valueString": "Shopper settles on a middle option",
+                "confidence": 0.81
+              }
+            ],
+            "confidence": 0.81
+          },
+          "OnScreenText": {
+            "type": "array",
+            "valueArray": [
+              {
+                "type": "string",
+                "valueString": "Name Your Price Tool",
+                "confidence": 0.94
+              },
+              {
+                "type": "string",
+                "valueString": "Progressive.com",
+                "confidence": 0.94
+              }
+            ],
+            "confidence": 0.94
+          },
+          "CommercialMessage": {
+            "type": "string",
+            "valueString": "Adjusting your budget on the tool shows different coverage levels instantly.",
+            "confidence": 0.9
+          },
+          "HasCallToAction": {
+            "type": "string",
+            "valueString": "Yes",
+            "confidence": 0.92
+          },
+          "CallToActionType": {
+            "type": "string",
+            "valueString": "VisitWebsite",
+            "confidence": 0.91
+          },
+          "HumorMechanism": {
+            "type": "string",
+            "valueString": "Flo's overly cheerful narration of an ordinary slider movement.",
+            "confidence": 0.8
+          },
+          "SentimentCategory": {
+            "type": "string",
+            "valueString": "Positive",
+            "confidence": 0.97
+          },
+          "SentimentNarrative": {
+            "type": "string",
+            "valueString": "Patient and reassuring, ending on a confident decision.",
+            "confidence": 0.92
+          },
+          "SportsOrEntertainmentReferences": {
+            "type": "array",
+            "valueArray": [],
+            "confidence": 0.75
+          },
+          "BrandSafetyFlag": {
+            "type": "string",
+            "valueString": "Clear",
+            "confidence": 0.93
+          },
+          "BrandSafetyNotes": {
+            "type": "string",
+            "valueString": "No obvious brand-safety concerns are visible or spoken.",
+            "confidence": 0.97
+          },
+          "BrandMentionCount": {
+            "type": "integer",
+            "valueInteger": 1,
+            "confidence": 0.86
+          }
+        }
+      }
+    ]
+  }
+}

@@ -1,4 +1,4 @@
-# FLV Content Understanding Demo
+# Content Understanding Demo
 
 A runnable example agentic workflow using Content Understanding and Document Intelligence:
 
@@ -95,12 +95,22 @@ call-to-action, etc.) are structured for marketing reporting. See
 [`fabric/README.md`](fabric/README.md) for the plan and steps to land historic
 campaign analysis results in a Fabric Lakehouse (via a OneLake shortcut and a
 flattening notebook — no SAS tokens or keys, consistent with this repo's
-managed-identity-only storage account) for Power BI reporting, with a later
-phase to join in simulated engagement data for marketing-effectiveness analysis.
+managed-identity-only storage account) for Power BI reporting, joined with a
+simulated sales table for marketing-effectiveness analysis.
 [`fabric/sample-data/`](fabric/sample-data) has committed, synthetic Content
 Understanding results for well-known Progressive campaigns (Flo, Dr. Rick, The
 Motaur, Jamie, Baker Mayfield) so you can demo this reporting pipeline without
-an Azure deployment or real commercial footage.
+an Azure deployment or real commercial footage. A second, schema-evolved
+analyzer (`cuCommercialVideoAnalyzerV2`) is also included so you can compare
+how the same video's structured output changes when the field schema changes —
+see [`docs/content-understanding-architecture.md`](docs/content-understanding-architecture.md).
+
+## Content Understanding architecture
+
+For a high-level diagram of how Content Understanding itself works (analyzers,
+field schemas, and structured output), independent of this repo's two demo
+scenarios, see
+[`docs/content-understanding-architecture.md`](docs/content-understanding-architecture.md).
 
 ## Azure architecture
 

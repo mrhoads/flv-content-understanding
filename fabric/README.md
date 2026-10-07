@@ -4,13 +4,17 @@
 
 Get Content Understanding results for commercial/marketing video campaigns into
 Microsoft Fabric so historic campaign attributes (brand, products, competitors,
-sentiment, call-to-action, humor, etc.) can be reported on in Power BI, and later
-joined with simulated engagement data to analyze marketing effectiveness.
+sentiment, call-to-action, humor, etc.) can be reported on in Power BI, joined
+with simulated engagement/sales data to analyze marketing effectiveness.
 
 This repo already has the hard part: `infra/analyzers/commercial-video.json`
 defines `flvCommercialVideoAnalyzer`, a Content Understanding analyzer tuned for
 marketing attributes, and `examples/analyze_video.py` shows how to call it and
 get back structured JSON. This plan wires that JSON into Fabric.
+
+For a high-level diagram of how Content Understanding analyzers/field schemas
+work in general, see
+[`../docs/content-understanding-architecture.md`](../docs/content-understanding-architecture.md).
 
 ## Why this differs from the public sample
 
@@ -74,9 +78,9 @@ Delta table: campaign_insights   (one row per video/segment, one column per CU f
     v
 Power BI report / Fabric semantic model: historic marketing campaign results
     |
-    (future) join with a simulated impressions/clicks/conversions table
+    join with the simulated impressions/clicks/conversions table
     v
-Marketing effectiveness analysis
+Marketing effectiveness analysis (simulated)
 ```
 
 ## What's already deployed by this change
@@ -223,6 +227,82 @@ file, or `examples/analyze_video.py` run is required for this path — it's
 synthetic data standing in for historic campaign results, clearly for demo
 purposes.
 
+## Comparing analyzer schema versions (v1 vs v2)
+
+`infra/analyzers/commercial-video.json` (`flvCommercialVideoAnalyzer`, v1,
+live) and `infra/analyzers/commercial-video-v2.json`
+(`cuCommercialVideoAnalyzerV2`, v2, new-convention naming) define two
+different field schemas for the *same kind* of commercial video. The v2
+schema is a deliberate evolution, meant to demo how changing a Content
+Understanding field schema changes what you get back for identical footage:
+
+| v1 field (`generate`, free text)            | v2 field(s) (`classify`/new)                                   | Why change it |
+| -------------------------------------------- | ---------------------------------------------------------------- | ------------- |
+| `CallToAction` (string)                      | `HasCallToAction` (Yes/No) + `CallToActionType` (enum)           | Presence/category becomes directly chartable — no string parsing to find "no clear CTA" rows. |
+| `EmotionSentiment` (string)                   | `SentimentCategory` (enum) + `SentimentNarrative` (string, renamed) | Sentiment distribution becomes a `GROUP BY`-able column while keeping the narrative detail. |
+| `BrandSafetyNotes` (string)                  | `BrandSafetyFlag` (Clear/ReviewRecommended) + `BrandSafetyNotes` (string) | A reviewer can filter to flagged rows instead of reading every note. |
+| *(none)*                                      | `BrandMentionCount` (integer)  | New quantitative field for trend lines that v1's all-text/array schema couldn't produce. |
+| *(none, covered by free-text `Characters`)*  | `KnownCharacters` (multi-select enum: Flo, Jamie, Mara, Alan, Dr. Rick) | Flags which recurring campaign characters appear, for reliable filtering/aggregation by character, while `Characters` keeps capturing the full cast (including any character outside that roster) as free text. |
+
+All other fields (brand, products, competitors, setting, etc.) are unchanged,
+so most of the schema is stable and only the fields that benefit from
+structure actually changed — a realistic schema-versioning story, not a full
+rewrite.
+
+`fabric/sample-data/generate_synthetic_commercials_v2.py` renders the exact
+same synthetic campaigns/variants as
+`generate_synthetic_commercials.py` through the v2 schema instead, reusing
+the same stable `id` per video, so v1 and v2 rows for the same commercial
+can be joined and compared side by side:
+
+```bash
+python fabric/sample-data/generate_synthetic_commercials_v2.py
+```
+
+Writes `fabric/sample-data/cu-results-v2/<campaign_name>/<id>.json`. Ingest it
+the same way as `cu-results` — add a second OneLake shortcut
+(e.g. `Files/cu-results-v2`) and either reuse
+`campaign_insights_ingestion.ipynb` with `SHORTCUT_PATH`/`DELTA_TABLE_NAME`
+pointed at the v2 path/table name, or duplicate the notebook. Deploying the
+v2 analyzer itself (so it can analyze real video, not just synthetic JSON) is
+wired into `infra/configure-foundry-analyzers.sh` alongside the three
+existing analyzers.
+
+## Simulated data for marketing effectiveness
+
+`fabric/sample-data/generate_synthetic_sales.py` generates a
+**fully synthetic** `campaign_sales_simulated` table — impressions, clicks,
+conversions, and revenue, one row per commercial sample, correlated with real
+Content Understanding attributes for that same video (the v2 schema's
+classified `SentimentCategory` and `CallToActionType`, plus whether the video
+references sports/entertainment). No real Progressive sales, spend, or
+performance numbers are used; every row is marked `is_simulated = true` and
+every column is clearly documented as invented for the demo in the script's
+module docstring.
+
+```bash
+python fabric/sample-data/generate_synthetic_sales.py
+```
+
+Writes `fabric/sample-data/campaign-sales/campaign_sales_simulated.csv`. Copy
+it into a `Files/campaign-sales` shortcut/folder the same way as the
+`cu-results` JSON, then run
+`fabric/notebooks/campaign_sales_ingestion.ipynb`, which:
+
+1. Loads the CSV into a `campaign_sales_simulated` Delta table.
+2. Joins it to `campaign_insights` on `campaign_name` + the result `id`
+   parsed out of `file_path`, producing a `campaign_performance_simulated`
+   table.
+3. Prints a quick sanity-check aggregate (click-through rate by sentiment
+   category, conversion rate by call-to-action type) so you can confirm the
+   simulated correlation looks like the documented pattern before building a
+   Power BI report on top of it.
+
+Build a Power BI report/semantic model on `campaign_performance_simulated` —
+revenue and conversion rate by `campaign_name`, `sentiment_category`, and
+`call_to_action_type` — clearly labeled throughout as simulated/demo data,
+not real measured marketing performance.
+
 ## One-time manual setup in Fabric (no Bicep/ARM support for these item types yet)
 
 1. **Create (or reuse) a Fabric workspace** on a capacity that supports
@@ -292,19 +372,6 @@ account that also holds the app's `flv-content` container).
 notebook derives it from the blob path), so group videos into a folder per
 campaign for reporting.
 
-## Later: simulated data for marketing effectiveness
-
-Once historic reporting works end to end, add a second Fabric notebook that
-generates a synthetic `campaign_engagement_simulated` table — impressions,
-clicks, and conversions per `file_path`/`campaign_name` — with values
-correlated to real CU attributes already in `campaign_insights` (e.g., a
-simulated conversion-rate lift when `CallToAction` is present, or when
-`EmotionSentiment` is positive). Join the two tables in the semantic model so
-reports can show "campaigns with a clear CTA simulate N% higher conversion,"
-clearly labeled as simulated/demo data, not real measured performance. This is
-intentionally deferred — flag when you want it built and we'll add the
-generator notebook plus the join logic.
-
 ## Files added by this change
 
 - `infra/modules/storage.bicep` — single module that creates the one
@@ -317,9 +384,16 @@ generator notebook plus the join logic.
 - `infra/grant-fabric-workspace-access.sh` — one-shot script to grant
   `Storage Blob Data Reader` on `stflvfabricdeve9fd` once the Fabric workspace
   identity exists.
+- `infra/analyzers/commercial-video-v2.json` — the `cuCommercialVideoAnalyzerV2`
+  schema, a deliberately evolved v2 of `commercial-video.json` for the
+  schema-comparison demo (see "Comparing analyzer schema versions" above).
 - `fabric/notebooks/campaign_insights_ingestion.ipynb` — Fabric PySpark
   notebook that flattens CU JSON from the shortcut into the `campaign_insights`
   Delta table. Schema-agnostic: new analyzer fields show up as new columns.
+- `fabric/notebooks/campaign_sales_ingestion.ipynb` — Fabric PySpark notebook
+  that loads the simulated sales CSV and joins it with `campaign_insights`.
 - `fabric/sample-data/` — synthetic, committed Content Understanding result
-  JSON for recognizable Progressive commercial campaigns, plus the generator
-  script that produces it, for demoing the reporting pipeline without Azure.
+  JSON for recognizable Progressive commercial campaigns (`cu-results/` for
+  v1, `cu-results-v2/` for the v2 schema), a simulated sales CSV
+  (`campaign-sales/`), and the generator scripts that produce all three, for
+  demoing the reporting pipeline without Azure.

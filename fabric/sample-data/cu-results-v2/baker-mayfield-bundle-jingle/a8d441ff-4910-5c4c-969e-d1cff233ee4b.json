@@ -1,0 +1,210 @@
+{
+  "id": "a8d441ff-4910-5c4c-969e-d1cff233ee4b",
+  "status": "Succeeded",
+  "result": {
+    "analyzerId": "cuCommercialVideoAnalyzerV2",
+    "apiVersion": "2025-11-01",
+    "createdAt": "2026-04-02T10:40:29Z",
+    "contents": [
+      {
+        "kind": "audioVisual",
+        "startTimeMs": 0,
+        "endTimeMs": 30000,
+        "markdown": "## Baker Mayfield interrupts a football watch party\n\nDuring a football watch party, Baker Mayfield appears on the TV screen itself and sings the bundle jingle directly to the stunned living room before the game resumes.",
+        "fields": {
+          "AdvertiserBrand": {
+            "type": "string",
+            "valueString": "Progressive Insurance",
+            "confidence": 0.95
+          },
+          "VisibleProducts": {
+            "type": "array",
+            "valueArray": [
+              {
+                "type": "string",
+                "valueString": "Living room TV",
+                "confidence": 0.97
+              },
+              {
+                "type": "string",
+                "valueString": "Progressive bundle offer card",
+                "confidence": 0.97
+              }
+            ],
+            "confidence": 0.97
+          },
+          "CompetitorsMentioned": {
+            "type": "array",
+            "valueArray": [],
+            "confidence": 0.84
+          },
+          "InsuranceProductsMentioned": {
+            "type": "array",
+            "valueArray": [
+              {
+                "type": "string",
+                "valueString": "Auto insurance",
+                "confidence": 0.97
+              },
+              {
+                "type": "string",
+                "valueString": "Home insurance",
+                "confidence": 0.97
+              },
+              {
+                "type": "string",
+                "valueString": "Bundled home and auto",
+                "confidence": 0.97
+              }
+            ],
+            "confidence": 0.97
+          },
+          "Characters": {
+            "type": "array",
+            "valueArray": [
+              {
+                "type": "string",
+                "valueString": "Baker Mayfield",
+                "confidence": 0.91
+              },
+              {
+                "type": "string",
+                "valueString": "watch party friends",
+                "confidence": 0.91
+              }
+            ],
+            "confidence": 0.91
+          },
+          "KnownCharacters": {
+            "type": "array",
+            "valueArray": [],
+            "confidence": 0.89
+          },
+          "CharacterRoles": {
+            "type": "string",
+            "valueString": "Baker Mayfield breaks the fourth wall from inside the TV broadcast; the friends react with stunned amusement.",
+            "confidence": 0.9
+          },
+          "MusicAndAudio": {
+            "type": "string",
+            "valueString": "Baker Mayfield sings the bundle jingle over a TV-broadcast audio filter, with crowd-noise and a stadium PA sound effect underneath.",
+            "confidence": 0.97
+          },
+          "Setting": {
+            "type": "string",
+            "valueString": "A suburban living room during a football watch party.",
+            "confidence": 0.9
+          },
+          "KeyActions": {
+            "type": "array",
+            "valueArray": [
+              {
+                "type": "string",
+                "valueString": "Game broadcast cuts to Baker Mayfield mid-play",
+                "confidence": 0.96
+              },
+              {
+                "type": "string",
+                "valueString": "He sings the bundle jingle directly to the room",
+                "confidence": 0.96
+              },
+              {
+                "type": "string",
+                "valueString": "Friends stare at the TV, stunned",
+                "confidence": 0.96
+              },
+              {
+                "type": "string",
+                "valueString": "Broadcast cuts back to the game as if nothing happened",
+                "confidence": 0.96
+              }
+            ],
+            "confidence": 0.96
+          },
+          "OnScreenText": {
+            "type": "array",
+            "valueArray": [
+              {
+                "type": "string",
+                "valueString": "Bundle & Save",
+                "confidence": 0.9
+              },
+              {
+                "type": "string",
+                "valueString": "Progressive.com",
+                "confidence": 0.9
+              }
+            ],
+            "confidence": 0.9
+          },
+          "CommercialMessage": {
+            "type": "string",
+            "valueString": "Bundling home and auto insurance with Progressive saves money.",
+            "confidence": 0.97
+          },
+          "HasCallToAction": {
+            "type": "string",
+            "valueString": "Yes",
+            "confidence": 0.92
+          },
+          "CallToActionType": {
+            "type": "string",
+            "valueString": "PurchaseNow",
+            "confidence": 0.93
+          },
+          "HumorMechanism": {
+            "type": "string",
+            "valueString": "A celebrity spokesperson breaking the broadcast's fourth wall.",
+            "confidence": 0.92
+          },
+          "SentimentCategory": {
+            "type": "string",
+            "valueString": "Positive",
+            "confidence": 0.88
+          },
+          "SentimentNarrative": {
+            "type": "string",
+            "valueString": "Surprised and amused, ending on a playful note.",
+            "confidence": 0.93
+          },
+          "SportsOrEntertainmentReferences": {
+            "type": "array",
+            "valueArray": [
+              {
+                "type": "string",
+                "valueString": "NFL",
+                "confidence": 0.77
+              },
+              {
+                "type": "string",
+                "valueString": "Football broadcast",
+                "confidence": 0.77
+              },
+              {
+                "type": "string",
+                "valueString": "Baker Mayfield (celebrity spokesperson)",
+                "confidence": 0.77
+              }
+            ],
+            "confidence": 0.77
+          },
+          "BrandSafetyFlag": {
+            "type": "string",
+            "valueString": "Clear",
+            "confidence": 0.96
+          },
+          "BrandSafetyNotes": {
+            "type": "string",
+            "valueString": "No obvious brand-safety concerns are visible or spoken.",
+            "confidence": 0.97
+          },
+          "BrandMentionCount": {
+            "type": "integer",
+            "valueInteger": 1,
+            "confidence": 0.95
+          }
+        }
+      }
+    ]
+  }
+}

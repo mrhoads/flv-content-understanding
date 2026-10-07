@@ -51,7 +51,7 @@ class EmployeeCaseRequest(BaseModel):
 
 def employee_prompt(case: dict[str, object], instruction: str) -> str:
     return (
-        "You are the internal FLV evidence assistant for insurance employees. Answer only "
+        "You are the internal Content Understanding evidence assistant for insurance employees. Answer only "
         "from the supplied case context. Distinguish extracted facts from inferences, "
         "mention confidence or missing evidence, and never make the final coverage, fraud, "
         "or legal-authenticity decision. Refer to filenames when useful.\n"
@@ -101,7 +101,7 @@ async def lifespan(app: FastAPI):
     yield
 
 
-app = FastAPI(title="Progressive FLV Demo", lifespan=lifespan)
+app = FastAPI(title="Progressive Content Understanding Demo", lifespan=lifespan)
 app.mount("/static", StaticFiles(directory="app/static"), name="static")
 
 
@@ -215,7 +215,7 @@ async def customer_message(
         raise HTTPException(status_code=404, detail="Case not found")
     repository.add_message(case, "user", request.message)
     prompt = (
-        "You are the customer-facing FLV intake agent. Respond professionally to the "
+        "You are the customer-facing Content Understanding intake agent. Respond professionally to the "
         "customer's message, using the case context. Ask only for information needed to "
         "complete first-look verification. Do not make a claim decision.\n"
         f"Customer message: {request.message}\nCase context: {compact_case_context(case)}"
