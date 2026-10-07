@@ -55,7 +55,7 @@
           "method": "classify",
           "enum": ["Flo", "Jamie", "Mara", "Alan", "DrRick"]
         },
-        "description": "NEW in v2: which of Progressive's recurring campaign characters (Flo, Jamie, Mara, Alan, Dr. Rick) appear in this video, for reliable filtering/aggregation by character across a campaign. Returns an empty array if none of these recurring characters appear. Extend this enum as new recurring characters are introduced; characters outside this known roster are still captured in full in `Characters`."
+        "description": "NEW in v2: EVERY one of Progressive's recurring campaign characters (Flo, Jamie, Mara, Alan, Dr. Rick) who appears or speaks anywhere in this video, for reliable filtering/aggregation by character across a campaign. This is a multi-label field: multiple characters routinely co-star in the same commercial (for example Flo and Mara together), so do not stop after finding one match - check the full video and the `Characters` field above for every name in the roster, including secondary or supporting characters with less screen time, and include each one you find. Returns an empty array only if none of these recurring characters appear. Extend this enum as new recurring characters are introduced; characters outside this known roster are still captured in full in `Characters`."
       },
       "CharacterRoles": {
         "type": "string",
