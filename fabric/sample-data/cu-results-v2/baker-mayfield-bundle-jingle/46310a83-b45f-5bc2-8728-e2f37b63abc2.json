@@ -1,0 +1,175 @@
+{
+  "id": "46310a83-b45f-5bc2-8728-e2f37b63abc2",
+  "status": "Succeeded",
+  "result": {
+    "analyzerId": "cuCommercialVideoAnalyzerV2",
+    "apiVersion": "2025-11-01",
+    "createdAt": "2025-12-22T14:40:29Z",
+    "contents": [
+      {
+        "kind": "audioVisual",
+        "startTimeMs": 0,
+        "endTimeMs": 15000,
+        "markdown": "## Quick Baker Mayfield jingle recap\n\nA 15-second cut-down: Baker Mayfield hums the bundle jingle's hook while making a sandwich in a kitchen, barely looking up at the camera.",
+        "fields": {
+          "AdvertiserBrand": {
+            "type": "string",
+            "valueString": "Progressive Insurance",
+            "confidence": 0.93
+          },
+          "VisibleProducts": {
+            "type": "array",
+            "valueArray": [
+              {
+                "type": "string",
+                "valueString": "Kitchen counter",
+                "confidence": 0.88
+              },
+              {
+                "type": "string",
+                "valueString": "Progressive bundle offer card",
+                "confidence": 0.88
+              }
+            ],
+            "confidence": 0.88
+          },
+          "CompetitorsMentioned": {
+            "type": "array",
+            "valueArray": [],
+            "confidence": 0.77
+          },
+          "InsuranceProductsMentioned": {
+            "type": "array",
+            "valueArray": [
+              {
+                "type": "string",
+                "valueString": "Bundled home and auto",
+                "confidence": 0.94
+              }
+            ],
+            "confidence": 0.94
+          },
+          "Characters": {
+            "type": "array",
+            "valueArray": [
+              {
+                "type": "string",
+                "valueString": "Baker Mayfield",
+                "confidence": 0.93
+              }
+            ],
+            "confidence": 0.93
+          },
+          "KnownCharacters": {
+            "type": "array",
+            "valueArray": [],
+            "confidence": 0.96
+          },
+          "CharacterRoles": {
+            "type": "string",
+            "valueString": "Baker Mayfield delivers a brief, casual direct-to-camera moment.",
+            "confidence": 0.95
+          },
+          "MusicAndAudio": {
+            "type": "string",
+            "valueString": "Short hummed reprise of the bundle jingle hook, no full lyrics.",
+            "confidence": 0.82
+          },
+          "Setting": {
+            "type": "string",
+            "valueString": "A home kitchen.",
+            "confidence": 0.97
+          },
+          "KeyActions": {
+            "type": "array",
+            "valueArray": [
+              {
+                "type": "string",
+                "valueString": "Baker Mayfield hums the jingle hook",
+                "confidence": 0.91
+              },
+              {
+                "type": "string",
+                "valueString": "He glances at the camera and winks",
+                "confidence": 0.91
+              }
+            ],
+            "confidence": 0.91
+          },
+          "OnScreenText": {
+            "type": "array",
+            "valueArray": [
+              {
+                "type": "string",
+                "valueString": "Bundle & Save",
+                "confidence": 0.97
+              },
+              {
+                "type": "string",
+                "valueString": "Progressive.com",
+                "confidence": 0.97
+              }
+            ],
+            "confidence": 0.97
+          },
+          "CommercialMessage": {
+            "type": "string",
+            "valueString": "Bundling home and auto insurance with Progressive saves money.",
+            "confidence": 0.93
+          },
+          "HasCallToAction": {
+            "type": "string",
+            "valueString": "Yes",
+            "confidence": 0.94
+          },
+          "CallToActionType": {
+            "type": "string",
+            "valueString": "PurchaseNow",
+            "confidence": 0.95
+          },
+          "HumorMechanism": {
+            "type": "string",
+            "valueString": "Deadpan delivery of the jingle as background noise.",
+            "confidence": 0.94
+          },
+          "SentimentCategory": {
+            "type": "string",
+            "valueString": "Positive",
+            "confidence": 0.89
+          },
+          "SentimentNarrative": {
+            "type": "string",
+            "valueString": "Casual and lightly amusing.",
+            "confidence": 0.95
+          },
+          "SportsOrEntertainmentReferences": {
+            "type": "array",
+            "valueArray": [
+              {
+                "type": "string",
+                "valueString": "Baker Mayfield (celebrity spokesperson)",
+                "confidence": 0.82
+              }
+            ],
+            "confidence": 0.82
+          },
+          "BrandSafetyFlag": {
+            "type": "string",
+            "valueString": "Clear",
+            "confidence": 0.94
+          },
+          "BrandSafetyNotes": {
+            "type": "string",
+            "valueString": "No obvious brand-safety concerns are visible or spoken.",
+            "confidence": 0.94
+          },
+          "BrandMentionCount": {
+            "type": "integer",
+            "valueInteger": 1,
+            "confidence": 0.95
+          }
+        }
+      }
+    ]
+  }
+}

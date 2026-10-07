@@ -1,0 +1,185 @@
+{
+  "id": "7b0466ca-ec54-507c-a1d8-6880889ed138",
+  "status": "Succeeded",
+  "result": {
+    "analyzerId": "cuCommercialVideoAnalyzerV2",
+    "apiVersion": "2025-11-01",
+    "createdAt": "2026-06-08T10:40:29Z",
+    "contents": [
+      {
+        "kind": "audioVisual",
+        "startTimeMs": 0,
+        "endTimeMs": 30000,
+        "markdown": "## Dr. Rick tunes in on a new homeowner\n\nDr. Rick observes a young homeowner starting to repeat his parents' habits -- over-explaining a thermostat setting to houseguests -- and steps in with a supportive, slightly awkward intervention.",
+        "fields": {
+          "AdvertiserBrand": {
+            "type": "string",
+            "valueString": "Progressive Insurance",
+            "confidence": 0.94
+          },
+          "VisibleProducts": {
+            "type": "array",
+            "valueArray": [
+              {
+                "type": "string",
+                "valueString": "Progressive Home insurance brochure",
+                "confidence": 0.89
+              },
+              {
+                "type": "string",
+                "valueString": "Dr. Rick's clipboard",
+                "confidence": 0.89
+              }
+            ],
+            "confidence": 0.89
+          },
+          "CompetitorsMentioned": {
+            "type": "array",
+            "valueArray": [],
+            "confidence": 0.87
+          },
+          "InsuranceProductsMentioned": {
+            "type": "array",
+            "valueArray": [
+              {
+                "type": "string",
+                "valueString": "Home insurance",
+                "confidence": 0.98
+              }
+            ],
+            "confidence": 0.98
+          },
+          "Characters": {
+            "type": "array",
+            "valueArray": [
+              {
+                "type": "string",
+                "valueString": "Dr. Rick",
+                "confidence": 0.91
+              },
+              {
+                "type": "string",
+                "valueString": "young homeowner",
+                "confidence": 0.91
+              }
+            ],
+            "confidence": 0.91
+          },
+          "KnownCharacters": {
+            "type": "array",
+            "valueArray": [
+              {
+                "type": "string",
+                "valueString": "DrRick",
+                "confidence": 0.85
+              }
+            ],
+            "confidence": 0.85
+          },
+          "CharacterRoles": {
+            "type": "string",
+            "valueString": "Dr. Rick is Progressive's in-house 'parentamorphosis' counselor; the young homeowner is a new policyholder slipping into parent-like habits.",
+            "confidence": 0.87
+          },
+          "MusicAndAudio": {
+            "type": "string",
+            "valueString": "Soft, mock-clinical piano underscore; occasional record-scratch sound effect when Dr. Rick interrupts a habit.",
+            "confidence": 0.97
+          },
+          "Setting": {
+            "type": "string",
+            "valueString": "A suburban living room during a casual house-party gathering.",
+            "confidence": 0.94
+          },
+          "KeyActions": {
+            "type": "array",
+            "valueArray": [
+              {
+                "type": "string",
+                "valueString": "Homeowner over-explains the thermostat to guests",
+                "confidence": 0.85
+              },
+              {
+                "type": "string",
+                "valueString": "Dr. Rick steps in to gently interrupt the habit",
+                "confidence": 0.85
+              },
+              {
+                "type": "string",
+                "valueString": "Dr. Rick offers a reassuring, deadpan tip",
+                "confidence": 0.85
+              }
+            ],
+            "confidence": 0.85
+          },
+          "OnScreenText": {
+            "type": "array",
+            "valueArray": [
+              {
+                "type": "string",
+                "valueString": "Parentamorphosis",
+                "confidence": 0.95
+              },
+              {
+                "type": "string",
+                "valueString": "Progressive.com/home",
+                "confidence": 0.95
+              }
+            ],
+            "confidence": 0.95
+          },
+          "CommercialMessage": {
+            "type": "string",
+            "valueString": "New homeowners can get support (and home insurance) from Progressive so they don't turn into their parents.",
+            "confidence": 0.93
+          },
+          "HasCallToAction": {
+            "type": "string",
+            "valueString": "Yes",
+            "confidence": 0.97
+          },
+          "CallToActionType": {
+            "type": "string",
+            "valueString": "GetAQuote",
+            "confidence": 0.94
+          },
+          "HumorMechanism": {
+            "type": "string",
+            "valueString": "Deadpan clinical framing of mundane parent behaviors as a treatable condition.",
+            "confidence": 0.85
+          },
+          "SentimentCategory": {
+            "type": "string",
+            "valueString": "Mixed",
+            "confidence": 0.87
+          },
+          "SentimentNarrative": {
+            "type": "string",
+            "valueString": "Light, comedic embarrassment resolving into warm reassurance.",
+            "confidence": 0.84
+          },
+          "SportsOrEntertainmentReferences": {
+            "type": "array",
+            "valueArray": [],
+            "confidence": 0.71
+          },
+          "BrandSafetyFlag": {
+            "type": "string",
+            "valueString": "Clear",
+            "confidence": 0.97
+          },
+          "BrandSafetyNotes": {
+            "type": "string",
+            "valueString": "No obvious brand-safety concerns are visible or spoken.",
+            "confidence": 0.91
+          },
+          "BrandMentionCount": {
+            "type": "integer",
+            "valueInteger": 1,
+            "confidence": 0.89
+          }
+        }
+      }
+    ]
+  }
+}

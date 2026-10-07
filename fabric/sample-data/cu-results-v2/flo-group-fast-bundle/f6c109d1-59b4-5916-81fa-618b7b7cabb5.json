@@ -1,0 +1,200 @@
+{
+  "id": "f6c109d1-59b4-5916-81fa-618b7b7cabb5",
+  "status": "Succeeded",
+  "result": {
+    "analyzerId": "cuCommercialVideoAnalyzerV2",
+    "apiVersion": "2025-11-01",
+    "createdAt": "2026-02-01T13:40:29Z",
+    "contents": [
+      {
+        "kind": "audioVisual",
+        "startTimeMs": 0,
+        "endTimeMs": 30000,
+        "markdown": "## Flo demos bundling with renters insurance\n\nFlo shows a young renter how adding renters insurance to an auto policy stacks a second discount, using a small-scale 'apartment' shelf display.",
+        "fields": {
+          "AdvertiserBrand": {
+            "type": "string",
+            "valueString": "Progressive Insurance",
+            "confidence": 0.99
+          },
+          "VisibleProducts": {
+            "type": "array",
+            "valueArray": [
+              {
+                "type": "string",
+                "valueString": "Apartment-display shelf unit",
+                "confidence": 0.9
+              },
+              {
+                "type": "string",
+                "valueString": "Bundle discount price tag signage",
+                "confidence": 0.9
+              }
+            ],
+            "confidence": 0.9
+          },
+          "CompetitorsMentioned": {
+            "type": "array",
+            "valueArray": [],
+            "confidence": 0.73
+          },
+          "InsuranceProductsMentioned": {
+            "type": "array",
+            "valueArray": [
+              {
+                "type": "string",
+                "valueString": "Auto insurance",
+                "confidence": 0.95
+              },
+              {
+                "type": "string",
+                "valueString": "Renters insurance",
+                "confidence": 0.95
+              },
+              {
+                "type": "string",
+                "valueString": "Bundled auto and renters",
+                "confidence": 0.95
+              }
+            ],
+            "confidence": 0.95
+          },
+          "Characters": {
+            "type": "array",
+            "valueArray": [
+              {
+                "type": "string",
+                "valueString": "Flo",
+                "confidence": 0.99
+              },
+              {
+                "type": "string",
+                "valueString": "renter customer",
+                "confidence": 0.99
+              }
+            ],
+            "confidence": 0.99
+          },
+          "KnownCharacters": {
+            "type": "array",
+            "valueArray": [
+              {
+                "type": "string",
+                "valueString": "Flo",
+                "confidence": 0.87
+              }
+            ],
+            "confidence": 0.87
+          },
+          "CharacterRoles": {
+            "type": "string",
+            "valueString": "Flo hosts the bit; the renter is a young customer skeptical that renters insurance is worth bundling in.",
+            "confidence": 0.89
+          },
+          "MusicAndAudio": {
+            "type": "string",
+            "valueString": "Bright, friendly instrumental bed with a soft 'ka-ching' sound effect.",
+            "confidence": 0.91
+          },
+          "Setting": {
+            "type": "string",
+            "valueString": "A miniature apartment-themed display aisle inside the Progressive Store.",
+            "confidence": 0.97
+          },
+          "KeyActions": {
+            "type": "array",
+            "valueArray": [
+              {
+                "type": "string",
+                "valueString": "Renter picks up a lone auto policy box",
+                "confidence": 0.97
+              },
+              {
+                "type": "string",
+                "valueString": "Flo adds a renters insurance box to the cart",
+                "confidence": 0.97
+              },
+              {
+                "type": "string",
+                "valueString": "Price tag updates to show the stacked discount",
+                "confidence": 0.97
+              },
+              {
+                "type": "string",
+                "valueString": "Renter looks pleasantly surprised",
+                "confidence": 0.97
+              }
+            ],
+            "confidence": 0.97
+          },
+          "OnScreenText": {
+            "type": "array",
+            "valueArray": [
+              {
+                "type": "string",
+                "valueString": "Bundle & Save",
+                "confidence": 0.96
+              },
+              {
+                "type": "string",
+                "valueString": "Progressive.com",
+                "confidence": 0.96
+              }
+            ],
+            "confidence": 0.96
+          },
+          "CommercialMessage": {
+            "type": "string",
+            "valueString": "Renters can stack a discount by bundling renters insurance with auto.",
+            "confidence": 0.92
+          },
+          "HasCallToAction": {
+            "type": "string",
+            "valueString": "Yes",
+            "confidence": 0.96
+          },
+          "CallToActionType": {
+            "type": "string",
+            "valueString": "VisitWebsite",
+            "confidence": 0.9
+          },
+          "HumorMechanism": {
+            "type": "string",
+            "valueString": "Mini apartment set played completely seriously as a real display.",
+            "confidence": 0.88
+          },
+          "SentimentCategory": {
+            "type": "string",
+            "valueString": "Positive",
+            "confidence": 0.9
+          },
+          "SentimentNarrative": {
+            "type": "string",
+            "valueString": "Pleasantly surprised and upbeat.",
+            "confidence": 0.96
+          },
+          "SportsOrEntertainmentReferences": {
+            "type": "array",
+            "valueArray": [],
+            "confidence": 0.8
+          },
+          "BrandSafetyFlag": {
+            "type": "string",
+            "valueString": "Clear",
+            "confidence": 0.92
+          },
+          "BrandSafetyNotes": {
+            "type": "string",
+            "valueString": "No obvious brand-safety concerns are visible or spoken.",
+            "confidence": 0.91
+          },
+          "BrandMentionCount": {
+            "type": "integer",
+            "valueInteger": 1,
+            "confidence": 0.85
+          }
+        }
+      }
+    ]
+  }
+}

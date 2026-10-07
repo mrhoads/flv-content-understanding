@@ -1,0 +1,179 @@
+{
+  "id": "8de4c0b0-a84d-51e3-a1a9-00c8e5bde933",
+  "status": "Succeeded",
+  "result": {
+    "analyzerId": "cuCommercialVideoAnalyzerV2",
+    "apiVersion": "2025-11-01",
+    "createdAt": "2026-08-16T04:40:29Z",
+    "contents": [
+      {
+        "kind": "audioVisual",
+        "startTimeMs": 0,
+        "endTimeMs": 30000,
+        "markdown": "## The Motaur explains motorcycle savings\n\nThe Motaur, Progressive's half-man-half-motorcycle mascot, greets a rider in a garage and explains usage-based motorcycle insurance discounts with exaggerated enthusiasm.",
+        "fields": {
+          "AdvertiserBrand": {
+            "type": "string",
+            "valueString": "Progressive Insurance",
+            "confidence": 0.97
+          },
+          "VisibleProducts": {
+            "type": "array",
+            "valueArray": [
+              {
+                "type": "string",
+                "valueString": "Motorcycle in garage",
+                "confidence": 0.96
+              },
+              {
+                "type": "string",
+                "valueString": "Progressive motorcycle policy flyer",
+                "confidence": 0.96
+              }
+            ],
+            "confidence": 0.96
+          },
+          "CompetitorsMentioned": {
+            "type": "array",
+            "valueArray": [],
+            "confidence": 0.78
+          },
+          "InsuranceProductsMentioned": {
+            "type": "array",
+            "valueArray": [
+              {
+                "type": "string",
+                "valueString": "Motorcycle insurance",
+                "confidence": 0.95
+              }
+            ],
+            "confidence": 0.95
+          },
+          "Characters": {
+            "type": "array",
+            "valueArray": [
+              {
+                "type": "string",
+                "valueString": "The Motaur",
+                "confidence": 0.91
+              },
+              {
+                "type": "string",
+                "valueString": "motorcycle rider",
+                "confidence": 0.91
+              }
+            ],
+            "confidence": 0.91
+          },
+          "KnownCharacters": {
+            "type": "array",
+            "valueArray": [],
+            "confidence": 0.97
+          },
+          "CharacterRoles": {
+            "type": "string",
+            "valueString": "The Motaur is an exuberant half-man, half-motorcycle mascot; the rider is a skeptical-then-convinced customer.",
+            "confidence": 0.96
+          },
+          "MusicAndAudio": {
+            "type": "string",
+            "valueString": "Driving rock guitar riff under the Motaur's booming voiceover; engine-rev sound effect for emphasis.",
+            "confidence": 0.98
+          },
+          "Setting": {
+            "type": "string",
+            "valueString": "A home garage with a parked motorcycle.",
+            "confidence": 0.95
+          },
+          "KeyActions": {
+            "type": "array",
+            "valueArray": [
+              {
+                "type": "string",
+                "valueString": "The Motaur gallops in to greet the rider",
+                "confidence": 0.96
+              },
+              {
+                "type": "string",
+                "valueString": "The Motaur gestures at the motorcycle while explaining discounts",
+                "confidence": 0.96
+              },
+              {
+                "type": "string",
+                "valueString": "Rider looks surprised, then convinced",
+                "confidence": 0.96
+              }
+            ],
+            "confidence": 0.96
+          },
+          "OnScreenText": {
+            "type": "array",
+            "valueArray": [
+              {
+                "type": "string",
+                "valueString": "Motorcycle insurance starting at $75/year*",
+                "confidence": 0.85
+              },
+              {
+                "type": "string",
+                "valueString": "Progressive.com",
+                "confidence": 0.85
+              }
+            ],
+            "confidence": 0.85
+          },
+          "CommercialMessage": {
+            "type": "string",
+            "valueString": "Motorcycle riders can save with usage-based Progressive discounts.",
+            "confidence": 0.93
+          },
+          "HasCallToAction": {
+            "type": "string",
+            "valueString": "Yes",
+            "confidence": 0.93
+          },
+          "CallToActionType": {
+            "type": "string",
+            "valueString": "GetAQuote",
+            "confidence": 0.97
+          },
+          "HumorMechanism": {
+            "type": "string",
+            "valueString": "Absurd half-man-half-motorcycle mascot delivering sincere insurance advice.",
+            "confidence": 0.91
+          },
+          "SentimentCategory": {
+            "type": "string",
+            "valueString": "Positive",
+            "confidence": 0.96
+          },
+          "SentimentNarrative": {
+            "type": "string",
+            "valueString": "High-energy and enthusiastic throughout.",
+            "confidence": 0.95
+          },
+          "SportsOrEntertainmentReferences": {
+            "type": "array",
+            "valueArray": [],
+            "confidence": 0.76
+          },
+          "BrandSafetyFlag": {
+            "type": "string",
+            "valueString": "Clear",
+            "confidence": 0.97
+          },
+          "BrandSafetyNotes": {
+            "type": "string",
+            "valueString": "Motorcycle riding is shown only in a stationary garage setting; no on-road riding or stunts depicted.",
+            "confidence": 0.91
+          },
+          "BrandMentionCount": {
+            "type": "integer",
+            "valueInteger": 1,
+            "confidence": 0.96
+          }
+        }
+      }
+    ]
+  }
+}

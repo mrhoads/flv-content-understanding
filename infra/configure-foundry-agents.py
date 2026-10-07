@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Create new versions of the two FLV prompt agents in Microsoft Foundry."""
+"""Create new versions of the two insurance-intake prompt agents in Microsoft Foundry."""
 
 from __future__ import annotations
 

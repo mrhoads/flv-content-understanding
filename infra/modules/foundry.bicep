@@ -42,7 +42,7 @@ resource foundryProject 'Microsoft.CognitiveServices/accounts/projects@2025-06-0
     type: 'SystemAssigned'
   }
   properties: {
-    displayName: 'Progressive FLV Demo'
+    displayName: 'Progressive Content Understanding Demo'
     description: 'Foundry project for vehicle first-look verification.'
   }
 }

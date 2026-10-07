@@ -1,0 +1,195 @@
+{
+  "id": "5145c9f0-d48d-58cb-9950-cad338913717",
+  "status": "Succeeded",
+  "result": {
+    "analyzerId": "cuCommercialVideoAnalyzerV2",
+    "apiVersion": "2025-11-01",
+    "createdAt": "2026-03-25T00:40:29Z",
+    "contents": [
+      {
+        "kind": "audioVisual",
+        "startTimeMs": 0,
+        "endTimeMs": 30000,
+        "markdown": "## Jamie organizes a one-man parade\n\nJamie recruits two other employees into an impromptu mini-parade down the main aisle to celebrate a sales milestone, while Flo tries to keep shoppers moving.",
+        "fields": {
+          "AdvertiserBrand": {
+            "type": "string",
+            "valueString": "Progressive Insurance",
+            "confidence": 0.94
+          },
+          "VisibleProducts": {
+            "type": "array",
+            "valueArray": [
+              {
+                "type": "string",
+                "valueString": "Progressive Store shelf display",
+                "confidence": 0.83
+              },
+              {
+                "type": "string",
+                "valueString": "Handmade parade banner",
+                "confidence": 0.83
+              }
+            ],
+            "confidence": 0.83
+          },
+          "CompetitorsMentioned": {
+            "type": "array",
+            "valueArray": [],
+            "confidence": 0.84
+          },
+          "InsuranceProductsMentioned": {
+            "type": "array",
+            "valueArray": [
+              {
+                "type": "string",
+                "valueString": "Auto insurance",
+                "confidence": 0.98
+              }
+            ],
+            "confidence": 0.98
+          },
+          "Characters": {
+            "type": "array",
+            "valueArray": [
+              {
+                "type": "string",
+                "valueString": "Jamie",
+                "confidence": 0.98
+              },
+              {
+                "type": "string",
+                "valueString": "Flo",
+                "confidence": 0.98
+              },
+              {
+                "type": "string",
+                "valueString": "two coworkers",
+                "confidence": 0.98
+              }
+            ],
+            "confidence": 0.98
+          },
+          "KnownCharacters": {
+            "type": "array",
+            "valueArray": [
+              {
+                "type": "string",
+                "valueString": "Flo",
+                "confidence": 0.97
+              },
+              {
+                "type": "string",
+                "valueString": "Jamie",
+                "confidence": 0.97
+              }
+            ],
+            "confidence": 0.97
+          },
+          "CharacterRoles": {
+            "type": "string",
+            "valueString": "Jamie leads an enthusiastic, self-organized parade; Flo manages the shoppers caught in the middle of it.",
+            "confidence": 0.94
+          },
+          "MusicAndAudio": {
+            "type": "string",
+            "valueString": "Mock-triumphant marching-band instrumental with a kazoo lead line and a small cowbell sound effect.",
+            "confidence": 0.84
+          },
+          "Setting": {
+            "type": "string",
+            "valueString": "The Progressive Store's main aisle.",
+            "confidence": 0.94
+          },
+          "KeyActions": {
+            "type": "array",
+            "valueArray": [
+              {
+                "type": "string",
+                "valueString": "Jamie leads a small parade with a handmade banner",
+                "confidence": 0.93
+              },
+              {
+                "type": "string",
+                "valueString": "Two coworkers follow along half-heartedly",
+                "confidence": 0.93
+              },
+              {
+                "type": "string",
+                "valueString": "Flo redirects confused shoppers around the parade",
+                "confidence": 0.93
+              },
+              {
+                "type": "string",
+                "valueString": "Jamie takes an exaggerated bow at the register",
+                "confidence": 0.93
+              }
+            ],
+            "confidence": 0.93
+          },
+          "OnScreenText": {
+            "type": "array",
+            "valueArray": [
+              {
+                "type": "string",
+                "valueString": "Progressive.com",
+                "confidence": 0.92
+              }
+            ],
+            "confidence": 0.92
+          },
+          "CommercialMessage": {
+            "type": "string",
+            "valueString": "Progressive's team celebrates the wins, even small ones, while still helping you save.",
+            "confidence": 0.9
+          },
+          "HasCallToAction": {
+            "type": "string",
+            "valueString": "Yes",
+            "confidence": 0.98
+          },
+          "CallToActionType": {
+            "type": "string",
+            "valueString": "GetAQuote",
+            "confidence": 0.87
+          },
+          "HumorMechanism": {
+            "type": "string",
+            "valueString": "A full parade staged for an extremely minor achievement.",
+            "confidence": 0.78
+          },
+          "SentimentCategory": {
+            "type": "string",
+            "valueString": "Positive",
+            "confidence": 0.91
+          },
+          "SentimentNarrative": {
+            "type": "string",
+            "valueString": "Comedic and high-energy, ending in a shared laugh.",
+            "confidence": 0.9
+          },
+          "SportsOrEntertainmentReferences": {
+            "type": "array",
+            "valueArray": [],
+            "confidence": 0.82
+          },
+          "BrandSafetyFlag": {
+            "type": "string",
+            "valueString": "Clear",
+            "confidence": 0.93
+          },
+          "BrandSafetyNotes": {
+            "type": "string",
+            "valueString": "No obvious brand-safety concerns are visible or spoken.",
+            "confidence": 0.97
+          },
+          "BrandMentionCount": {
+            "type": "integer",
+            "valueInteger": 1,
+            "confidence": 0.91
+          }
+        }
+      }
+    ]
+  }
+}

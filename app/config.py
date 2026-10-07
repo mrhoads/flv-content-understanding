@@ -79,7 +79,7 @@ def load_settings() -> Settings:
         storage_backend=os.getenv("STORAGE_BACKEND", "local").lower(),
         local_data_dir=Path(os.getenv("LOCAL_DATA_DIR", ".demo-data")),
         storage_account_url=os.getenv("AZURE_STORAGE_ACCOUNT_URL"),
-        storage_container=os.getenv("AZURE_STORAGE_CONTAINER", "flv-content"),
+        storage_container=os.getenv("AZURE_STORAGE_CONTAINER", "cu-content"),
         foundry_project_endpoint=os.getenv("FOUNDRY_PROJECT_ENDPOINT"),
         foundry_model_deployment=os.getenv("FOUNDRY_MODEL_DEPLOYMENT"),
         customer_agent_name=os.getenv("FOUNDRY_CUSTOMER_AGENT_NAME"),

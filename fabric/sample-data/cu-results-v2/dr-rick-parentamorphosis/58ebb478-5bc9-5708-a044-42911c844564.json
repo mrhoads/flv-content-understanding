@@ -1,0 +1,175 @@
+{
+  "id": "58ebb478-5bc9-5708-a044-42911c844564",
+  "status": "Succeeded",
+  "result": {
+    "analyzerId": "cuCommercialVideoAnalyzerV2",
+    "apiVersion": "2025-11-01",
+    "createdAt": "2026-09-11T21:40:29Z",
+    "contents": [
+      {
+        "kind": "audioVisual",
+        "startTimeMs": 0,
+        "endTimeMs": 15000,
+        "markdown": "## Dr. Rick's quick check-in\n\nA short cut-down where Dr. Rick catches a homeowner refolding takeout menus 'for the drawer' and offers a one-line intervention.",
+        "fields": {
+          "AdvertiserBrand": {
+            "type": "string",
+            "valueString": "Progressive Insurance",
+            "confidence": 0.94
+          },
+          "VisibleProducts": {
+            "type": "array",
+            "valueArray": [
+              {
+                "type": "string",
+                "valueString": "Dr. Rick's clipboard",
+                "confidence": 0.97
+              }
+            ],
+            "confidence": 0.97
+          },
+          "CompetitorsMentioned": {
+            "type": "array",
+            "valueArray": [],
+            "confidence": 0.81
+          },
+          "InsuranceProductsMentioned": {
+            "type": "array",
+            "valueArray": [
+              {
+                "type": "string",
+                "valueString": "Home insurance",
+                "confidence": 0.89
+              }
+            ],
+            "confidence": 0.89
+          },
+          "Characters": {
+            "type": "array",
+            "valueArray": [
+              {
+                "type": "string",
+                "valueString": "Dr. Rick",
+                "confidence": 0.95
+              },
+              {
+                "type": "string",
+                "valueString": "young homeowner",
+                "confidence": 0.95
+              }
+            ],
+            "confidence": 0.95
+          },
+          "KnownCharacters": {
+            "type": "array",
+            "valueArray": [
+              {
+                "type": "string",
+                "valueString": "DrRick",
+                "confidence": 0.96
+              }
+            ],
+            "confidence": 0.96
+          },
+          "CharacterRoles": {
+            "type": "string",
+            "valueString": "Dr. Rick delivers a quick deadpan intervention.",
+            "confidence": 0.81
+          },
+          "MusicAndAudio": {
+            "type": "string",
+            "valueString": "Single soft piano sting, brief record-scratch effect.",
+            "confidence": 0.81
+          },
+          "Setting": {
+            "type": "string",
+            "valueString": "A suburban kitchen.",
+            "confidence": 0.96
+          },
+          "KeyActions": {
+            "type": "array",
+            "valueArray": [
+              {
+                "type": "string",
+                "valueString": "Homeowner refolds takeout menus",
+                "confidence": 0.87
+              },
+              {
+                "type": "string",
+                "valueString": "Dr. Rick interrupts",
+                "confidence": 0.87
+              }
+            ],
+            "confidence": 0.87
+          },
+          "OnScreenText": {
+            "type": "array",
+            "valueArray": [
+              {
+                "type": "string",
+                "valueString": "Parentamorphosis",
+                "confidence": 0.98
+              },
+              {
+                "type": "string",
+                "valueString": "Progressive.com/home",
+                "confidence": 0.98
+              }
+            ],
+            "confidence": 0.98
+          },
+          "CommercialMessage": {
+            "type": "string",
+            "valueString": "Don't let homeownership turn you into your parents.",
+            "confidence": 0.9
+          },
+          "HasCallToAction": {
+            "type": "string",
+            "valueString": "Yes",
+            "confidence": 0.95
+          },
+          "CallToActionType": {
+            "type": "string",
+            "valueString": "GetAQuote",
+            "confidence": 0.86
+          },
+          "HumorMechanism": {
+            "type": "string",
+            "valueString": "Quick callback gag to a recognizable parent habit.",
+            "confidence": 0.77
+          },
+          "SentimentCategory": {
+            "type": "string",
+            "valueString": "Positive",
+            "confidence": 0.94
+          },
+          "SentimentNarrative": {
+            "type": "string",
+            "valueString": "Light and comedic.",
+            "confidence": 0.9
+          },
+          "SportsOrEntertainmentReferences": {
+            "type": "array",
+            "valueArray": [],
+            "confidence": 0.77
+          },
+          "BrandSafetyFlag": {
+            "type": "string",
+            "valueString": "Clear",
+            "confidence": 0.92
+          },
+          "BrandSafetyNotes": {
+            "type": "string",
+            "valueString": "No obvious brand-safety concerns are visible or spoken.",
+            "confidence": 0.96
+          },
+          "BrandMentionCount": {
+            "type": "integer",
+            "valueInteger": 1,
+            "confidence": 0.89
+          }
+        }
+      }
+    ]
+  }
+}
