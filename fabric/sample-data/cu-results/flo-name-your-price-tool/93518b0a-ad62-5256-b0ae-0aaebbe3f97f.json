@@ -1,0 +1,144 @@
+{
+  "id": "93518b0a-ad62-5256-b0ae-0aaebbe3f97f",
+  "status": "Succeeded",
+  "result": {
+    "analyzerId": "flvCommercialVideoAnalyzer",
+    "apiVersion": "2025-11-01",
+    "createdAt": "2026-01-31T11:09:34Z",
+    "contents": [
+      {
+        "kind": "audioVisual",
+        "startTimeMs": 0,
+        "endTimeMs": 15000,
+        "markdown": "## Flo closes up the store for the night\n\nA quiet 15-second close: Flo switches off the kiosk lights one by one down the aisle, reminding viewers the tool is available online anytime.",
+        "fields": {
+          "AdvertiserBrand": {
+            "type": "string",
+            "valueString": "Progressive Insurance",
+            "confidence": 0.93
+          },
+          "VisibleProducts": {
+            "type": "array",
+            "valueArray": [
+              {
+                "type": "string",
+                "valueString": "Name Your Price Tool kiosk",
+                "confidence": 0.85
+              },
+              {
+                "type": "string",
+                "valueString": "Progressive Store shelf display",
+                "confidence": 0.85
+              }
+            ],
+            "confidence": 0.85
+          },
+          "CompetitorsMentioned": {
+            "type": "array",
+            "valueArray": [],
+            "confidence": 0.78
+          },
+          "InsuranceProductsMentioned": {
+            "type": "array",
+            "valueArray": [
+              {
+                "type": "string",
+                "valueString": "Auto insurance",
+                "confidence": 0.95
+              }
+            ],
+            "confidence": 0.95
+          },
+          "Characters": {
+            "type": "array",
+            "valueArray": [
+              {
+                "type": "string",
+                "valueString": "Flo",
+                "confidence": 0.94
+              }
+            ],
+            "confidence": 0.94
+          },
+          "CharacterRoles": {
+            "type": "string",
+            "valueString": "Flo delivers a calm, solo closing-time moment.",
+            "confidence": 0.93
+          },
+          "MusicAndAudio": {
+            "type": "string",
+            "valueString": "Slow, mellow instrumental wind-down with soft footstep sound effects.",
+            "confidence": 0.98
+          },
+          "Setting": {
+            "type": "string",
+            "valueString": "The Progressive Store at night, aisle lights dimming in sequence.",
+            "confidence": 0.91
+          },
+          "KeyActions": {
+            "type": "array",
+            "valueArray": [
+              {
+                "type": "string",
+                "valueString": "Flo walks the aisle switching off kiosk lights",
+                "confidence": 0.94
+              },
+              {
+                "type": "string",
+                "valueString": "Flo pauses at the last kiosk and smiles at the camera",
+                "confidence": 0.94
+              }
+            ],
+            "confidence": 0.94
+          },
+          "OnScreenText": {
+            "type": "array",
+            "valueArray": [
+              {
+                "type": "string",
+                "valueString": "Progressive.com -- anytime",
+                "confidence": 0.98
+              },
+              {
+                "type": "string",
+                "valueString": "Name Your Price Tool",
+                "confidence": 0.98
+              }
+            ],
+            "confidence": 0.98
+          },
+          "CommercialMessage": {
+            "type": "string",
+            "valueString": "Progressive's price tool is available online any time, day or night.",
+            "confidence": 0.97
+          },
+          "CallToAction": {
+            "type": "string",
+            "valueString": "Get a quote anytime at Progressive.com.",
+            "confidence": 0.9
+          },
+          "HumorMechanism": {
+            "type": "string",
+            "valueString": "Mild deadpan delivered to an empty store as if it were a full crowd.",
+            "confidence": 0.92
+          },
+          "EmotionSentiment": {
+            "type": "string",
+            "valueString": "Calm and quietly warm.",
+            "confidence": 0.93
+          },
+          "SportsOrEntertainmentReferences": {
+            "type": "array",
+            "valueArray": [],
+            "confidence": 0.7
+          },
+          "BrandSafetyNotes": {
+            "type": "string",
+            "valueString": "No obvious brand-safety concerns are visible or spoken.",
+            "confidence": 0.97
+          }
+        }
+      }
+    ]
+  }
+}

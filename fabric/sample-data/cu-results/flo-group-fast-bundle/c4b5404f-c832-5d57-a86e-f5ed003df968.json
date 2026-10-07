@@ -1,0 +1,179 @@
+{
+  "id": "c4b5404f-c832-5d57-a86e-f5ed003df968",
+  "status": "Succeeded",
+  "result": {
+    "analyzerId": "flvCommercialVideoAnalyzer",
+    "apiVersion": "2025-11-01",
+    "createdAt": "2026-04-09T13:09:35Z",
+    "contents": [
+      {
+        "kind": "audioVisual",
+        "startTimeMs": 0,
+        "endTimeMs": 30000,
+        "markdown": "## Flo and Jamie's forklift bundling race\n\nFlo and Jamie each pilot a small store forklift loaded with policy pallets, racing to see who can bundle a family's full policy set first.",
+        "fields": {
+          "AdvertiserBrand": {
+            "type": "string",
+            "valueString": "Progressive Insurance",
+            "confidence": 0.94
+          },
+          "VisibleProducts": {
+            "type": "array",
+            "valueArray": [
+              {
+                "type": "string",
+                "valueString": "Store forklift",
+                "confidence": 0.88
+              },
+              {
+                "type": "string",
+                "valueString": "Policy pallets",
+                "confidence": 0.88
+              },
+              {
+                "type": "string",
+                "valueString": "Bundle discount price tag signage",
+                "confidence": 0.88
+              }
+            ],
+            "confidence": 0.88
+          },
+          "CompetitorsMentioned": {
+            "type": "array",
+            "valueArray": [],
+            "confidence": 0.82
+          },
+          "InsuranceProductsMentioned": {
+            "type": "array",
+            "valueArray": [
+              {
+                "type": "string",
+                "valueString": "Auto insurance",
+                "confidence": 0.96
+              },
+              {
+                "type": "string",
+                "valueString": "Home insurance",
+                "confidence": 0.96
+              },
+              {
+                "type": "string",
+                "valueString": "Boat insurance",
+                "confidence": 0.96
+              },
+              {
+                "type": "string",
+                "valueString": "Bundled policies",
+                "confidence": 0.96
+              }
+            ],
+            "confidence": 0.96
+          },
+          "Characters": {
+            "type": "array",
+            "valueArray": [
+              {
+                "type": "string",
+                "valueString": "Flo",
+                "confidence": 0.9
+              },
+              {
+                "type": "string",
+                "valueString": "Jamie",
+                "confidence": 0.9
+              }
+            ],
+            "confidence": 0.9
+          },
+          "CharacterRoles": {
+            "type": "string",
+            "valueString": "Flo and Jamie are rival coworkers competing good-naturedly to assemble the bigger bundle fastest.",
+            "confidence": 0.82
+          },
+          "MusicAndAudio": {
+            "type": "string",
+            "valueString": "Fast-paced comedic chase music with a forklift-beeping sound effect and a cartoonish horn sting at the finish.",
+            "confidence": 0.88
+          },
+          "Setting": {
+            "type": "string",
+            "valueString": "The Progressive Store's loading aisle, with two parallel forklift lanes.",
+            "confidence": 0.89
+          },
+          "KeyActions": {
+            "type": "array",
+            "valueArray": [
+              {
+                "type": "string",
+                "valueString": "Flo and Jamie race forklifts down parallel aisles",
+                "confidence": 0.93
+              },
+              {
+                "type": "string",
+                "valueString": "Each stacks a pallet with home, auto, and boat policy boxes",
+                "confidence": 0.93
+              },
+              {
+                "type": "string",
+                "valueString": "They arrive at the register in a near-tie",
+                "confidence": 0.93
+              },
+              {
+                "type": "string",
+                "valueString": "Register displays the combined bundle discount",
+                "confidence": 0.93
+              }
+            ],
+            "confidence": 0.93
+          },
+          "OnScreenText": {
+            "type": "array",
+            "valueArray": [
+              {
+                "type": "string",
+                "valueString": "Bundle & Save",
+                "confidence": 0.96
+              },
+              {
+                "type": "string",
+                "valueString": "Progressive.com",
+                "confidence": 0.96
+              }
+            ],
+            "confidence": 0.96
+          },
+          "CommercialMessage": {
+            "type": "string",
+            "valueString": "Bundling multiple policies together adds up to bigger savings.",
+            "confidence": 0.87
+          },
+          "CallToAction": {
+            "type": "string",
+            "valueString": "Bundle your policies at Progressive.com.",
+            "confidence": 0.93
+          },
+          "HumorMechanism": {
+            "type": "string",
+            "valueString": "Over-the-top forklift race for an otherwise mundane paperwork task.",
+            "confidence": 0.81
+          },
+          "EmotionSentiment": {
+            "type": "string",
+            "valueString": "High-energy and comedic, ending in a friendly tie.",
+            "confidence": 0.89
+          },
+          "SportsOrEntertainmentReferences": {
+            "type": "array",
+            "valueArray": [],
+            "confidence": 0.88
+          },
+          "BrandSafetyNotes": {
+            "type": "string",
+            "valueString": "No obvious brand-safety concerns are visible or spoken.",
+            "confidence": 0.97
+          }
+        }
+      }
+    ]
+  }
+}

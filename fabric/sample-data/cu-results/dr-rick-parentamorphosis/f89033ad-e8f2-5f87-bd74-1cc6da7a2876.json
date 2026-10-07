@@ -1,0 +1,144 @@
+{
+  "id": "f89033ad-e8f2-5f87-bd74-1cc6da7a2876",
+  "status": "Succeeded",
+  "result": {
+    "analyzerId": "flvCommercialVideoAnalyzer",
+    "apiVersion": "2025-11-01",
+    "createdAt": "2026-04-29T23:09:34Z",
+    "contents": [
+      {
+        "kind": "audioVisual",
+        "startTimeMs": 0,
+        "endTimeMs": 15000,
+        "markdown": "## Dr. Rick's early-bird dinner reservation habit\n\nA short cut-down: Dr. Rick catches a homeowner proudly booking a 4:30pm dinner reservation and offers a one-line intervention.",
+        "fields": {
+          "AdvertiserBrand": {
+            "type": "string",
+            "valueString": "Progressive Insurance",
+            "confidence": 0.9
+          },
+          "VisibleProducts": {
+            "type": "array",
+            "valueArray": [
+              {
+                "type": "string",
+                "valueString": "Dr. Rick's clipboard",
+                "confidence": 0.89
+              }
+            ],
+            "confidence": 0.89
+          },
+          "CompetitorsMentioned": {
+            "type": "array",
+            "valueArray": [],
+            "confidence": 0.88
+          },
+          "InsuranceProductsMentioned": {
+            "type": "array",
+            "valueArray": [
+              {
+                "type": "string",
+                "valueString": "Home insurance",
+                "confidence": 0.94
+              }
+            ],
+            "confidence": 0.94
+          },
+          "Characters": {
+            "type": "array",
+            "valueArray": [
+              {
+                "type": "string",
+                "valueString": "Dr. Rick",
+                "confidence": 0.91
+              },
+              {
+                "type": "string",
+                "valueString": "young homeowner",
+                "confidence": 0.91
+              }
+            ],
+            "confidence": 0.91
+          },
+          "CharacterRoles": {
+            "type": "string",
+            "valueString": "Dr. Rick delivers a quick deadpan intervention.",
+            "confidence": 0.89
+          },
+          "MusicAndAudio": {
+            "type": "string",
+            "valueString": "Single soft piano sting, brief record-scratch effect.",
+            "confidence": 0.95
+          },
+          "Setting": {
+            "type": "string",
+            "valueString": "A suburban kitchen, homeowner on the phone.",
+            "confidence": 0.81
+          },
+          "KeyActions": {
+            "type": "array",
+            "valueArray": [
+              {
+                "type": "string",
+                "valueString": "Homeowner books an early dinner reservation",
+                "confidence": 0.81
+              },
+              {
+                "type": "string",
+                "valueString": "Dr. Rick interrupts",
+                "confidence": 0.81
+              }
+            ],
+            "confidence": 0.81
+          },
+          "OnScreenText": {
+            "type": "array",
+            "valueArray": [
+              {
+                "type": "string",
+                "valueString": "Parentamorphosis",
+                "confidence": 0.97
+              },
+              {
+                "type": "string",
+                "valueString": "Progressive.com/home",
+                "confidence": 0.97
+              }
+            ],
+            "confidence": 0.97
+          },
+          "CommercialMessage": {
+            "type": "string",
+            "valueString": "Don't let homeownership turn you into your parents.",
+            "confidence": 0.87
+          },
+          "CallToAction": {
+            "type": "string",
+            "valueString": "Visit Progressive.com/home for a quote.",
+            "confidence": 0.97
+          },
+          "HumorMechanism": {
+            "type": "string",
+            "valueString": "Quick callback gag to a recognizable parent habit.",
+            "confidence": 0.86
+          },
+          "EmotionSentiment": {
+            "type": "string",
+            "valueString": "Light and comedic.",
+            "confidence": 0.9
+          },
+          "SportsOrEntertainmentReferences": {
+            "type": "array",
+            "valueArray": [],
+            "confidence": 0.71
+          },
+          "BrandSafetyNotes": {
+            "type": "string",
+            "valueString": "No obvious brand-safety concerns are visible or spoken.",
+            "confidence": 0.91
+          }
+        }
+      }
+    ]
+  }
+}

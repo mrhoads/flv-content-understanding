@@ -1,0 +1,159 @@
+{
+  "id": "319f7fac-db1f-5760-8711-c3ab164c5726",
+  "status": "Succeeded",
+  "result": {
+    "analyzerId": "flvCommercialVideoAnalyzer",
+    "apiVersion": "2025-11-01",
+    "createdAt": "2026-02-23T11:09:35Z",
+    "contents": [
+      {
+        "kind": "audioVisual",
+        "startTimeMs": 0,
+        "endTimeMs": 30000,
+        "markdown": "## Dr. Rick catches a garage-sale pricing habit\n\nDr. Rick observes a homeowner meticulously price-tagging every item at a garage sale down to the penny and intervenes with a support-group-style lesson.",
+        "fields": {
+          "AdvertiserBrand": {
+            "type": "string",
+            "valueString": "Progressive Insurance",
+            "confidence": 0.96
+          },
+          "VisibleProducts": {
+            "type": "array",
+            "valueArray": [
+              {
+                "type": "string",
+                "valueString": "Price-tag gun",
+                "confidence": 0.86
+              },
+              {
+                "type": "string",
+                "valueString": "Dr. Rick's clipboard",
+                "confidence": 0.86
+              }
+            ],
+            "confidence": 0.86
+          },
+          "CompetitorsMentioned": {
+            "type": "array",
+            "valueArray": [],
+            "confidence": 0.89
+          },
+          "InsuranceProductsMentioned": {
+            "type": "array",
+            "valueArray": [
+              {
+                "type": "string",
+                "valueString": "Home insurance",
+                "confidence": 0.95
+              }
+            ],
+            "confidence": 0.95
+          },
+          "Characters": {
+            "type": "array",
+            "valueArray": [
+              {
+                "type": "string",
+                "valueString": "Dr. Rick",
+                "confidence": 0.94
+              },
+              {
+                "type": "string",
+                "valueString": "young homeowner",
+                "confidence": 0.94
+              }
+            ],
+            "confidence": 0.94
+          },
+          "CharacterRoles": {
+            "type": "string",
+            "valueString": "Dr. Rick counsels the homeowner through a classic 'parent habit' relapse during a driveway garage sale.",
+            "confidence": 0.91
+          },
+          "MusicAndAudio": {
+            "type": "string",
+            "valueString": "Light acoustic guitar underscore; a kazoo-like sound effect plays each time the price-tag gun clicks.",
+            "confidence": 0.9
+          },
+          "Setting": {
+            "type": "string",
+            "valueString": "A suburban driveway during a weekend garage sale.",
+            "confidence": 0.89
+          },
+          "KeyActions": {
+            "type": "array",
+            "valueArray": [
+              {
+                "type": "string",
+                "valueString": "Homeowner price-tags items down to the penny",
+                "confidence": 0.89
+              },
+              {
+                "type": "string",
+                "valueString": "Neighbors look on, mildly concerned",
+                "confidence": 0.89
+              },
+              {
+                "type": "string",
+                "valueString": "Dr. Rick steps in with a clipboard and a gentle lesson",
+                "confidence": 0.89
+              },
+              {
+                "type": "string",
+                "valueString": "Homeowner loosens up and rounds a price to a whole dollar",
+                "confidence": 0.89
+              }
+            ],
+            "confidence": 0.89
+          },
+          "OnScreenText": {
+            "type": "array",
+            "valueArray": [
+              {
+                "type": "string",
+                "valueString": "Parentamorphosis",
+                "confidence": 0.91
+              },
+              {
+                "type": "string",
+                "valueString": "Progressive.com/home",
+                "confidence": 0.91
+              }
+            ],
+            "confidence": 0.91
+          },
+          "CommercialMessage": {
+            "type": "string",
+            "valueString": "Progressive helps new homeowners recognize parent habits before they take hold.",
+            "confidence": 0.85
+          },
+          "CallToAction": {
+            "type": "string",
+            "valueString": "Get a home insurance quote at Progressive.com.",
+            "confidence": 0.89
+          },
+          "HumorMechanism": {
+            "type": "string",
+            "valueString": "Treating obsessive garage-sale pricing as a clinical symptom.",
+            "confidence": 0.8
+          },
+          "EmotionSentiment": {
+            "type": "string",
+            "valueString": "Comedic discomfort resolving into relief.",
+            "confidence": 0.92
+          },
+          "SportsOrEntertainmentReferences": {
+            "type": "array",
+            "valueArray": [],
+            "confidence": 0.81
+          },
+          "BrandSafetyNotes": {
+            "type": "string",
+            "valueString": "No obvious brand-safety concerns are visible or spoken.",
+            "confidence": 0.98
+          }
+        }
+      }
+    ]
+  }
+}

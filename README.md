@@ -97,6 +97,10 @@ campaign analysis results in a Fabric Lakehouse (via a OneLake shortcut and a
 flattening notebook — no SAS tokens or keys, consistent with this repo's
 managed-identity-only storage account) for Power BI reporting, with a later
 phase to join in simulated engagement data for marketing-effectiveness analysis.
+[`fabric/sample-data/`](fabric/sample-data) has committed, synthetic Content
+Understanding results for well-known Progressive campaigns (Flo, Dr. Rick, The
+Motaur, Jamie, Baker Mayfield) so you can demo this reporting pipeline without
+an Azure deployment or real commercial footage.
 
 ## Azure architecture
 

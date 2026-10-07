@@ -1,0 +1,139 @@
+{
+  "id": "5c15b8a8-945e-5912-9004-6727bbaf2da4",
+  "status": "Succeeded",
+  "result": {
+    "analyzerId": "flvCommercialVideoAnalyzer",
+    "apiVersion": "2025-11-01",
+    "createdAt": "2026-01-07T20:09:34Z",
+    "contents": [
+      {
+        "kind": "audioVisual",
+        "startTimeMs": 0,
+        "endTimeMs": 15000,
+        "markdown": "## Quick bundle-and-save recap\n\nA 15-second cut-down: Flo holds up a single combined policy box and reminds viewers that bundling is still the fastest way to save.",
+        "fields": {
+          "AdvertiserBrand": {
+            "type": "string",
+            "valueString": "Progressive Insurance",
+            "confidence": 0.91
+          },
+          "VisibleProducts": {
+            "type": "array",
+            "valueArray": [
+              {
+                "type": "string",
+                "valueString": "Bundle discount price tag signage",
+                "confidence": 0.89
+              }
+            ],
+            "confidence": 0.89
+          },
+          "CompetitorsMentioned": {
+            "type": "array",
+            "valueArray": [],
+            "confidence": 0.81
+          },
+          "InsuranceProductsMentioned": {
+            "type": "array",
+            "valueArray": [
+              {
+                "type": "string",
+                "valueString": "Bundled home and auto",
+                "confidence": 0.91
+              }
+            ],
+            "confidence": 0.91
+          },
+          "Characters": {
+            "type": "array",
+            "valueArray": [
+              {
+                "type": "string",
+                "valueString": "Flo",
+                "confidence": 0.98
+              }
+            ],
+            "confidence": 0.98
+          },
+          "CharacterRoles": {
+            "type": "string",
+            "valueString": "Flo delivers a brisk, solo reminder about bundling.",
+            "confidence": 0.88
+          },
+          "MusicAndAudio": {
+            "type": "string",
+            "valueString": "Short upbeat jingle sting, no lyrics.",
+            "confidence": 0.84
+          },
+          "Setting": {
+            "type": "string",
+            "valueString": "The Progressive Store checkout counter.",
+            "confidence": 0.9
+          },
+          "KeyActions": {
+            "type": "array",
+            "valueArray": [
+              {
+                "type": "string",
+                "valueString": "Flo holds up a combined policy box",
+                "confidence": 0.93
+              },
+              {
+                "type": "string",
+                "valueString": "Flo points to the discount price tag",
+                "confidence": 0.93
+              }
+            ],
+            "confidence": 0.93
+          },
+          "OnScreenText": {
+            "type": "array",
+            "valueArray": [
+              {
+                "type": "string",
+                "valueString": "Bundle & Save",
+                "confidence": 0.88
+              },
+              {
+                "type": "string",
+                "valueString": "Progressive.com",
+                "confidence": 0.88
+              }
+            ],
+            "confidence": 0.88
+          },
+          "CommercialMessage": {
+            "type": "string",
+            "valueString": "Bundling is still the fastest way to save with Progressive.",
+            "confidence": 0.86
+          },
+          "CallToAction": {
+            "type": "string",
+            "valueString": "Bundle today at Progressive.com.",
+            "confidence": 0.98
+          },
+          "HumorMechanism": {
+            "type": "string",
+            "valueString": "Quick callback to the bundling premise for familiarity.",
+            "confidence": 0.88
+          },
+          "EmotionSentiment": {
+            "type": "string",
+            "valueString": "Brisk and upbeat.",
+            "confidence": 0.88
+          },
+          "SportsOrEntertainmentReferences": {
+            "type": "array",
+            "valueArray": [],
+            "confidence": 0.81
+          },
+          "BrandSafetyNotes": {
+            "type": "string",
+            "valueString": "No obvious brand-safety concerns are visible or spoken.",
+            "confidence": 0.91
+          }
+        }
+      }
+    ]
+  }
+}

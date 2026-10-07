@@ -1,0 +1,154 @@
+{
+  "id": "b4dd3f53-f5c3-5513-8171-0116931585ac",
+  "status": "Succeeded",
+  "result": {
+    "analyzerId": "flvCommercialVideoAnalyzer",
+    "apiVersion": "2025-11-01",
+    "createdAt": "2026-09-01T16:09:34Z",
+    "contents": [
+      {
+        "kind": "audioVisual",
+        "startTimeMs": 0,
+        "endTimeMs": 30000,
+        "markdown": "## Jamie's new name tag mishap\n\nJamie proudly debuts a new name tag that misspells his name, and spends the ad insisting to shoppers that it's intentional, while Flo quietly corrects customers behind his back.",
+        "fields": {
+          "AdvertiserBrand": {
+            "type": "string",
+            "valueString": "Progressive Insurance",
+            "confidence": 0.93
+          },
+          "VisibleProducts": {
+            "type": "array",
+            "valueArray": [
+              {
+                "type": "string",
+                "valueString": "Progressive Store shelf display",
+                "confidence": 0.89
+              },
+              {
+                "type": "string",
+                "valueString": "Misspelled name tag",
+                "confidence": 0.89
+              }
+            ],
+            "confidence": 0.89
+          },
+          "CompetitorsMentioned": {
+            "type": "array",
+            "valueArray": [],
+            "confidence": 0.84
+          },
+          "InsuranceProductsMentioned": {
+            "type": "array",
+            "valueArray": [
+              {
+                "type": "string",
+                "valueString": "Auto insurance",
+                "confidence": 0.97
+              }
+            ],
+            "confidence": 0.97
+          },
+          "Characters": {
+            "type": "array",
+            "valueArray": [
+              {
+                "type": "string",
+                "valueString": "Jamie",
+                "confidence": 0.93
+              },
+              {
+                "type": "string",
+                "valueString": "Flo",
+                "confidence": 0.93
+              }
+            ],
+            "confidence": 0.93
+          },
+          "CharacterRoles": {
+            "type": "string",
+            "valueString": "Jamie insists the misspelled name tag is intentional; Flo quietly corrects shoppers out of his earshot.",
+            "confidence": 0.8
+          },
+          "MusicAndAudio": {
+            "type": "string",
+            "valueString": "Light comedic instrumental with a soft 'record scratch' sting on the reveal.",
+            "confidence": 0.96
+          },
+          "Setting": {
+            "type": "string",
+            "valueString": "The Progressive Store checkout area.",
+            "confidence": 0.85
+          },
+          "KeyActions": {
+            "type": "array",
+            "valueArray": [
+              {
+                "type": "string",
+                "valueString": "Jamie shows off his new name tag",
+                "confidence": 0.9
+              },
+              {
+                "type": "string",
+                "valueString": "A shopper points out the misspelling",
+                "confidence": 0.9
+              },
+              {
+                "type": "string",
+                "valueString": "Jamie insists it's intentional",
+                "confidence": 0.9
+              },
+              {
+                "type": "string",
+                "valueString": "Flo quietly corrects the next shopper behind him",
+                "confidence": 0.9
+              }
+            ],
+            "confidence": 0.9
+          },
+          "OnScreenText": {
+            "type": "array",
+            "valueArray": [
+              {
+                "type": "string",
+                "valueString": "Progressive.com",
+                "confidence": 0.99
+              }
+            ],
+            "confidence": 0.99
+          },
+          "CommercialMessage": {
+            "type": "string",
+            "valueString": "Even on an off day, Progressive's team is there to help you save.",
+            "confidence": 0.81
+          },
+          "CallToAction": {
+            "type": "string",
+            "valueString": "Visit Progressive.com for a quote.",
+            "confidence": 0.93
+          },
+          "HumorMechanism": {
+            "type": "string",
+            "valueString": "Jamie's confident denial of an obvious mistake.",
+            "confidence": 0.82
+          },
+          "EmotionSentiment": {
+            "type": "string",
+            "valueString": "Light, awkward comedy.",
+            "confidence": 0.94
+          },
+          "SportsOrEntertainmentReferences": {
+            "type": "array",
+            "valueArray": [],
+            "confidence": 0.8
+          },
+          "BrandSafetyNotes": {
+            "type": "string",
+            "valueString": "No obvious brand-safety concerns are visible or spoken.",
+            "confidence": 0.99
+          }
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,149 @@
+{
+  "id": "fe7298a5-90b9-53ae-bee1-013b7bc7101e",
+  "status": "Succeeded",
+  "result": {
+    "analyzerId": "flvCommercialVideoAnalyzer",
+    "apiVersion": "2025-11-01",
+    "createdAt": "2025-11-06T04:09:34Z",
+    "contents": [
+      {
+        "kind": "audioVisual",
+        "startTimeMs": 0,
+        "endTimeMs": 30000,
+        "markdown": "## Jamie's employee-of-the-month bit\n\nJamie, Flo's coworker, is thrilled to be named employee of the month and over-explains the honor to uninterested shoppers, while Flo looks on with affectionate exasperation.",
+        "fields": {
+          "AdvertiserBrand": {
+            "type": "string",
+            "valueString": "Progressive Insurance",
+            "confidence": 0.96
+          },
+          "VisibleProducts": {
+            "type": "array",
+            "valueArray": [
+              {
+                "type": "string",
+                "valueString": "Progressive Store shelf display",
+                "confidence": 0.82
+              },
+              {
+                "type": "string",
+                "valueString": "Employee of the Month plaque",
+                "confidence": 0.82
+              }
+            ],
+            "confidence": 0.82
+          },
+          "CompetitorsMentioned": {
+            "type": "array",
+            "valueArray": [],
+            "confidence": 0.82
+          },
+          "InsuranceProductsMentioned": {
+            "type": "array",
+            "valueArray": [
+              {
+                "type": "string",
+                "valueString": "Auto insurance",
+                "confidence": 0.97
+              }
+            ],
+            "confidence": 0.97
+          },
+          "Characters": {
+            "type": "array",
+            "valueArray": [
+              {
+                "type": "string",
+                "valueString": "Jamie",
+                "confidence": 0.98
+              },
+              {
+                "type": "string",
+                "valueString": "Flo",
+                "confidence": 0.98
+              }
+            ],
+            "confidence": 0.98
+          },
+          "CharacterRoles": {
+            "type": "string",
+            "valueString": "Jamie is an eager, slightly overconfident Progressive Store employee; Flo is his more composed coworker.",
+            "confidence": 0.86
+          },
+          "MusicAndAudio": {
+            "type": "string",
+            "valueString": "Light comedic instrumental sting with a small fanfare cue.",
+            "confidence": 0.9
+          },
+          "Setting": {
+            "type": "string",
+            "valueString": "The Progressive Store checkout area.",
+            "confidence": 0.93
+          },
+          "KeyActions": {
+            "type": "array",
+            "valueArray": [
+              {
+                "type": "string",
+                "valueString": "Jamie holds up his employee-of-the-month plaque",
+                "confidence": 0.83
+              },
+              {
+                "type": "string",
+                "valueString": "Jamie over-explains the honor to shoppers",
+                "confidence": 0.83
+              },
+              {
+                "type": "string",
+                "valueString": "Flo redirects the shoppers to checkout",
+                "confidence": 0.83
+              }
+            ],
+            "confidence": 0.83
+          },
+          "OnScreenText": {
+            "type": "array",
+            "valueArray": [
+              {
+                "type": "string",
+                "valueString": "Progressive.com",
+                "confidence": 0.97
+              }
+            ],
+            "confidence": 0.97
+          },
+          "CommercialMessage": {
+            "type": "string",
+            "valueString": "Progressive employees (even Jamie) are there to help you save.",
+            "confidence": 0.94
+          },
+          "CallToAction": {
+            "type": "string",
+            "valueString": "Visit Progressive.com for a quote.",
+            "confidence": 0.86
+          },
+          "HumorMechanism": {
+            "type": "string",
+            "valueString": "Jamie's over-the-top self-congratulation played against Flo's deadpan.",
+            "confidence": 0.87
+          },
+          "EmotionSentiment": {
+            "type": "string",
+            "valueString": "Comedic and lighthearted.",
+            "confidence": 0.87
+          },
+          "SportsOrEntertainmentReferences": {
+            "type": "array",
+            "valueArray": [],
+            "confidence": 0.74
+          },
+          "BrandSafetyNotes": {
+            "type": "string",
+            "valueString": "No obvious brand-safety concerns are visible or spoken.",
+            "confidence": 0.95
+          }
+        }
+      }
+    ]
+  }
+}
