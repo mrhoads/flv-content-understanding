@@ -1,9 +1,9 @@
 param location string
 param storageAccountName string
-param containerName string
+param containerNames array
 param tags object
 
-@description('Enable Hierarchical Namespace (Azure Data Lake Storage Gen2). Required for OneLake/Fabric shortcuts. Set only at account creation time for a new, dedicated account - do not flip this on an existing account with blob index tags (e.g. from Defender for Storage malware scanning), since migration is a separate, one-way operation with its own prerequisites.')
+@description('Enable Hierarchical Namespace (Azure Data Lake Storage Gen2). Required for OneLake/Fabric shortcuts. Set only at account creation time - do not flip this on an existing account with blob index tags (e.g. from Defender for Storage malware scanning), since migration is a separate, one-way operation with its own prerequisites. Note: HNS-enabled accounts do not support blob index tags, so Defender for Storage malware-scan tags will not appear on blobs in this account.')
 param isHnsEnabled bool = false
 
 resource storageAccount 'Microsoft.Storage/storageAccounts@2026-06-01' = {
@@ -59,13 +59,15 @@ resource blobService 'Microsoft.Storage/storageAccounts/blobServices@2026-06-01'
   }
 }
 
-resource blobContainer 'Microsoft.Storage/storageAccounts/blobServices/containers@2026-06-01' = {
-  parent: blobService
-  name: containerName
-  properties: {
-    publicAccess: 'None'
+resource blobContainers 'Microsoft.Storage/storageAccounts/blobServices/containers@2026-06-01' = [
+  for containerName in containerNames: {
+    parent: blobService
+    name: containerName
+    properties: {
+      publicAccess: 'None'
+    }
   }
-}
+]
 
 @description('Storage Account ID')
 output storageAccountId string = storageAccount.id
@@ -76,11 +78,8 @@ output name string = storageAccount.name
 @description('Blob Service ID')
 output blobServiceId string = blobService.id
 
-@description('Blob Container ID')
-output blobContainerId string = blobContainer.id
-
-@description('Blob Container Name')
-output containerName string = blobContainer.name
+@description('Blob Container Names')
+output containerNames array = [for (containerName, i) in containerNames: blobContainers[i].name]
 
 @description('Blob Endpoint')
 output blobEndpoint string = storageAccount.properties.primaryEndpoints.blob

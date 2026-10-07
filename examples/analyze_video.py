@@ -311,12 +311,12 @@ def write_artifacts(
 def upload_fabric_result(
     *,
     json_path: Path,
-    fabric_storage_account_url: str,
+    storage_account_url: str,
     container_name: str,
     campaign_name: str,
     credential: object,
 ) -> str:
-    """Upload CU result JSON to the dedicated, HNS-enabled Fabric storage account.
+    """Upload CU result JSON to the HNS-enabled storage account's cu-results container.
 
     Fabric reads this container read-only through a OneLake ADLS Gen2 shortcut
     (see fabric/README.md). The blob key shape matches that shortcut's expected
@@ -325,9 +325,7 @@ def upload_fabric_result(
     from azure.core.exceptions import ResourceExistsError
     from azure.storage.blob import BlobServiceClient, ContentSettings
 
-    service = BlobServiceClient(
-        account_url=fabric_storage_account_url, credential=credential
-    )
+    service = BlobServiceClient(account_url=storage_account_url, credential=credential)
     container = service.get_container_client(container_name)
     try:
         container.create_container()
@@ -368,8 +366,9 @@ def parse_args() -> argparse.Namespace:
         "--storage-account-url",
         default=os.getenv("AZURE_STORAGE_ACCOUNT_URL"),
         help=(
-            "Blob account URL used to stage local --video input with a temporary "
-            "user-delegation SAS. Defaults to AZURE_STORAGE_ACCOUNT_URL."
+            "Single HNS-enabled Blob/ADLS Gen2 account URL used both to stage local "
+            "--video input and to upload results for Fabric to consume. Defaults to "
+            "AZURE_STORAGE_ACCOUNT_URL."
         ),
     )
     parser.add_argument(
@@ -379,17 +378,12 @@ def parse_args() -> argparse.Namespace:
     )
     parser.add_argument("--output-dir", type=Path, default=DEFAULT_OUTPUT_DIR)
     parser.add_argument(
-        "--fabric-storage-account-url",
-        default=os.getenv("FABRIC_STORAGE_ACCOUNT_URL"),
-        help=(
-            "Dedicated, HNS-enabled Blob account URL whose cu-results container "
-            "Fabric reads via a OneLake shortcut. Defaults to "
-            "FABRIC_STORAGE_ACCOUNT_URL. Omit to skip uploading to Fabric."
-        ),
-    )
-    parser.add_argument(
         "--fabric-container",
         default=os.getenv("FABRIC_RESULTS_CONTAINER") or DEFAULT_FABRIC_CONTAINER,
+        help=(
+            "Container (on --storage-account-url) that Fabric reads via a OneLake "
+            "shortcut. Set to an empty string to skip uploading results for Fabric."
+        ),
     )
     parser.add_argument(
         "--campaign-name",
@@ -446,10 +440,10 @@ def main() -> None:
     print(f"JSON: {json_path}")
     print(f"Markdown: {markdown_path}")
 
-    if args.fabric_storage_account_url:
+    if args.storage_account_url and args.fabric_container:
         fabric_url = upload_fabric_result(
             json_path=json_path,
-            fabric_storage_account_url=args.fabric_storage_account_url,
+            storage_account_url=args.storage_account_url,
             container_name=args.fabric_container,
             campaign_name=args.campaign_name,
             credential=credential,
@@ -457,8 +451,8 @@ def main() -> None:
         print(f"Fabric: {fabric_url}")
     else:
         print(
-            "Fabric: skipped (set --fabric-storage-account-url or "
-            "FABRIC_STORAGE_ACCOUNT_URL to upload results for Fabric to consume)"
+            "Fabric: skipped (set --storage-account-url/AZURE_STORAGE_ACCOUNT_URL "
+            "and keep --fabric-container non-empty to upload results for Fabric)"
         )
 
 

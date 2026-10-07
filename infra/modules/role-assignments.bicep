@@ -1,9 +1,6 @@
 param keyVaultName string
 param containerRegistryId string
 param storageAccountId string
-
-@description('Resource ID of the dedicated, HNS-enabled storage account used for the Fabric OneLake shortcut. Leave empty to skip the grant.')
-param fabricStorageAccountId string = ''
 param foundryAccountName string
 param contentUnderstandingAccountName string
 param documentIntelligenceAccountName string
@@ -64,7 +61,8 @@ resource containerRegistry 'Microsoft.ContainerRegistry/registries@2025-11-01' e
   name: last(split(containerRegistryId, '/'))
 }
 
-// Managed identity gets Storage Blob Data Contributor
+// Managed identity gets Storage Blob Data Contributor (covers both the flv-content
+// app-data container and the cu-results container the Fabric OneLake shortcut reads).
 resource managedIdentityStorageRole 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
   scope: storage
   name: guid(storage.id, managedIdentityPrincipalId, storageBlobDataContributor)
@@ -75,50 +73,33 @@ resource managedIdentityStorageRole 'Microsoft.Authorization/roleAssignments@202
   }
 }
 
+// Deployer can also write CU result JSON when running examples/analyze_video.py
+// locally with DefaultAzureCredential (az login).
+resource deployerStorageRole 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
+  scope: storage
+  name: guid(storage.id, deployerObjectId, storageBlobDataContributor)
+  properties: {
+    roleDefinitionId: subscriptionResourceId('Microsoft.Authorization/roleDefinitions', storageBlobDataContributor)
+    principalId: deployerObjectId
+    principalType: 'User'
+  }
+}
+
 // Get reference to storage account
 resource storage 'Microsoft.Storage/storageAccounts@2026-06-01' existing = {
   name: last(split(storageAccountId, '/'))
 }
 
-// Fabric workspace identity gets read-only access to the cu-results container (on the
-// dedicated, HNS-enabled Fabric storage account) via a OneLake shortcut. No SAS/keys
-// are used because the storage account disables shared key access. Only created when
-// both the identity principal ID and the Fabric storage account ID are supplied.
-resource fabricStorage 'Microsoft.Storage/storageAccounts@2026-06-01' existing = if (!empty(fabricStorageAccountId)) {
-  name: !empty(fabricStorageAccountId) ? last(split(fabricStorageAccountId, '/')) : 'placeholder'
-}
-
-resource fabricWorkspaceStorageReaderRole 'Microsoft.Authorization/roleAssignments@2022-04-01' = if (!empty(fabricWorkspaceIdentityPrincipalId) && !empty(fabricStorageAccountId)) {
-  scope: fabricStorage
-  name: guid(fabricStorageAccountId, fabricWorkspaceIdentityPrincipalId, storageBlobDataReader)
+// Fabric workspace identity gets read-only access to the cu-results container via a
+// OneLake shortcut. No SAS/keys are used because the storage account disables shared
+// key access. Only created when the identity principal ID is supplied.
+resource fabricWorkspaceStorageReaderRole 'Microsoft.Authorization/roleAssignments@2022-04-01' = if (!empty(fabricWorkspaceIdentityPrincipalId)) {
+  scope: storage
+  name: guid(storage.id, fabricWorkspaceIdentityPrincipalId, storageBlobDataReader)
   properties: {
     roleDefinitionId: subscriptionResourceId('Microsoft.Authorization/roleDefinitions', storageBlobDataReader)
     principalId: fabricWorkspaceIdentityPrincipalId
     principalType: 'ServicePrincipal'
-  }
-}
-
-// The app's managed identity writes CU result JSON into the cu-results container
-// (consumed read-only by the Fabric OneLake shortcut above).
-resource managedIdentityFabricStorageRole 'Microsoft.Authorization/roleAssignments@2022-04-01' = if (!empty(fabricStorageAccountId)) {
-  scope: fabricStorage
-  name: guid(fabricStorageAccountId, managedIdentityPrincipalId, storageBlobDataContributor)
-  properties: {
-    roleDefinitionId: subscriptionResourceId('Microsoft.Authorization/roleDefinitions', storageBlobDataContributor)
-    principalId: managedIdentityPrincipalId
-    principalType: 'ServicePrincipal'
-  }
-}
-
-// The deployer can also write CU result JSON when running examples/analyze_video.py
-// locally with DefaultAzureCredential (az login).
-resource deployerFabricStorageRole 'Microsoft.Authorization/roleAssignments@2022-04-01' = if (!empty(fabricStorageAccountId)) {
-  scope: fabricStorage
-  name: guid(fabricStorageAccountId, deployerObjectId, storageBlobDataContributor)
-  properties: {
-    roleDefinitionId: subscriptionResourceId('Microsoft.Authorization/roleDefinitions', storageBlobDataContributor)
-    principalId: deployerObjectId
-    principalType: 'User'
   }
 }
 
@@ -209,6 +190,9 @@ output appIdentityAcrPullRoleId string = managedIdentityAcrPullRole.id
 @description('App Identity Storage Role Assignment ID')
 output appIdentityStorageRoleId string = managedIdentityStorageRole.id
 
+@description('Deployer Storage Role Assignment ID')
+output deployerStorageRoleId string = deployerStorageRole.id
+
 @description('App Identity Foundry Role Assignment ID')
 output appIdentityFoundryRoleId string = managedIdentityFoundryRole.id
 
@@ -228,10 +212,4 @@ output appIdentityDocumentIntelligenceRoleId string = managedIdentityDocumentInt
 output appIdentityAgentConsumerRoleId string = managedIdentityAgentConsumerRole.id
 
 @description('Fabric Workspace Identity Storage Reader Role Assignment ID (empty when not granted yet)')
-output fabricWorkspaceStorageReaderRoleId string = (!empty(fabricWorkspaceIdentityPrincipalId) && !empty(fabricStorageAccountId)) ? fabricWorkspaceStorageReaderRole.id : ''
-
-@description('App Identity Fabric Storage Contributor Role Assignment ID (empty when fabricStorageAccountId not supplied)')
-output appIdentityFabricStorageRoleId string = !empty(fabricStorageAccountId) ? managedIdentityFabricStorageRole.id : ''
-
-@description('Deployer Fabric Storage Contributor Role Assignment ID (empty when fabricStorageAccountId not supplied)')
-output deployerFabricStorageRoleId string = !empty(fabricStorageAccountId) ? deployerFabricStorageRole.id : ''
+output fabricWorkspaceStorageReaderRoleId string = !empty(fabricWorkspaceIdentityPrincipalId) ? fabricWorkspaceStorageReaderRole.id : ''

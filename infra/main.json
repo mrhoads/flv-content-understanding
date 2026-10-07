@@ -6,7 +6,7 @@
     "_generator": {
       "name": "bicep",
       "version": "0.40.2.10011",
-      "templateHash": "17887835043880707532"
+      "templateHash": "2818094851284785741"
     }
   },
   "parameters": {
@@ -60,6 +60,13 @@
       "metadata": {
         "description": "Set false after the application image is built and Key Vault secrets are populated."
       }
+    },
+    "fabricWorkspaceIdentityPrincipalId": {
+      "type": "string",
+      "defaultValue": "",
+      "metadata": {
+        "description": "Principal ID of the Microsoft Fabric workspace identity, granted read-only access to the cu-results container for OneLake shortcut ingestion. Leave empty until the Fabric workspace identity is enabled."
+      }
     }
   },
   "variables": {
@@ -76,7 +83,7 @@
     "containerAppEnvName": "cae-flv-demo-dev-e9fd",
     "containerRegistryName": "crflvdemodeve9fd",
     "managedIdentityName": "id-flv-demo-dev-e9fd",
-    "storageAccountName": "stflvdemodeve9fd",
+    "storageAccountName": "stflvfabricdeve9fd",
     "keyVaultName": "kv-flv-demo-dev-e9fd",
     "logAnalyticsName": "log-flv-demo-dev-e9fd",
     "appInsightsName": "appi-flv-demo-dev-e9fd",
@@ -480,8 +487,14 @@
           "storageAccountName": {
             "value": "[variables('storageAccountName')]"
           },
-          "containerName": {
-            "value": "flv-content"
+          "containerNames": {
+            "value": [
+              "flv-content",
+              "cu-results"
+            ]
+          },
+          "isHnsEnabled": {
+            "value": true
           },
           "tags": {
             "value": "[variables('commonTags')]"
@@ -494,7 +507,7 @@
             "_generator": {
               "name": "bicep",
               "version": "0.40.2.10011",
-              "templateHash": "6017892361674155195"
+              "templateHash": "15988350438171823664"
             }
           },
           "parameters": {
@@ -504,11 +517,18 @@
             "storageAccountName": {
               "type": "string"
             },
-            "containerName": {
-              "type": "string"
+            "containerNames": {
+              "type": "array"
             },
             "tags": {
               "type": "object"
+            },
+            "isHnsEnabled": {
+              "type": "bool",
+              "defaultValue": false,
+              "metadata": {
+                "description": "Enable Hierarchical Namespace (Azure Data Lake Storage Gen2). Required for OneLake/Fabric shortcuts. Set only at account creation time - do not flip this on an existing account with blob index tags (e.g. from Defender for Storage malware scanning), since migration is a separate, one-way operation with its own prerequisites. Note: HNS-enabled accounts do not support blob index tags, so Defender for Storage malware-scan tags will not appear on blobs in this account."
+              }
             }
           },
           "resources": [
@@ -529,6 +549,7 @@
                 "allowSharedKeyAccess": false,
                 "defaultToOAuthAuthentication": true,
                 "dnsEndpointType": "Standard",
+                "isHnsEnabled": "[parameters('isHnsEnabled')]",
                 "encryption": {
                   "keySource": "Microsoft.Storage",
                   "services": {
@@ -569,9 +590,13 @@
               ]
             },
             {
+              "copy": {
+                "name": "blobContainers",
+                "count": "[length(parameters('containerNames'))]"
+              },
               "type": "Microsoft.Storage/storageAccounts/blobServices/containers",
               "apiVersion": "2026-06-01",
-              "name": "[format('{0}/{1}/{2}', parameters('storageAccountName'), 'default', parameters('containerName'))]",
+              "name": "[format('{0}/{1}/{2}', parameters('storageAccountName'), 'default', parameters('containerNames')[copyIndex()])]",
               "properties": {
                 "publicAccess": "None"
               },
@@ -602,12 +627,15 @@
               },
               "value": "[resourceId('Microsoft.Storage/storageAccounts/blobServices', parameters('storageAccountName'), 'default')]"
             },
-            "blobContainerId": {
-              "type": "string",
+            "containerNames": {
+              "type": "array",
               "metadata": {
-                "description": "Blob Container ID"
+                "description": "Blob Container Names"
               },
-              "value": "[resourceId('Microsoft.Storage/storageAccounts/blobServices/containers', parameters('storageAccountName'), 'default', parameters('containerName'))]"
+              "copy": {
+                "count": "[length(parameters('containerNames'))]",
+                "input": "[parameters('containerNames')[copyIndex()]]"
+              }
             },
             "blobEndpoint": {
               "type": "string",
@@ -615,6 +643,13 @@
                 "description": "Blob Endpoint"
               },
               "value": "[reference(resourceId('Microsoft.Storage/storageAccounts', parameters('storageAccountName')), '2026-06-01').primaryEndpoints.blob]"
+            },
+            "dfsEndpoint": {
+              "type": "string",
+              "metadata": {
+                "description": "DFS (ADLS Gen2) Endpoint - used for OneLake shortcuts when isHnsEnabled is true"
+              },
+              "value": "[reference(resourceId('Microsoft.Storage/storageAccounts', parameters('storageAccountName')), '2026-06-01').primaryEndpoints.dfs]"
             }
           }
         }
@@ -1052,7 +1087,7 @@
             "_generator": {
               "name": "bicep",
               "version": "0.40.2.10011",
-              "templateHash": "9048670235923045948"
+              "templateHash": "6061955855768501792"
             }
           },
           "parameters": {
@@ -1114,7 +1149,7 @@
               "name": "[format('{0}/{1}', parameters('accountName'), parameters('modelDeploymentName'))]",
               "sku": {
                 "name": "Standard",
-                "capacity": 10
+                "capacity": 1000
               },
               "properties": {
                 "model": {
@@ -1294,6 +1329,9 @@
           },
           "deployerObjectId": {
             "value": "[parameters('deployerObjectId')]"
+          },
+          "fabricWorkspaceIdentityPrincipalId": {
+            "value": "[parameters('fabricWorkspaceIdentityPrincipalId')]"
           }
         },
         "template": {
@@ -1303,7 +1341,7 @@
             "_generator": {
               "name": "bicep",
               "version": "0.40.2.10011",
-              "templateHash": "1360317093042732591"
+              "templateHash": "17026297845012006007"
             }
           },
           "parameters": {
@@ -1330,6 +1368,13 @@
             },
             "deployerObjectId": {
               "type": "string"
+            },
+            "fabricWorkspaceIdentityPrincipalId": {
+              "type": "string",
+              "defaultValue": "",
+              "metadata": {
+                "description": "Principal ID of the Microsoft Fabric workspace identity. Leave empty to skip; grant later with infra/grant-fabric-workspace-access.sh once the Fabric workspace identity exists."
+              }
             }
           },
           "variables": {
@@ -1338,7 +1383,8 @@
             "storageBlobDataContributor": "ba92f5b4-2d11-453d-a403-e96b0029c9fe",
             "acrPull": "7f951dda-4ed3-4680-a7ca-43fe172d538d",
             "cognitiveServicesUser": "a97b65f3-24c7-4388-baec-2e87135dc908",
-            "foundryAgentConsumer": "eed3b665-ab3a-47b6-8f48-c9382fb1dad6"
+            "foundryAgentConsumer": "eed3b665-ab3a-47b6-8f48-c9382fb1dad6",
+            "storageBlobDataReader": "2a2b9908-6ea1-4ae2-8e65-a410df84e7d1"
           },
           "resources": [
             {
@@ -1382,6 +1428,29 @@
               "properties": {
                 "roleDefinitionId": "[subscriptionResourceId('Microsoft.Authorization/roleDefinitions', variables('storageBlobDataContributor'))]",
                 "principalId": "[parameters('managedIdentityPrincipalId')]",
+                "principalType": "ServicePrincipal"
+              }
+            },
+            {
+              "type": "Microsoft.Authorization/roleAssignments",
+              "apiVersion": "2022-04-01",
+              "scope": "[resourceId('Microsoft.Storage/storageAccounts', last(split(parameters('storageAccountId'), '/')))]",
+              "name": "[guid(resourceId('Microsoft.Storage/storageAccounts', last(split(parameters('storageAccountId'), '/'))), parameters('deployerObjectId'), variables('storageBlobDataContributor'))]",
+              "properties": {
+                "roleDefinitionId": "[subscriptionResourceId('Microsoft.Authorization/roleDefinitions', variables('storageBlobDataContributor'))]",
+                "principalId": "[parameters('deployerObjectId')]",
+                "principalType": "User"
+              }
+            },
+            {
+              "condition": "[not(empty(parameters('fabricWorkspaceIdentityPrincipalId')))]",
+              "type": "Microsoft.Authorization/roleAssignments",
+              "apiVersion": "2022-04-01",
+              "scope": "[resourceId('Microsoft.Storage/storageAccounts', last(split(parameters('storageAccountId'), '/')))]",
+              "name": "[guid(resourceId('Microsoft.Storage/storageAccounts', last(split(parameters('storageAccountId'), '/'))), parameters('fabricWorkspaceIdentityPrincipalId'), variables('storageBlobDataReader'))]",
+              "properties": {
+                "roleDefinitionId": "[subscriptionResourceId('Microsoft.Authorization/roleDefinitions', variables('storageBlobDataReader'))]",
+                "principalId": "[parameters('fabricWorkspaceIdentityPrincipalId')]",
                 "principalType": "ServicePrincipal"
               }
             },
@@ -1481,6 +1550,13 @@
               },
               "value": "[extensionResourceId(resourceId('Microsoft.Storage/storageAccounts', last(split(parameters('storageAccountId'), '/'))), 'Microsoft.Authorization/roleAssignments', guid(resourceId('Microsoft.Storage/storageAccounts', last(split(parameters('storageAccountId'), '/'))), parameters('managedIdentityPrincipalId'), variables('storageBlobDataContributor')))]"
             },
+            "deployerStorageRoleId": {
+              "type": "string",
+              "metadata": {
+                "description": "Deployer Storage Role Assignment ID"
+              },
+              "value": "[extensionResourceId(resourceId('Microsoft.Storage/storageAccounts', last(split(parameters('storageAccountId'), '/'))), 'Microsoft.Authorization/roleAssignments', guid(resourceId('Microsoft.Storage/storageAccounts', last(split(parameters('storageAccountId'), '/'))), parameters('deployerObjectId'), variables('storageBlobDataContributor')))]"
+            },
             "appIdentityFoundryRoleId": {
               "type": "string",
               "metadata": {
@@ -1522,6 +1598,13 @@
                 "description": "App Identity Foundry Agent Consumer Role Assignment ID"
               },
               "value": "[extensionResourceId(resourceId('Microsoft.CognitiveServices/accounts', parameters('foundryAccountName')), 'Microsoft.Authorization/roleAssignments', guid(resourceId('Microsoft.CognitiveServices/accounts', parameters('foundryAccountName')), parameters('managedIdentityPrincipalId'), variables('foundryAgentConsumer')))]"
+            },
+            "fabricWorkspaceStorageReaderRoleId": {
+              "type": "string",
+              "metadata": {
+                "description": "Fabric Workspace Identity Storage Reader Role Assignment ID (empty when not granted yet)"
+              },
+              "value": "[if(not(empty(parameters('fabricWorkspaceIdentityPrincipalId'))), extensionResourceId(resourceId('Microsoft.Storage/storageAccounts', last(split(parameters('storageAccountId'), '/'))), 'Microsoft.Authorization/roleAssignments', guid(resourceId('Microsoft.Storage/storageAccounts', last(split(parameters('storageAccountId'), '/'))), parameters('fabricWorkspaceIdentityPrincipalId'), variables('storageBlobDataReader'))), '')]"
             }
           }
         }
@@ -1841,6 +1924,27 @@
         "description": "Document Intelligence Endpoint"
       },
       "value": "[reference('documentIntelligence').outputs.accountEndpoint.value]"
+    },
+    "cuResultsContainerName": {
+      "type": "string",
+      "metadata": {
+        "description": "Content Understanding results container name used by the Fabric OneLake shortcut"
+      },
+      "value": "cu-results"
+    },
+    "storageAccountName": {
+      "type": "string",
+      "metadata": {
+        "description": "Storage account name (single HNS-enabled account for both app data and Fabric OneLake shortcut)"
+      },
+      "value": "[reference('storage').outputs.name.value]"
+    },
+    "storageDfsEndpoint": {
+      "type": "string",
+      "metadata": {
+        "description": "Storage account DFS (ADLS Gen2) endpoint - use this URL when creating the OneLake shortcut"
+      },
+      "value": "[reference('storage').outputs.dfsEndpoint.value]"
     }
   }
 }
