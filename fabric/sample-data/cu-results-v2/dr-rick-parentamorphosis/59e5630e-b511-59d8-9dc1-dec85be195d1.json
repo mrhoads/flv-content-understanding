@@ -4,7 +4,7 @@
   "result": {
     "analyzerId": "cuCommercialVideoAnalyzerV2",
     "apiVersion": "2025-11-01",
-    "createdAt": "2026-05-25T03:40:29Z",
+    "createdAt": "2026-01-10T17:20:32Z",
     "contents": [
       {
         "kind": "audioVisual",
@@ -15,7 +15,7 @@
           "AdvertiserBrand": {
             "type": "string",
             "valueString": "Progressive Insurance",
-            "confidence": 0.91
+            "confidence": 0.96
           },
           "VisibleProducts": {
             "type": "array",
@@ -23,20 +23,20 @@
               {
                 "type": "string",
                 "valueString": "Price-tag gun",
-                "confidence": 0.92
+                "confidence": 0.9
               },
               {
                 "type": "string",
                 "valueString": "Dr. Rick's clipboard",
-                "confidence": 0.92
+                "confidence": 0.9
               }
             ],
-            "confidence": 0.92
+            "confidence": 0.9
           },
           "CompetitorsMentioned": {
             "type": "array",
             "valueArray": [],
-            "confidence": 0.79
+            "confidence": 0.89
           },
           "InsuranceProductsMentioned": {
             "type": "array",
@@ -44,10 +44,10 @@
               {
                 "type": "string",
                 "valueString": "Home insurance",
-                "confidence": 0.98
+                "confidence": 0.89
               }
             ],
-            "confidence": 0.98
+            "confidence": 0.89
           },
           "Characters": {
             "type": "array",
@@ -71,25 +71,25 @@
               {
                 "type": "string",
                 "valueString": "DrRick",
-                "confidence": 0.85
+                "confidence": 0.88
               }
             ],
-            "confidence": 0.85
+            "confidence": 0.88
           },
           "CharacterRoles": {
             "type": "string",
             "valueString": "Dr. Rick counsels the homeowner through a classic 'parent habit' relapse during a driveway garage sale.",
-            "confidence": 0.91
+            "confidence": 0.96
           },
           "MusicAndAudio": {
             "type": "string",
             "valueString": "Light acoustic guitar underscore; a kazoo-like sound effect plays each time the price-tag gun clicks.",
-            "confidence": 0.9
+            "confidence": 0.93
           },
           "Setting": {
             "type": "string",
             "valueString": "A suburban driveway during a weekend garage sale.",
-            "confidence": 0.82
+            "confidence": 0.83
           },
           "KeyActions": {
             "type": "array",
@@ -97,25 +97,25 @@
               {
                 "type": "string",
                 "valueString": "Homeowner price-tags items down to the penny",
-                "confidence": 0.9
+                "confidence": 0.85
               },
               {
                 "type": "string",
                 "valueString": "Neighbors look on, mildly concerned",
-                "confidence": 0.9
+                "confidence": 0.85
               },
               {
                 "type": "string",
                 "valueString": "Dr. Rick steps in with a clipboard and a gentle lesson",
-                "confidence": 0.9
+                "confidence": 0.85
               },
               {
                 "type": "string",
                 "valueString": "Homeowner loosens up and rounds a price to a whole dollar",
-                "confidence": 0.9
+                "confidence": 0.85
               }
             ],
-            "confidence": 0.9
+            "confidence": 0.85
           },
           "OnScreenText": {
             "type": "array",
@@ -123,65 +123,75 @@
               {
                 "type": "string",
                 "valueString": "Parentamorphosis",
-                "confidence": 0.92
+                "confidence": 0.88
               },
               {
                 "type": "string",
                 "valueString": "Progressive.com/home",
-                "confidence": 0.92
+                "confidence": 0.88
               }
             ],
-            "confidence": 0.92
+            "confidence": 0.88
           },
           "CommercialMessage": {
             "type": "string",
             "valueString": "Progressive helps new homeowners recognize parent habits before they take hold.",
-            "confidence": 0.82
+            "confidence": 0.86
           },
           "HasCallToAction": {
             "type": "string",
             "valueString": "Yes",
-            "confidence": 0.93
+            "confidence": 0.96
           },
           "CallToActionType": {
             "type": "string",
             "valueString": "GetAQuote",
-            "confidence": 0.86
+            "confidence": 0.96
           },
           "HumorMechanism": {
             "type": "string",
             "valueString": "Treating obsessive garage-sale pricing as a clinical symptom.",
-            "confidence": 0.8
+            "confidence": 0.85
           },
           "SentimentCategory": {
             "type": "string",
             "valueString": "Mixed",
-            "confidence": 0.89
+            "confidence": 0.88
           },
           "SentimentNarrative": {
             "type": "string",
             "valueString": "Comedic discomfort resolving into relief.",
-            "confidence": 0.88
+            "confidence": 0.96
           },
-          "SportsOrEntertainmentReferences": {
+          "HasSportsReference": {
+            "type": "string",
+            "valueString": "No",
+            "confidence": 0.86
+          },
+          "SportsTypes": {
             "type": "array",
             "valueArray": [],
-            "confidence": 0.82
+            "confidence": 0.9
+          },
+          "EntertainmentReferences": {
+            "type": "array",
+            "valueArray": [],
+            "confidence": 0.88
           },
           "BrandSafetyFlag": {
             "type": "string",
             "valueString": "Clear",
-            "confidence": 0.93
+            "confidence": 0.9
           },
           "BrandSafetyNotes": {
             "type": "string",
             "valueString": "No obvious brand-safety concerns are visible or spoken.",
-            "confidence": 0.99
+            "confidence": 0.93
           },
           "BrandMentionCount": {
             "type": "integer",
             "valueInteger": 1,
-            "confidence": 0.95
+            "confidence": 0.87
           }
         }
       }

@@ -4,7 +4,7 @@
   "result": {
     "analyzerId": "cuCommercialVideoAnalyzerV2",
     "apiVersion": "2025-11-01",
-    "createdAt": "2025-11-14T12:40:29Z",
+    "createdAt": "2025-11-14T14:20:32Z",
     "contents": [
       {
         "kind": "audioVisual",
@@ -168,7 +168,17 @@
             "valueString": "Upbeat and reassuring throughout, with a confident close.",
             "confidence": 0.91
           },
-          "SportsOrEntertainmentReferences": {
+          "HasSportsReference": {
+            "type": "string",
+            "valueString": "No",
+            "confidence": 0.96
+          },
+          "SportsTypes": {
+            "type": "array",
+            "valueArray": [],
+            "confidence": 0.8
+          },
+          "EntertainmentReferences": {
             "type": "array",
             "valueArray": [],
             "confidence": 0.88
@@ -176,17 +186,17 @@
           "BrandSafetyFlag": {
             "type": "string",
             "valueString": "Clear",
-            "confidence": 0.9
+            "confidence": 0.96
           },
           "BrandSafetyNotes": {
             "type": "string",
             "valueString": "No obvious brand-safety concerns are visible or spoken.",
-            "confidence": 0.97
+            "confidence": 0.93
           },
           "BrandMentionCount": {
             "type": "integer",
             "valueInteger": 1,
-            "confidence": 0.94
+            "confidence": 0.87
           }
         }
       }

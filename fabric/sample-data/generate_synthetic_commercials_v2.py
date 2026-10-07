@@ -22,6 +22,12 @@ different structured output when the analyzer's field schema changes:
   roster (Flo, Jamie, Mara, Alan, Dr. Rick) appear, while `Characters` keeps
   capturing the full cast as free text, including any character outside that
   roster.
+- `SportsOrEntertainmentReferences` (a single free-text array mixing sports and
+  general entertainment mentions) splits into `HasSportsReference` (Yes/No,
+  `classify`) + `SportsTypes` (multi-label `classify` enum of common sports)
+  for reliable sports-specific filtering, plus a narrower free-text
+  `EntertainmentReferences` for non-sports mentions (celebrities, TV,
+  streaming).
 
 See `docs/content-understanding-architecture.md` and `fabric/README.md` for
 the narrative explanation of this schema comparison.
@@ -72,6 +78,25 @@ _MIXED_SENTIMENT_KEYWORDS = ("awkward", "embarrassment", "discomfort", "cringe")
 
 _KNOWN_CHARACTER_ROSTER = ("Flo", "Jamie", "Mara", "Alan", "Dr. Rick")
 
+_SPORT_KEYWORDS = (
+    ("football", "Football"),
+    ("nfl", "Football"),
+    ("basketball", "Basketball"),
+    ("nba", "Basketball"),
+    ("baseball", "Baseball"),
+    ("mlb", "Baseball"),
+    ("hockey", "Hockey"),
+    ("nhl", "Hockey"),
+    ("soccer", "Soccer"),
+    ("golf", "Golf"),
+    ("tennis", "Tennis"),
+    ("racing", "MotorsportsRacing"),
+    ("nascar", "MotorsportsRacing"),
+    ("boxing", "Boxing"),
+    ("mma", "Boxing"),
+    ("olympics", "Olympics"),
+)
+
 
 def _field_bool_enum(value: str, confidence: float) -> dict:
     """A `classify`-style field value: still a string type, but drawn from an enum."""
@@ -106,6 +131,24 @@ def _classify_known_characters(characters: list[str]) -> list[str]:
     return matched
 
 
+def _classify_sports_and_entertainment(refs: list[str]) -> tuple[list[str], list[str]]:
+    """Split the v1 free-text sports/entertainment references into a `SportsTypes`
+    enum list and a remaining free-text `EntertainmentReferences` list, mirroring
+    the classification the v2 analyzer schema performs."""
+    sport_types: list[str] = []
+    entertainment: list[str] = []
+    for ref in refs:
+        lowered = ref.lower()
+        matched_sports = [sport for keyword, sport in _SPORT_KEYWORDS if keyword in lowered]
+        if matched_sports:
+            for sport in matched_sports:
+                if sport not in sport_types:
+                    sport_types.append(sport)
+        else:
+            entertainment.append(ref)
+    return sport_types, entertainment
+
+
 def _count_brand_mentions(variant: dict) -> int:
     # Advertiser brand (always Progressive) plus each distinct competitor mentioned.
     return 1 + len(variant.get("competitors", []))
@@ -114,6 +157,10 @@ def _count_brand_mentions(variant: dict) -> int:
 def _build_fields_v2(rng: random.Random, variant: dict) -> dict:
     call_to_action_type = _classify_call_to_action_type(variant["call_to_action"])
     sentiment_category = _classify_sentiment_category(variant["emotion_sentiment"])
+    sport_types, entertainment_refs = _classify_sports_and_entertainment(
+        variant.get("sports_or_entertainment_references", [])
+    )
+    has_sports_reference = "Yes" if sport_types else "No"
     return {
         "AdvertiserBrand": _field_string("Progressive Insurance", _confidence(rng, 0.9, 0.99)),
         "VisibleProducts": _field_array(variant["visible_products"], _confidence(rng)),
@@ -136,9 +183,9 @@ def _build_fields_v2(rng: random.Random, variant: dict) -> dict:
         "HumorMechanism": _field_string(variant["humor_mechanism"], _confidence(rng, 0.75, 0.95)),
         "SentimentCategory": _field_bool_enum(sentiment_category, _confidence(rng, 0.85, 0.98)),
         "SentimentNarrative": _field_string(variant["emotion_sentiment"], _confidence(rng)),
-        "SportsOrEntertainmentReferences": _field_array(
-            variant.get("sports_or_entertainment_references", []), _confidence(rng, 0.7, 0.92)
-        ),
+        "HasSportsReference": _field_bool_enum(has_sports_reference, _confidence(rng, 0.85, 0.98)),
+        "SportsTypes": _field_array(sport_types, _confidence(rng, 0.8, 0.95)),
+        "EntertainmentReferences": _field_array(entertainment_refs, _confidence(rng, 0.7, 0.92)),
         "BrandSafetyFlag": _field_bool_enum("Clear", _confidence(rng, 0.9, 0.99)),
         "BrandSafetyNotes": _field_string(
             variant.get(

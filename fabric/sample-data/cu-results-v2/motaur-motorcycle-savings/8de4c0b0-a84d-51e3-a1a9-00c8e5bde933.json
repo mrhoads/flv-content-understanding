@@ -4,7 +4,7 @@
   "result": {
     "analyzerId": "cuCommercialVideoAnalyzerV2",
     "apiVersion": "2025-11-01",
-    "createdAt": "2026-08-16T04:40:29Z",
+    "createdAt": "2026-06-13T10:20:32Z",
     "contents": [
       {
         "kind": "audioVisual",
@@ -15,7 +15,7 @@
           "AdvertiserBrand": {
             "type": "string",
             "valueString": "Progressive Insurance",
-            "confidence": 0.97
+            "confidence": 0.9
           },
           "VisibleProducts": {
             "type": "array",
@@ -23,20 +23,20 @@
               {
                 "type": "string",
                 "valueString": "Motorcycle in garage",
-                "confidence": 0.96
+                "confidence": 0.83
               },
               {
                 "type": "string",
                 "valueString": "Progressive motorcycle policy flyer",
-                "confidence": 0.96
+                "confidence": 0.83
               }
             ],
-            "confidence": 0.96
+            "confidence": 0.83
           },
           "CompetitorsMentioned": {
             "type": "array",
             "valueArray": [],
-            "confidence": 0.78
+            "confidence": 0.77
           },
           "InsuranceProductsMentioned": {
             "type": "array",
@@ -44,10 +44,10 @@
               {
                 "type": "string",
                 "valueString": "Motorcycle insurance",
-                "confidence": 0.95
+                "confidence": 0.98
               }
             ],
-            "confidence": 0.95
+            "confidence": 0.98
           },
           "Characters": {
             "type": "array",
@@ -55,35 +55,35 @@
               {
                 "type": "string",
                 "valueString": "The Motaur",
-                "confidence": 0.91
+                "confidence": 0.99
               },
               {
                 "type": "string",
                 "valueString": "motorcycle rider",
-                "confidence": 0.91
+                "confidence": 0.99
               }
             ],
-            "confidence": 0.91
+            "confidence": 0.99
           },
           "KnownCharacters": {
             "type": "array",
             "valueArray": [],
-            "confidence": 0.97
+            "confidence": 0.89
           },
           "CharacterRoles": {
             "type": "string",
             "valueString": "The Motaur is an exuberant half-man, half-motorcycle mascot; the rider is a skeptical-then-convinced customer.",
-            "confidence": 0.96
+            "confidence": 0.92
           },
           "MusicAndAudio": {
             "type": "string",
             "valueString": "Driving rock guitar riff under the Motaur's booming voiceover; engine-rev sound effect for emphasis.",
-            "confidence": 0.98
+            "confidence": 0.87
           },
           "Setting": {
             "type": "string",
             "valueString": "A home garage with a parked motorcycle.",
-            "confidence": 0.95
+            "confidence": 0.98
           },
           "KeyActions": {
             "type": "array",
@@ -91,20 +91,20 @@
               {
                 "type": "string",
                 "valueString": "The Motaur gallops in to greet the rider",
-                "confidence": 0.96
+                "confidence": 0.9
               },
               {
                 "type": "string",
                 "valueString": "The Motaur gestures at the motorcycle while explaining discounts",
-                "confidence": 0.96
+                "confidence": 0.9
               },
               {
                 "type": "string",
                 "valueString": "Rider looks surprised, then convinced",
-                "confidence": 0.96
+                "confidence": 0.9
               }
             ],
-            "confidence": 0.96
+            "confidence": 0.9
           },
           "OnScreenText": {
             "type": "array",
@@ -112,65 +112,75 @@
               {
                 "type": "string",
                 "valueString": "Motorcycle insurance starting at $75/year*",
-                "confidence": 0.85
+                "confidence": 0.98
               },
               {
                 "type": "string",
                 "valueString": "Progressive.com",
-                "confidence": 0.85
+                "confidence": 0.98
               }
             ],
-            "confidence": 0.85
+            "confidence": 0.98
           },
           "CommercialMessage": {
             "type": "string",
             "valueString": "Motorcycle riders can save with usage-based Progressive discounts.",
-            "confidence": 0.93
+            "confidence": 0.82
           },
           "HasCallToAction": {
             "type": "string",
             "valueString": "Yes",
-            "confidence": 0.93
+            "confidence": 0.99
           },
           "CallToActionType": {
             "type": "string",
             "valueString": "GetAQuote",
-            "confidence": 0.97
+            "confidence": 0.87
           },
           "HumorMechanism": {
             "type": "string",
             "valueString": "Absurd half-man-half-motorcycle mascot delivering sincere insurance advice.",
-            "confidence": 0.91
+            "confidence": 0.94
           },
           "SentimentCategory": {
             "type": "string",
             "valueString": "Positive",
-            "confidence": 0.96
+            "confidence": 0.88
           },
           "SentimentNarrative": {
             "type": "string",
             "valueString": "High-energy and enthusiastic throughout.",
-            "confidence": 0.95
+            "confidence": 0.82
           },
-          "SportsOrEntertainmentReferences": {
+          "HasSportsReference": {
+            "type": "string",
+            "valueString": "No",
+            "confidence": 0.91
+          },
+          "SportsTypes": {
             "type": "array",
             "valueArray": [],
-            "confidence": 0.76
+            "confidence": 0.91
+          },
+          "EntertainmentReferences": {
+            "type": "array",
+            "valueArray": [],
+            "confidence": 0.77
           },
           "BrandSafetyFlag": {
             "type": "string",
             "valueString": "Clear",
-            "confidence": 0.97
+            "confidence": 0.95
           },
           "BrandSafetyNotes": {
             "type": "string",
             "valueString": "Motorcycle riding is shown only in a stationary garage setting; no on-road riding or stunts depicted.",
-            "confidence": 0.91
+            "confidence": 0.95
           },
           "BrandMentionCount": {
             "type": "integer",
             "valueInteger": 1,
-            "confidence": 0.96
+            "confidence": 0.9
           }
         }
       }

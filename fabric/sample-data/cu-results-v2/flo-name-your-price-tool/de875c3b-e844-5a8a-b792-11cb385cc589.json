@@ -4,7 +4,7 @@
   "result": {
     "analyzerId": "cuCommercialVideoAnalyzerV2",
     "apiVersion": "2025-11-01",
-    "createdAt": "2026-09-21T05:40:29Z",
+    "createdAt": "2026-04-29T11:20:32Z",
     "contents": [
       {
         "kind": "audioVisual",
@@ -15,7 +15,7 @@
           "AdvertiserBrand": {
             "type": "string",
             "valueString": "Progressive Insurance",
-            "confidence": 0.94
+            "confidence": 0.96
           },
           "VisibleProducts": {
             "type": "array",
@@ -23,15 +23,15 @@
               {
                 "type": "string",
                 "valueString": "Name Your Price Tool kiosk",
-                "confidence": 0.81
+                "confidence": 0.87
               },
               {
                 "type": "string",
                 "valueString": "Employee training badge",
-                "confidence": 0.81
+                "confidence": 0.87
               }
             ],
-            "confidence": 0.81
+            "confidence": 0.87
           },
           "CompetitorsMentioned": {
             "type": "array",
@@ -44,10 +44,10 @@
               {
                 "type": "string",
                 "valueString": "Auto insurance",
-                "confidence": 0.94
+                "confidence": 0.93
               }
             ],
-            "confidence": 0.94
+            "confidence": 0.93
           },
           "Characters": {
             "type": "array",
@@ -55,15 +55,15 @@
               {
                 "type": "string",
                 "valueString": "Flo",
-                "confidence": 0.96
+                "confidence": 0.92
               },
               {
                 "type": "string",
                 "valueString": "new seasonal employee",
-                "confidence": 0.96
+                "confidence": 0.92
               }
             ],
-            "confidence": 0.96
+            "confidence": 0.92
           },
           "KnownCharacters": {
             "type": "array",
@@ -79,17 +79,17 @@
           "CharacterRoles": {
             "type": "string",
             "valueString": "Flo is the confident store mentor; the new seasonal employee is eager but visibly nervous on his first shift.",
-            "confidence": 0.89
+            "confidence": 0.9
           },
           "MusicAndAudio": {
             "type": "string",
             "valueString": "Bouncy comedic instrumental cue that stumbles briefly when the trainee fumbles his line, then resolves cleanly.",
-            "confidence": 0.96
+            "confidence": 0.85
           },
           "Setting": {
             "type": "string",
             "valueString": "The Progressive Store, near the front training station.",
-            "confidence": 0.92
+            "confidence": 0.91
           },
           "KeyActions": {
             "type": "array",
@@ -97,25 +97,25 @@
               {
                 "type": "string",
                 "valueString": "Flo quizzes the trainee on the kiosk script",
-                "confidence": 0.83
+                "confidence": 0.96
               },
               {
                 "type": "string",
                 "valueString": "Trainee stumbles over the pitch to a waiting customer",
-                "confidence": 0.83
+                "confidence": 0.96
               },
               {
                 "type": "string",
                 "valueString": "Flo gives an encouraging nudge",
-                "confidence": 0.83
+                "confidence": 0.96
               },
               {
                 "type": "string",
                 "valueString": "Trainee lands the pitch and the customer smiles",
-                "confidence": 0.83
+                "confidence": 0.96
               }
             ],
-            "confidence": 0.83
+            "confidence": 0.96
           },
           "OnScreenText": {
             "type": "array",
@@ -123,50 +123,60 @@
               {
                 "type": "string",
                 "valueString": "Name Your Price Tool",
-                "confidence": 0.87
+                "confidence": 0.91
               },
               {
                 "type": "string",
                 "valueString": "Progressive.com",
-                "confidence": 0.87
+                "confidence": 0.91
               }
             ],
-            "confidence": 0.87
+            "confidence": 0.91
           },
           "CommercialMessage": {
             "type": "string",
             "valueString": "Anyone at Progressive can help you find a price that fits your budget.",
-            "confidence": 0.93
+            "confidence": 0.84
           },
           "HasCallToAction": {
             "type": "string",
             "valueString": "Yes",
-            "confidence": 0.95
+            "confidence": 0.99
           },
           "CallToActionType": {
             "type": "string",
             "valueString": "VisitWebsite",
-            "confidence": 0.95
+            "confidence": 0.92
           },
           "HumorMechanism": {
             "type": "string",
             "valueString": "The trainee's nervous overcorrection played against Flo's calm coaching.",
-            "confidence": 0.84
+            "confidence": 0.77
           },
           "SentimentCategory": {
             "type": "string",
             "valueString": "Mixed",
-            "confidence": 0.93
+            "confidence": 0.86
           },
           "SentimentNarrative": {
             "type": "string",
             "valueString": "Light embarrassment resolving into pride.",
-            "confidence": 0.87
+            "confidence": 0.82
           },
-          "SportsOrEntertainmentReferences": {
+          "HasSportsReference": {
+            "type": "string",
+            "valueString": "No",
+            "confidence": 0.93
+          },
+          "SportsTypes": {
             "type": "array",
             "valueArray": [],
             "confidence": 0.92
+          },
+          "EntertainmentReferences": {
+            "type": "array",
+            "valueArray": [],
+            "confidence": 0.79
           },
           "BrandSafetyFlag": {
             "type": "string",
@@ -176,12 +186,12 @@
           "BrandSafetyNotes": {
             "type": "string",
             "valueString": "No obvious brand-safety concerns are visible or spoken.",
-            "confidence": 0.94
+            "confidence": 0.93
           },
           "BrandMentionCount": {
             "type": "integer",
             "valueInteger": 1,
-            "confidence": 0.95
+            "confidence": 0.98
           }
         }
       }

@@ -4,7 +4,7 @@
   "result": {
     "analyzerId": "cuCommercialVideoAnalyzerV2",
     "apiVersion": "2025-11-01",
-    "createdAt": "2026-04-20T11:40:29Z",
+    "createdAt": "2025-11-23T18:20:32Z",
     "contents": [
       {
         "kind": "audioVisual",
@@ -15,7 +15,7 @@
           "AdvertiserBrand": {
             "type": "string",
             "valueString": "Progressive Insurance",
-            "confidence": 0.96
+            "confidence": 0.91
           },
           "VisibleProducts": {
             "type": "array",
@@ -23,15 +23,15 @@
               {
                 "type": "string",
                 "valueString": "Dr. Rick's clipboard",
-                "confidence": 0.85
+                "confidence": 0.97
               }
             ],
-            "confidence": 0.85
+            "confidence": 0.97
           },
           "CompetitorsMentioned": {
             "type": "array",
             "valueArray": [],
-            "confidence": 0.85
+            "confidence": 0.87
           },
           "InsuranceProductsMentioned": {
             "type": "array",
@@ -39,10 +39,10 @@
               {
                 "type": "string",
                 "valueString": "Home insurance",
-                "confidence": 0.94
+                "confidence": 0.99
               }
             ],
-            "confidence": 0.94
+            "confidence": 0.99
           },
           "Characters": {
             "type": "array",
@@ -50,15 +50,15 @@
               {
                 "type": "string",
                 "valueString": "Dr. Rick",
-                "confidence": 0.94
+                "confidence": 0.97
               },
               {
                 "type": "string",
                 "valueString": "young homeowner",
-                "confidence": 0.94
+                "confidence": 0.97
               }
             ],
-            "confidence": 0.94
+            "confidence": 0.97
           },
           "KnownCharacters": {
             "type": "array",
@@ -66,25 +66,25 @@
               {
                 "type": "string",
                 "valueString": "DrRick",
-                "confidence": 0.85
+                "confidence": 0.96
               }
             ],
-            "confidence": 0.85
+            "confidence": 0.96
           },
           "CharacterRoles": {
             "type": "string",
             "valueString": "Dr. Rick delivers a quick deadpan intervention.",
-            "confidence": 0.81
+            "confidence": 0.8
           },
           "MusicAndAudio": {
             "type": "string",
             "valueString": "Single soft piano sting, brief record-scratch effect.",
-            "confidence": 0.96
+            "confidence": 0.93
           },
           "Setting": {
             "type": "string",
             "valueString": "A suburban kitchen, homeowner on the phone.",
-            "confidence": 0.96
+            "confidence": 0.86
           },
           "KeyActions": {
             "type": "array",
@@ -92,15 +92,15 @@
               {
                 "type": "string",
                 "valueString": "Homeowner books an early dinner reservation",
-                "confidence": 0.9
+                "confidence": 0.97
               },
               {
                 "type": "string",
                 "valueString": "Dr. Rick interrupts",
-                "confidence": 0.9
+                "confidence": 0.97
               }
             ],
-            "confidence": 0.9
+            "confidence": 0.97
           },
           "OnScreenText": {
             "type": "array",
@@ -108,65 +108,75 @@
               {
                 "type": "string",
                 "valueString": "Parentamorphosis",
-                "confidence": 0.97
+                "confidence": 0.96
               },
               {
                 "type": "string",
                 "valueString": "Progressive.com/home",
-                "confidence": 0.97
+                "confidence": 0.96
               }
             ],
-            "confidence": 0.97
+            "confidence": 0.96
           },
           "CommercialMessage": {
             "type": "string",
             "valueString": "Don't let homeownership turn you into your parents.",
-            "confidence": 0.9
+            "confidence": 0.96
           },
           "HasCallToAction": {
             "type": "string",
             "valueString": "Yes",
-            "confidence": 0.91
+            "confidence": 0.97
           },
           "CallToActionType": {
             "type": "string",
             "valueString": "GetAQuote",
-            "confidence": 0.87
+            "confidence": 0.88
           },
           "HumorMechanism": {
             "type": "string",
             "valueString": "Quick callback gag to a recognizable parent habit.",
-            "confidence": 0.81
+            "confidence": 0.91
           },
           "SentimentCategory": {
             "type": "string",
             "valueString": "Positive",
-            "confidence": 0.97
+            "confidence": 0.86
           },
           "SentimentNarrative": {
             "type": "string",
             "valueString": "Light and comedic.",
-            "confidence": 0.94
+            "confidence": 0.96
           },
-          "SportsOrEntertainmentReferences": {
+          "HasSportsReference": {
+            "type": "string",
+            "valueString": "No",
+            "confidence": 0.96
+          },
+          "SportsTypes": {
             "type": "array",
             "valueArray": [],
-            "confidence": 0.89
+            "confidence": 0.83
+          },
+          "EntertainmentReferences": {
+            "type": "array",
+            "valueArray": [],
+            "confidence": 0.88
           },
           "BrandSafetyFlag": {
             "type": "string",
             "valueString": "Clear",
-            "confidence": 0.98
+            "confidence": 0.94
           },
           "BrandSafetyNotes": {
             "type": "string",
             "valueString": "No obvious brand-safety concerns are visible or spoken.",
-            "confidence": 0.92
+            "confidence": 0.93
           },
           "BrandMentionCount": {
             "type": "integer",
             "valueInteger": 1,
-            "confidence": 0.88
+            "confidence": 0.95
           }
         }
       }

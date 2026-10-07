@@ -4,7 +4,7 @@
   "result": {
     "analyzerId": "cuCommercialVideoAnalyzerV2",
     "apiVersion": "2025-11-01",
-    "createdAt": "2026-04-02T10:40:29Z",
+    "createdAt": "2026-08-24T09:20:32Z",
     "contents": [
       {
         "kind": "audioVisual",
@@ -15,7 +15,7 @@
           "AdvertiserBrand": {
             "type": "string",
             "valueString": "Progressive Insurance",
-            "confidence": 0.95
+            "confidence": 0.98
           },
           "VisibleProducts": {
             "type": "array",
@@ -23,20 +23,20 @@
               {
                 "type": "string",
                 "valueString": "Living room TV",
-                "confidence": 0.97
+                "confidence": 0.84
               },
               {
                 "type": "string",
                 "valueString": "Progressive bundle offer card",
-                "confidence": 0.97
+                "confidence": 0.84
               }
             ],
-            "confidence": 0.97
+            "confidence": 0.84
           },
           "CompetitorsMentioned": {
             "type": "array",
             "valueArray": [],
-            "confidence": 0.84
+            "confidence": 0.79
           },
           "InsuranceProductsMentioned": {
             "type": "array",
@@ -44,20 +44,20 @@
               {
                 "type": "string",
                 "valueString": "Auto insurance",
-                "confidence": 0.97
+                "confidence": 0.95
               },
               {
                 "type": "string",
                 "valueString": "Home insurance",
-                "confidence": 0.97
+                "confidence": 0.95
               },
               {
                 "type": "string",
                 "valueString": "Bundled home and auto",
-                "confidence": 0.97
+                "confidence": 0.95
               }
             ],
-            "confidence": 0.97
+            "confidence": 0.95
           },
           "Characters": {
             "type": "array",
@@ -65,35 +65,35 @@
               {
                 "type": "string",
                 "valueString": "Baker Mayfield",
-                "confidence": 0.91
+                "confidence": 0.93
               },
               {
                 "type": "string",
                 "valueString": "watch party friends",
-                "confidence": 0.91
+                "confidence": 0.93
               }
             ],
-            "confidence": 0.91
+            "confidence": 0.93
           },
           "KnownCharacters": {
             "type": "array",
             "valueArray": [],
-            "confidence": 0.89
+            "confidence": 0.85
           },
           "CharacterRoles": {
             "type": "string",
             "valueString": "Baker Mayfield breaks the fourth wall from inside the TV broadcast; the friends react with stunned amusement.",
-            "confidence": 0.9
+            "confidence": 0.95
           },
           "MusicAndAudio": {
             "type": "string",
             "valueString": "Baker Mayfield sings the bundle jingle over a TV-broadcast audio filter, with crowd-noise and a stadium PA sound effect underneath.",
-            "confidence": 0.97
+            "confidence": 0.83
           },
           "Setting": {
             "type": "string",
             "valueString": "A suburban living room during a football watch party.",
-            "confidence": 0.9
+            "confidence": 0.84
           },
           "KeyActions": {
             "type": "array",
@@ -101,25 +101,25 @@
               {
                 "type": "string",
                 "valueString": "Game broadcast cuts to Baker Mayfield mid-play",
-                "confidence": 0.96
+                "confidence": 0.94
               },
               {
                 "type": "string",
                 "valueString": "He sings the bundle jingle directly to the room",
-                "confidence": 0.96
+                "confidence": 0.94
               },
               {
                 "type": "string",
                 "valueString": "Friends stare at the TV, stunned",
-                "confidence": 0.96
+                "confidence": 0.94
               },
               {
                 "type": "string",
                 "valueString": "Broadcast cuts back to the game as if nothing happened",
-                "confidence": 0.96
+                "confidence": 0.94
               }
             ],
-            "confidence": 0.96
+            "confidence": 0.94
           },
           "OnScreenText": {
             "type": "array",
@@ -140,53 +140,59 @@
           "CommercialMessage": {
             "type": "string",
             "valueString": "Bundling home and auto insurance with Progressive saves money.",
-            "confidence": 0.97
+            "confidence": 0.96
           },
           "HasCallToAction": {
             "type": "string",
             "valueString": "Yes",
-            "confidence": 0.92
+            "confidence": 0.96
           },
           "CallToActionType": {
             "type": "string",
             "valueString": "PurchaseNow",
-            "confidence": 0.93
+            "confidence": 0.89
           },
           "HumorMechanism": {
             "type": "string",
             "valueString": "A celebrity spokesperson breaking the broadcast's fourth wall.",
-            "confidence": 0.92
+            "confidence": 0.75
           },
           "SentimentCategory": {
             "type": "string",
             "valueString": "Positive",
-            "confidence": 0.88
+            "confidence": 0.97
           },
           "SentimentNarrative": {
             "type": "string",
             "valueString": "Surprised and amused, ending on a playful note.",
-            "confidence": 0.93
+            "confidence": 0.82
           },
-          "SportsOrEntertainmentReferences": {
+          "HasSportsReference": {
+            "type": "string",
+            "valueString": "Yes",
+            "confidence": 0.94
+          },
+          "SportsTypes": {
             "type": "array",
             "valueArray": [
               {
                 "type": "string",
-                "valueString": "NFL",
-                "confidence": 0.77
-              },
-              {
-                "type": "string",
-                "valueString": "Football broadcast",
-                "confidence": 0.77
-              },
+                "valueString": "Football",
+                "confidence": 0.87
+              }
+            ],
+            "confidence": 0.87
+          },
+          "EntertainmentReferences": {
+            "type": "array",
+            "valueArray": [
               {
                 "type": "string",
                 "valueString": "Baker Mayfield (celebrity spokesperson)",
-                "confidence": 0.77
+                "confidence": 0.87
               }
             ],
-            "confidence": 0.77
+            "confidence": 0.87
           },
           "BrandSafetyFlag": {
             "type": "string",
@@ -196,12 +202,12 @@
           "BrandSafetyNotes": {
             "type": "string",
             "valueString": "No obvious brand-safety concerns are visible or spoken.",
-            "confidence": 0.97
+            "confidence": 0.96
           },
           "BrandMentionCount": {
             "type": "integer",
             "valueInteger": 1,
-            "confidence": 0.95
+            "confidence": 0.91
           }
         }
       }

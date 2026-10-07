@@ -4,7 +4,7 @@
   "result": {
     "analyzerId": "cuCommercialVideoAnalyzerV2",
     "apiVersion": "2025-11-01",
-    "createdAt": "2026-09-05T02:40:29Z",
+    "createdAt": "2026-06-21T03:20:32Z",
     "contents": [
       {
         "kind": "audioVisual",
@@ -15,7 +15,7 @@
           "AdvertiserBrand": {
             "type": "string",
             "valueString": "Progressive Insurance",
-            "confidence": 0.94
+            "confidence": 0.93
           },
           "VisibleProducts": {
             "type": "array",
@@ -23,10 +23,10 @@
               {
                 "type": "string",
                 "valueString": "Progressive Store shelf display",
-                "confidence": 0.9
+                "confidence": 0.94
               }
             ],
-            "confidence": 0.9
+            "confidence": 0.94
           },
           "CompetitorsMentioned": {
             "type": "array",
@@ -39,10 +39,10 @@
               {
                 "type": "string",
                 "valueString": "Auto insurance",
-                "confidence": 0.9
+                "confidence": 0.96
               }
             ],
-            "confidence": 0.9
+            "confidence": 0.96
           },
           "Characters": {
             "type": "array",
@@ -50,15 +50,15 @@
               {
                 "type": "string",
                 "valueString": "Jamie",
-                "confidence": 0.94
+                "confidence": 0.97
               },
               {
                 "type": "string",
                 "valueString": "Flo",
-                "confidence": 0.94
+                "confidence": 0.97
               }
             ],
-            "confidence": 0.94
+            "confidence": 0.97
           },
           "KnownCharacters": {
             "type": "array",
@@ -66,30 +66,30 @@
               {
                 "type": "string",
                 "valueString": "Flo",
-                "confidence": 0.97
+                "confidence": 0.88
               },
               {
                 "type": "string",
                 "valueString": "Jamie",
-                "confidence": 0.97
+                "confidence": 0.88
               }
             ],
-            "confidence": 0.97
+            "confidence": 0.88
           },
           "CharacterRoles": {
             "type": "string",
             "valueString": "Jamie rushes an over-enthusiastic pitch; Flo closes it out.",
-            "confidence": 0.91
+            "confidence": 0.81
           },
           "MusicAndAudio": {
             "type": "string",
             "valueString": "Fast comedic instrumental sting that cuts off abruptly.",
-            "confidence": 0.93
+            "confidence": 0.8
           },
           "Setting": {
             "type": "string",
             "valueString": "The Progressive Store checkout counter.",
-            "confidence": 0.95
+            "confidence": 0.9
           },
           "KeyActions": {
             "type": "array",
@@ -97,15 +97,15 @@
               {
                 "type": "string",
                 "valueString": "Jamie rushes through a pitch",
-                "confidence": 0.94
+                "confidence": 0.98
               },
               {
                 "type": "string",
                 "valueString": "Flo cuts him off with a smile",
-                "confidence": 0.94
+                "confidence": 0.98
               }
             ],
-            "confidence": 0.94
+            "confidence": 0.98
           },
           "OnScreenText": {
             "type": "array",
@@ -121,22 +121,22 @@
           "CommercialMessage": {
             "type": "string",
             "valueString": "Progressive's team is there to help you save, even in a hurry.",
-            "confidence": 0.8
+            "confidence": 0.92
           },
           "HasCallToAction": {
             "type": "string",
             "valueString": "Yes",
-            "confidence": 0.93
+            "confidence": 0.97
           },
           "CallToActionType": {
             "type": "string",
             "valueString": "GetAQuote",
-            "confidence": 0.95
+            "confidence": 0.93
           },
           "HumorMechanism": {
             "type": "string",
             "valueString": "Jamie's rapid-fire overeagerness cut short by Flo.",
-            "confidence": 0.92
+            "confidence": 0.9
           },
           "SentimentCategory": {
             "type": "string",
@@ -146,17 +146,27 @@
           "SentimentNarrative": {
             "type": "string",
             "valueString": "Quick and lighthearted.",
-            "confidence": 0.88
+            "confidence": 0.84
           },
-          "SportsOrEntertainmentReferences": {
+          "HasSportsReference": {
+            "type": "string",
+            "valueString": "No",
+            "confidence": 0.85
+          },
+          "SportsTypes": {
             "type": "array",
             "valueArray": [],
-            "confidence": 0.86
+            "confidence": 0.82
+          },
+          "EntertainmentReferences": {
+            "type": "array",
+            "valueArray": [],
+            "confidence": 0.73
           },
           "BrandSafetyFlag": {
             "type": "string",
             "valueString": "Clear",
-            "confidence": 0.95
+            "confidence": 0.96
           },
           "BrandSafetyNotes": {
             "type": "string",
