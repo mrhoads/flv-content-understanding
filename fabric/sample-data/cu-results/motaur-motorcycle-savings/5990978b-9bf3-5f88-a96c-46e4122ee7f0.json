@@ -1,0 +1,154 @@
+{
+  "id": "5990978b-9bf3-5f88-a96c-46e4122ee7f0",
+  "status": "Succeeded",
+  "result": {
+    "analyzerId": "flvCommercialVideoAnalyzer",
+    "apiVersion": "2025-11-01",
+    "createdAt": "2026-05-24T21:11:05Z",
+    "contents": [
+      {
+        "kind": "audioVisual",
+        "startTimeMs": 0,
+        "endTimeMs": 30000,
+        "markdown": "## The Motaur narrates a trail ride, voiceover only\n\nA scenic off-road trail ride plays out while the Motaur's voice narrates usage-based motorcycle savings over the footage, never appearing on-screen.",
+        "fields": {
+          "AdvertiserBrand": {
+            "type": "string",
+            "valueString": "Progressive Insurance",
+            "confidence": 0.98
+          },
+          "VisibleProducts": {
+            "type": "array",
+            "valueArray": [
+              {
+                "type": "string",
+                "valueString": "Off-road motorcycle",
+                "confidence": 0.93
+              },
+              {
+                "type": "string",
+                "valueString": "Progressive motorcycle policy flyer",
+                "confidence": 0.93
+              }
+            ],
+            "confidence": 0.93
+          },
+          "CompetitorsMentioned": {
+            "type": "array",
+            "valueArray": [],
+            "confidence": 0.73
+          },
+          "InsuranceProductsMentioned": {
+            "type": "array",
+            "valueArray": [
+              {
+                "type": "string",
+                "valueString": "Motorcycle insurance",
+                "confidence": 0.91
+              }
+            ],
+            "confidence": 0.91
+          },
+          "Characters": {
+            "type": "array",
+            "valueArray": [
+              {
+                "type": "string",
+                "valueString": "The Motaur (voiceover only)",
+                "confidence": 0.92
+              },
+              {
+                "type": "string",
+                "valueString": "off-road rider",
+                "confidence": 0.92
+              }
+            ],
+            "confidence": 0.92
+          },
+          "CharacterRoles": {
+            "type": "string",
+            "valueString": "The Motaur narrates in voiceover; the off-road rider is shown riding a scenic trail without speaking.",
+            "confidence": 0.86
+          },
+          "MusicAndAudio": {
+            "type": "string",
+            "valueString": "Driving rock instrumental under the Motaur's voiceover, blended with natural engine and trail ambiance.",
+            "confidence": 0.92
+          },
+          "Setting": {
+            "type": "string",
+            "valueString": "A scenic off-road motorcycle trail at sunset.",
+            "confidence": 0.95
+          },
+          "KeyActions": {
+            "type": "array",
+            "valueArray": [
+              {
+                "type": "string",
+                "valueString": "Rider navigates a winding trail",
+                "confidence": 0.89
+              },
+              {
+                "type": "string",
+                "valueString": "Motaur's voiceover explains usage-based discounts",
+                "confidence": 0.89
+              },
+              {
+                "type": "string",
+                "valueString": "Rider arrives at a scenic overlook as the pitch concludes",
+                "confidence": 0.89
+              }
+            ],
+            "confidence": 0.89
+          },
+          "OnScreenText": {
+            "type": "array",
+            "valueArray": [
+              {
+                "type": "string",
+                "valueString": "Motorcycle insurance starting at $75/year*",
+                "confidence": 0.89
+              },
+              {
+                "type": "string",
+                "valueString": "Progressive.com",
+                "confidence": 0.89
+              }
+            ],
+            "confidence": 0.89
+          },
+          "CommercialMessage": {
+            "type": "string",
+            "valueString": "Usage-based motorcycle insurance rewards safe, measured riding.",
+            "confidence": 0.96
+          },
+          "CallToAction": {
+            "type": "string",
+            "valueString": "Get a motorcycle insurance quote at Progressive.com.",
+            "confidence": 0.86
+          },
+          "HumorMechanism": {
+            "type": "string",
+            "valueString": "Mild, since the Motaur's over-the-top voice narrates a serene scene.",
+            "confidence": 0.88
+          },
+          "EmotionSentiment": {
+            "type": "string",
+            "valueString": "Calm and scenic, with an enthusiastic voiceover undertone.",
+            "confidence": 0.95
+          },
+          "SportsOrEntertainmentReferences": {
+            "type": "array",
+            "valueArray": [],
+            "confidence": 0.71
+          },
+          "BrandSafetyNotes": {
+            "type": "string",
+            "valueString": "Rider wears a full helmet and protective gear; trail riding shown at a measured pace.",
+            "confidence": 0.93
+          }
+        }
+      }
+    ]
+  }
+}

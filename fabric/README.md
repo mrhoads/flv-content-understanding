@@ -177,6 +177,54 @@ as `/lakehouse/default/Files/...` before calling `open()`. If you ever rewrite
 this cell, keep that conversion — don't pass the raw `notebookutils.fs.ls()`
 path straight to `open()`.
 
+## Demo with synthetic Progressive commercials (no video analysis needed)
+
+To demo Fabric reporting without an Azure deployment or real commercial
+footage, `fabric/sample-data/` has pre-generated, committed Content
+Understanding-shaped JSON for recognizable, long-running Progressive campaigns
+(Flo and the Progressive Store, Dr. Rick's "Parentamorphosis", The Motaur,
+Jamie, and the Baker Mayfield jingle spots). Each file matches the exact
+envelope `flvCommercialVideoAnalyzer` returns (`result.contents[].fields`,
+`type` + `value*` + `confidence` per field), one file per
+`cu-results/<campaign_name>/<id>.json`, across 6 campaigns / 26 distinct
+commercial variants (each campaign has several genuinely different ads —
+different settings, key actions, messaging, and humor — not just the same
+spot re-aired) — enough variety for brand/competitor mention counts,
+sentiment distribution, and CTA presence rate by campaign in Power BI.
+
+Regenerate (or extend with new campaigns) via
+`fabric/sample-data/generate_synthetic_commercials.py`; see its module
+docstring. Re-running with the default `--seed 42` reproduces the same files
+(stable IDs, re-randomized confidence scores and `createdAt` dates). Use
+`--extra N` to additionally generate `N` "flight re-airing" samples drawn at
+random from the existing campaign/variant pool (new IDs, timestamps, and
+confidence scores), useful for padding out volume for a Power BI demo without
+inventing new ad concepts; `--extra-seed` controls that randomization
+independently (defaults to `--seed + 1`).
+
+To use these for the OneLake shortcut described below, upload them into the
+`cu-results` container of the dedicated `stflvfabricdeve9fd`-style storage
+account, authenticated the same managed-identity way as the rest of this repo
+(no keys or SAS tokens):
+
+```bash
+az login
+python fabric/sample-data/generate_synthetic_commercials.py --upload \
+  --fabric-storage-account-url https://stflvfabricdeve9fd.blob.core.windows.net
+```
+
+`--upload` reuses `examples/analyze_video.py`'s `build_credential`/
+`upload_fabric_result` helpers, so it authenticates with `DefaultAzureCredential`
+in development (`--app-env production` switches to managed identity, matching
+`analyze_video.py`) and writes to the same
+`cu-results/<campaign_name>/<id>.json` blob layout real analyzer output uses.
+`FABRIC_STORAGE_ACCOUNT_URL` and `FABRIC_RESULTS_CONTAINER` work as environment
+variable equivalents of `--fabric-storage-account-url`/`--fabric-container`.
+Then run the ingestion notebook as usual. No Content Understanding call, video
+file, or `examples/analyze_video.py` run is required for this path — it's
+synthetic data standing in for historic campaign results, clearly for demo
+purposes.
+
 ## One-time manual setup in Fabric (no Bicep/ARM support for these item types yet)
 
 1. **Create (or reuse) a Fabric workspace** on a capacity that supports
@@ -273,3 +321,6 @@ generator notebook plus the join logic.
 - `fabric/notebooks/campaign_insights_ingestion.ipynb` — Fabric PySpark
   notebook that flattens CU JSON from the shortcut into the `campaign_insights`
   Delta table. Schema-agnostic: new analyzer fields show up as new columns.
+- `fabric/sample-data/` — synthetic, committed Content Understanding result
+  JSON for recognizable Progressive commercial campaigns, plus the generator
+  script that produces it, for demoing the reporting pipeline without Azure.

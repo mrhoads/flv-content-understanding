@@ -1,0 +1,164 @@
+{
+  "id": "7849744d-a721-585f-99da-cf2fde84a33b",
+  "status": "Succeeded",
+  "result": {
+    "analyzerId": "flvCommercialVideoAnalyzer",
+    "apiVersion": "2025-11-01",
+    "createdAt": "2026-03-27T22:11:05Z",
+    "contents": [
+      {
+        "kind": "audioVisual",
+        "startTimeMs": 0,
+        "endTimeMs": 30000,
+        "markdown": "## Flo compares coverage tiers side by side\n\nA shopper is torn between a 'Basic' and a 'Plus' coverage box, so Flo slides the Name Your Price Tool's budget dial back and forth to show how the shelf options change in real time.",
+        "fields": {
+          "AdvertiserBrand": {
+            "type": "string",
+            "valueString": "Progressive Insurance",
+            "confidence": 0.95
+          },
+          "VisibleProducts": {
+            "type": "array",
+            "valueArray": [
+              {
+                "type": "string",
+                "valueString": "Name Your Price Tool kiosk",
+                "confidence": 0.95
+              },
+              {
+                "type": "string",
+                "valueString": "Basic coverage box",
+                "confidence": 0.95
+              },
+              {
+                "type": "string",
+                "valueString": "Plus coverage box",
+                "confidence": 0.95
+              }
+            ],
+            "confidence": 0.95
+          },
+          "CompetitorsMentioned": {
+            "type": "array",
+            "valueArray": [],
+            "confidence": 0.82
+          },
+          "InsuranceProductsMentioned": {
+            "type": "array",
+            "valueArray": [
+              {
+                "type": "string",
+                "valueString": "Auto insurance",
+                "confidence": 0.97
+              }
+            ],
+            "confidence": 0.97
+          },
+          "Characters": {
+            "type": "array",
+            "valueArray": [
+              {
+                "type": "string",
+                "valueString": "Flo",
+                "confidence": 0.95
+              },
+              {
+                "type": "string",
+                "valueString": "shopper customer",
+                "confidence": 0.95
+              }
+            ],
+            "confidence": 0.95
+          },
+          "CharacterRoles": {
+            "type": "string",
+            "valueString": "Flo is the upbeat Progressive spokesperson and store guide; the shopper is an indecisive customer comparing two coverage tiers.",
+            "confidence": 0.93
+          },
+          "MusicAndAudio": {
+            "type": "string",
+            "valueString": "Light plucky instrumental under the dialogue, with a soft chime each time the shopper slides the budget dial.",
+            "confidence": 0.81
+          },
+          "Setting": {
+            "type": "string",
+            "valueString": "The Progressive Store, between two side-by-side coverage kiosks.",
+            "confidence": 0.84
+          },
+          "KeyActions": {
+            "type": "array",
+            "valueArray": [
+              {
+                "type": "string",
+                "valueString": "Shopper picks up the Basic box, then the Plus box",
+                "confidence": 0.85
+              },
+              {
+                "type": "string",
+                "valueString": "Flo slides the kiosk's budget dial back and forth",
+                "confidence": 0.85
+              },
+              {
+                "type": "string",
+                "valueString": "Shelf display updates to show the matching coverage tier",
+                "confidence": 0.85
+              },
+              {
+                "type": "string",
+                "valueString": "Shopper settles on a middle option",
+                "confidence": 0.85
+              }
+            ],
+            "confidence": 0.85
+          },
+          "OnScreenText": {
+            "type": "array",
+            "valueArray": [
+              {
+                "type": "string",
+                "valueString": "Name Your Price Tool",
+                "confidence": 0.86
+              },
+              {
+                "type": "string",
+                "valueString": "Progressive.com",
+                "confidence": 0.86
+              }
+            ],
+            "confidence": 0.86
+          },
+          "CommercialMessage": {
+            "type": "string",
+            "valueString": "Adjusting your budget on the tool shows different coverage levels instantly.",
+            "confidence": 0.84
+          },
+          "CallToAction": {
+            "type": "string",
+            "valueString": "Try the Name Your Price Tool yourself at Progressive.com.",
+            "confidence": 0.86
+          },
+          "HumorMechanism": {
+            "type": "string",
+            "valueString": "Flo's overly cheerful narration of an ordinary slider movement.",
+            "confidence": 0.81
+          },
+          "EmotionSentiment": {
+            "type": "string",
+            "valueString": "Patient and reassuring, ending on a confident decision.",
+            "confidence": 0.91
+          },
+          "SportsOrEntertainmentReferences": {
+            "type": "array",
+            "valueArray": [],
+            "confidence": 0.78
+          },
+          "BrandSafetyNotes": {
+            "type": "string",
+            "valueString": "No obvious brand-safety concerns are visible or spoken.",
+            "confidence": 0.93
+          }
+        }
+      }
+    ]
+  }
+}

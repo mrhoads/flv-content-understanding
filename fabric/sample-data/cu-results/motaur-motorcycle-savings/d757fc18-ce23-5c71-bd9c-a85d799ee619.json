@@ -1,0 +1,159 @@
+{
+  "id": "d757fc18-ce23-5c71-bd9c-a85d799ee619",
+  "status": "Succeeded",
+  "result": {
+    "analyzerId": "flvCommercialVideoAnalyzer",
+    "apiVersion": "2025-11-01",
+    "createdAt": "2026-04-09T23:11:05Z",
+    "contents": [
+      {
+        "kind": "audioVisual",
+        "startTimeMs": 0,
+        "endTimeMs": 30000,
+        "markdown": "## The Motaur holds court at a roadside cafe\n\nThe Motaur joins a table of riders at a roadside cafe stop, launching into an enthusiastic, half-shouted pitch about usage-based discounts over coffee.",
+        "fields": {
+          "AdvertiserBrand": {
+            "type": "string",
+            "valueString": "Progressive Insurance",
+            "confidence": 0.91
+          },
+          "VisibleProducts": {
+            "type": "array",
+            "valueArray": [
+              {
+                "type": "string",
+                "valueString": "Parked motorcycles",
+                "confidence": 0.85
+              },
+              {
+                "type": "string",
+                "valueString": "Progressive motorcycle policy flyer",
+                "confidence": 0.85
+              }
+            ],
+            "confidence": 0.85
+          },
+          "CompetitorsMentioned": {
+            "type": "array",
+            "valueArray": [],
+            "confidence": 0.77
+          },
+          "InsuranceProductsMentioned": {
+            "type": "array",
+            "valueArray": [
+              {
+                "type": "string",
+                "valueString": "Motorcycle insurance",
+                "confidence": 0.88
+              }
+            ],
+            "confidence": 0.88
+          },
+          "Characters": {
+            "type": "array",
+            "valueArray": [
+              {
+                "type": "string",
+                "valueString": "The Motaur",
+                "confidence": 0.99
+              },
+              {
+                "type": "string",
+                "valueString": "group of riders",
+                "confidence": 0.99
+              }
+            ],
+            "confidence": 0.99
+          },
+          "CharacterRoles": {
+            "type": "string",
+            "valueString": "The Motaur is the exuberant mascot holding court; the riders are a mixed group of regulars, amused and a little overwhelmed.",
+            "confidence": 0.95
+          },
+          "MusicAndAudio": {
+            "type": "string",
+            "valueString": "Upbeat acoustic guitar riff under the Motaur's booming voiceover, with ambient cafe chatter and a coffee-cup clink sound effect.",
+            "confidence": 0.9
+          },
+          "Setting": {
+            "type": "string",
+            "valueString": "An outdoor roadside cafe patio popular with motorcycle riders.",
+            "confidence": 0.88
+          },
+          "KeyActions": {
+            "type": "array",
+            "valueArray": [
+              {
+                "type": "string",
+                "valueString": "The Motaur approaches the riders' table uninvited",
+                "confidence": 0.81
+              },
+              {
+                "type": "string",
+                "valueString": "The Motaur launches into a loud, enthusiastic pitch",
+                "confidence": 0.81
+              },
+              {
+                "type": "string",
+                "valueString": "Riders exchange amused glances",
+                "confidence": 0.81
+              },
+              {
+                "type": "string",
+                "valueString": "One rider pulls out a phone to get a quote on the spot",
+                "confidence": 0.81
+              }
+            ],
+            "confidence": 0.81
+          },
+          "OnScreenText": {
+            "type": "array",
+            "valueArray": [
+              {
+                "type": "string",
+                "valueString": "Motorcycle insurance starting at $75/year*",
+                "confidence": 0.93
+              },
+              {
+                "type": "string",
+                "valueString": "Progressive.com",
+                "confidence": 0.93
+              }
+            ],
+            "confidence": 0.93
+          },
+          "CommercialMessage": {
+            "type": "string",
+            "valueString": "Riders can get real-time usage-based savings wherever they are.",
+            "confidence": 0.86
+          },
+          "CallToAction": {
+            "type": "string",
+            "valueString": "Get a motorcycle insurance quote at Progressive.com.",
+            "confidence": 0.96
+          },
+          "HumorMechanism": {
+            "type": "string",
+            "valueString": "The Motaur's booming, oversized presence crashing a quiet coffee break.",
+            "confidence": 0.78
+          },
+          "EmotionSentiment": {
+            "type": "string",
+            "valueString": "High-energy, slightly chaotic, ending in amused agreement.",
+            "confidence": 0.85
+          },
+          "SportsOrEntertainmentReferences": {
+            "type": "array",
+            "valueArray": [],
+            "confidence": 0.87
+          },
+          "BrandSafetyNotes": {
+            "type": "string",
+            "valueString": "Motorcycles are shown parked; no riding, stunts, or helmetless operation depicted.",
+            "confidence": 0.99
+          }
+        }
+      }
+    ]
+  }
+}

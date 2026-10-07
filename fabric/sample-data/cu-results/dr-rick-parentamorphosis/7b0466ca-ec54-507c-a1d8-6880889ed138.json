@@ -1,0 +1,154 @@
+{
+  "id": "7b0466ca-ec54-507c-a1d8-6880889ed138",
+  "status": "Succeeded",
+  "result": {
+    "analyzerId": "flvCommercialVideoAnalyzer",
+    "apiVersion": "2025-11-01",
+    "createdAt": "2026-06-13T22:11:05Z",
+    "contents": [
+      {
+        "kind": "audioVisual",
+        "startTimeMs": 0,
+        "endTimeMs": 30000,
+        "markdown": "## Dr. Rick tunes in on a new homeowner\n\nDr. Rick observes a young homeowner starting to repeat his parents' habits -- over-explaining a thermostat setting to houseguests -- and steps in with a supportive, slightly awkward intervention.",
+        "fields": {
+          "AdvertiserBrand": {
+            "type": "string",
+            "valueString": "Progressive Insurance",
+            "confidence": 0.93
+          },
+          "VisibleProducts": {
+            "type": "array",
+            "valueArray": [
+              {
+                "type": "string",
+                "valueString": "Progressive Home insurance brochure",
+                "confidence": 0.91
+              },
+              {
+                "type": "string",
+                "valueString": "Dr. Rick's clipboard",
+                "confidence": 0.91
+              }
+            ],
+            "confidence": 0.91
+          },
+          "CompetitorsMentioned": {
+            "type": "array",
+            "valueArray": [],
+            "confidence": 0.75
+          },
+          "InsuranceProductsMentioned": {
+            "type": "array",
+            "valueArray": [
+              {
+                "type": "string",
+                "valueString": "Home insurance",
+                "confidence": 0.9
+              }
+            ],
+            "confidence": 0.9
+          },
+          "Characters": {
+            "type": "array",
+            "valueArray": [
+              {
+                "type": "string",
+                "valueString": "Dr. Rick",
+                "confidence": 0.91
+              },
+              {
+                "type": "string",
+                "valueString": "young homeowner",
+                "confidence": 0.91
+              }
+            ],
+            "confidence": 0.91
+          },
+          "CharacterRoles": {
+            "type": "string",
+            "valueString": "Dr. Rick is Progressive's in-house 'parentamorphosis' counselor; the young homeowner is a new policyholder slipping into parent-like habits.",
+            "confidence": 0.91
+          },
+          "MusicAndAudio": {
+            "type": "string",
+            "valueString": "Soft, mock-clinical piano underscore; occasional record-scratch sound effect when Dr. Rick interrupts a habit.",
+            "confidence": 0.84
+          },
+          "Setting": {
+            "type": "string",
+            "valueString": "A suburban living room during a casual house-party gathering.",
+            "confidence": 0.96
+          },
+          "KeyActions": {
+            "type": "array",
+            "valueArray": [
+              {
+                "type": "string",
+                "valueString": "Homeowner over-explains the thermostat to guests",
+                "confidence": 0.95
+              },
+              {
+                "type": "string",
+                "valueString": "Dr. Rick steps in to gently interrupt the habit",
+                "confidence": 0.95
+              },
+              {
+                "type": "string",
+                "valueString": "Dr. Rick offers a reassuring, deadpan tip",
+                "confidence": 0.95
+              }
+            ],
+            "confidence": 0.95
+          },
+          "OnScreenText": {
+            "type": "array",
+            "valueArray": [
+              {
+                "type": "string",
+                "valueString": "Parentamorphosis",
+                "confidence": 0.86
+              },
+              {
+                "type": "string",
+                "valueString": "Progressive.com/home",
+                "confidence": 0.86
+              }
+            ],
+            "confidence": 0.86
+          },
+          "CommercialMessage": {
+            "type": "string",
+            "valueString": "New homeowners can get support (and home insurance) from Progressive so they don't turn into their parents.",
+            "confidence": 0.84
+          },
+          "CallToAction": {
+            "type": "string",
+            "valueString": "Get a home insurance quote at Progressive.com.",
+            "confidence": 0.94
+          },
+          "HumorMechanism": {
+            "type": "string",
+            "valueString": "Deadpan clinical framing of mundane parent behaviors as a treatable condition.",
+            "confidence": 0.79
+          },
+          "EmotionSentiment": {
+            "type": "string",
+            "valueString": "Light, comedic embarrassment resolving into warm reassurance.",
+            "confidence": 0.82
+          },
+          "SportsOrEntertainmentReferences": {
+            "type": "array",
+            "valueArray": [],
+            "confidence": 0.91
+          },
+          "BrandSafetyNotes": {
+            "type": "string",
+            "valueString": "No obvious brand-safety concerns are visible or spoken.",
+            "confidence": 0.95
+          }
+        }
+      }
+    ]
+  }
+}

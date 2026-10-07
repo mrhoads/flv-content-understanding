@@ -1,0 +1,169 @@
+{
+  "id": "d8c263d3-bdf6-53e8-9806-3c317e2e2ceb",
+  "status": "Succeeded",
+  "result": {
+    "analyzerId": "flvCommercialVideoAnalyzer",
+    "apiVersion": "2025-11-01",
+    "createdAt": "2025-12-16T10:11:05Z",
+    "contents": [
+      {
+        "kind": "audioVisual",
+        "startTimeMs": 0,
+        "endTimeMs": 30000,
+        "markdown": "## Dr. Rick intervenes on unsolicited car advice\n\nDr. Rick catches a homeowner giving a neighbor long-winded, unsolicited advice about tire pressure and steps in before it escalates further.",
+        "fields": {
+          "AdvertiserBrand": {
+            "type": "string",
+            "valueString": "Progressive Insurance",
+            "confidence": 0.96
+          },
+          "VisibleProducts": {
+            "type": "array",
+            "valueArray": [
+              {
+                "type": "string",
+                "valueString": "Tire pressure gauge",
+                "confidence": 0.9
+              },
+              {
+                "type": "string",
+                "valueString": "Dr. Rick's clipboard",
+                "confidence": 0.9
+              }
+            ],
+            "confidence": 0.9
+          },
+          "CompetitorsMentioned": {
+            "type": "array",
+            "valueArray": [],
+            "confidence": 0.81
+          },
+          "InsuranceProductsMentioned": {
+            "type": "array",
+            "valueArray": [
+              {
+                "type": "string",
+                "valueString": "Home insurance",
+                "confidence": 0.98
+              },
+              {
+                "type": "string",
+                "valueString": "Auto insurance",
+                "confidence": 0.98
+              }
+            ],
+            "confidence": 0.98
+          },
+          "Characters": {
+            "type": "array",
+            "valueArray": [
+              {
+                "type": "string",
+                "valueString": "Dr. Rick",
+                "confidence": 0.9
+              },
+              {
+                "type": "string",
+                "valueString": "young homeowner",
+                "confidence": 0.9
+              },
+              {
+                "type": "string",
+                "valueString": "neighbor",
+                "confidence": 0.9
+              }
+            ],
+            "confidence": 0.9
+          },
+          "CharacterRoles": {
+            "type": "string",
+            "valueString": "Dr. Rick counsels the homeowner; the neighbor is a patient but increasingly uninterested listener.",
+            "confidence": 0.93
+          },
+          "MusicAndAudio": {
+            "type": "string",
+            "valueString": "Soft mock-clinical piano underscore with a long drawn-out 'mmm' reaction sound effect from the neighbor.",
+            "confidence": 0.89
+          },
+          "Setting": {
+            "type": "string",
+            "valueString": "A suburban driveway, homeowner kneeling by a parked car.",
+            "confidence": 0.81
+          },
+          "KeyActions": {
+            "type": "array",
+            "valueArray": [
+              {
+                "type": "string",
+                "valueString": "Homeowner over-explains tire pressure to a visibly bored neighbor",
+                "confidence": 0.82
+              },
+              {
+                "type": "string",
+                "valueString": "Dr. Rick steps between them",
+                "confidence": 0.82
+              },
+              {
+                "type": "string",
+                "valueString": "Dr. Rick offers a shorter, kinder way to say it",
+                "confidence": 0.82
+              },
+              {
+                "type": "string",
+                "valueString": "Neighbor thanks Dr. Rick and walks away",
+                "confidence": 0.82
+              }
+            ],
+            "confidence": 0.82
+          },
+          "OnScreenText": {
+            "type": "array",
+            "valueArray": [
+              {
+                "type": "string",
+                "valueString": "Parentamorphosis",
+                "confidence": 0.95
+              },
+              {
+                "type": "string",
+                "valueString": "Progressive.com/home",
+                "confidence": 0.95
+              }
+            ],
+            "confidence": 0.95
+          },
+          "CommercialMessage": {
+            "type": "string",
+            "valueString": "Dr. Rick helps new homeowners catch parent habits before they talk someone's ear off.",
+            "confidence": 0.88
+          },
+          "CallToAction": {
+            "type": "string",
+            "valueString": "Get a quote at Progressive.com.",
+            "confidence": 0.86
+          },
+          "HumorMechanism": {
+            "type": "string",
+            "valueString": "Deadpan escalation of an ordinary over-explaining habit.",
+            "confidence": 0.89
+          },
+          "EmotionSentiment": {
+            "type": "string",
+            "valueString": "Light cringe-comedy resolving into warmth.",
+            "confidence": 0.88
+          },
+          "SportsOrEntertainmentReferences": {
+            "type": "array",
+            "valueArray": [],
+            "confidence": 0.73
+          },
+          "BrandSafetyNotes": {
+            "type": "string",
+            "valueString": "No obvious brand-safety concerns are visible or spoken.",
+            "confidence": 0.92
+          }
+        }
+      }
+    ]
+  }
+}

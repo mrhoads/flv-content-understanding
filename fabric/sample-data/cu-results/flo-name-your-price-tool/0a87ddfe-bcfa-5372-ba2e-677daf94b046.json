@@ -1,0 +1,164 @@
+{
+  "id": "0a87ddfe-bcfa-5372-ba2e-677daf94b046",
+  "status": "Succeeded",
+  "result": {
+    "analyzerId": "flvCommercialVideoAnalyzer",
+    "apiVersion": "2025-11-01",
+    "createdAt": "2026-05-07T02:11:05Z",
+    "contents": [
+      {
+        "kind": "audioVisual",
+        "startTimeMs": 0,
+        "endTimeMs": 30000,
+        "markdown": "## Flo pitches the Name Your Price Tool\n\nFlo greets shoppers at the bright white Progressive Store and walks a customer through entering a monthly budget into the Name Your Price Tool kiosk, which returns a shelf of coverage options that fit.",
+        "fields": {
+          "AdvertiserBrand": {
+            "type": "string",
+            "valueString": "Progressive Insurance",
+            "confidence": 0.91
+          },
+          "VisibleProducts": {
+            "type": "array",
+            "valueArray": [
+              {
+                "type": "string",
+                "valueString": "Name Your Price Tool kiosk",
+                "confidence": 0.98
+              },
+              {
+                "type": "string",
+                "valueString": "Progressive Store shelf display",
+                "confidence": 0.98
+              },
+              {
+                "type": "string",
+                "valueString": "Progressive employee vest",
+                "confidence": 0.98
+              }
+            ],
+            "confidence": 0.98
+          },
+          "CompetitorsMentioned": {
+            "type": "array",
+            "valueArray": [],
+            "confidence": 0.82
+          },
+          "InsuranceProductsMentioned": {
+            "type": "array",
+            "valueArray": [
+              {
+                "type": "string",
+                "valueString": "Auto insurance",
+                "confidence": 0.91
+              }
+            ],
+            "confidence": 0.91
+          },
+          "Characters": {
+            "type": "array",
+            "valueArray": [
+              {
+                "type": "string",
+                "valueString": "Flo",
+                "confidence": 0.9
+              },
+              {
+                "type": "string",
+                "valueString": "shopper customer",
+                "confidence": 0.9
+              }
+            ],
+            "confidence": 0.9
+          },
+          "CharacterRoles": {
+            "type": "string",
+            "valueString": "Flo is the upbeat Progressive spokesperson and store guide; the shopper is a budget-conscious customer she walks through the tool.",
+            "confidence": 0.96
+          },
+          "MusicAndAudio": {
+            "type": "string",
+            "valueString": "Upbeat, bright instrumental store-jingle bed under Flo's dialogue; no lyrics, light register-beep sound effect when the tool returns a price.",
+            "confidence": 0.93
+          },
+          "Setting": {
+            "type": "string",
+            "valueString": "The Progressive Store: a brightly lit, all-white superstore aisle.",
+            "confidence": 0.97
+          },
+          "KeyActions": {
+            "type": "array",
+            "valueArray": [
+              {
+                "type": "string",
+                "valueString": "Flo welcomes the shopper at the kiosk",
+                "confidence": 0.97
+              },
+              {
+                "type": "string",
+                "valueString": "Shopper enters a monthly budget amount",
+                "confidence": 0.97
+              },
+              {
+                "type": "string",
+                "valueString": "Kiosk displays a shelf of matching coverage options",
+                "confidence": 0.97
+              },
+              {
+                "type": "string",
+                "valueString": "Flo hands over a labeled box with the selected plan",
+                "confidence": 0.97
+              }
+            ],
+            "confidence": 0.97
+          },
+          "OnScreenText": {
+            "type": "array",
+            "valueArray": [
+              {
+                "type": "string",
+                "valueString": "Name Your Price Tool",
+                "confidence": 0.98
+              },
+              {
+                "type": "string",
+                "valueString": "Progressive.com",
+                "confidence": 0.98
+              }
+            ],
+            "confidence": 0.98
+          },
+          "CommercialMessage": {
+            "type": "string",
+            "valueString": "You can name the price you want to pay and Progressive will show coverage options that fit your budget.",
+            "confidence": 0.82
+          },
+          "CallToAction": {
+            "type": "string",
+            "valueString": "Visit Progressive.com to try the Name Your Price Tool.",
+            "confidence": 0.88
+          },
+          "HumorMechanism": {
+            "type": "string",
+            "valueString": "Deadpan store-clerk delivery applied to an absurdly literal 'shopping for insurance' premise.",
+            "confidence": 0.91
+          },
+          "EmotionSentiment": {
+            "type": "string",
+            "valueString": "Upbeat and reassuring throughout, with a confident close.",
+            "confidence": 0.91
+          },
+          "SportsOrEntertainmentReferences": {
+            "type": "array",
+            "valueArray": [],
+            "confidence": 0.8
+          },
+          "BrandSafetyNotes": {
+            "type": "string",
+            "valueString": "No obvious brand-safety concerns are visible or spoken.",
+            "confidence": 0.95
+          }
+        }
+      }
+    ]
+  }
+}

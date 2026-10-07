@@ -1,0 +1,159 @@
+{
+  "id": "3550ee88-dcf9-5532-bb21-997e6d6d02e1",
+  "status": "Succeeded",
+  "result": {
+    "analyzerId": "flvCommercialVideoAnalyzer",
+    "apiVersion": "2025-11-01",
+    "createdAt": "2026-03-28T20:11:05Z",
+    "contents": [
+      {
+        "kind": "audioVisual",
+        "startTimeMs": 0,
+        "endTimeMs": 30000,
+        "markdown": "## Flo trains a nervous new seasonal employee\n\nFlo quizzes a new seasonal hire on how to run the Name Your Price Tool kiosk; the trainee fumbles the pitch before landing it with a customer.",
+        "fields": {
+          "AdvertiserBrand": {
+            "type": "string",
+            "valueString": "Progressive Insurance",
+            "confidence": 0.91
+          },
+          "VisibleProducts": {
+            "type": "array",
+            "valueArray": [
+              {
+                "type": "string",
+                "valueString": "Name Your Price Tool kiosk",
+                "confidence": 0.89
+              },
+              {
+                "type": "string",
+                "valueString": "Employee training badge",
+                "confidence": 0.89
+              }
+            ],
+            "confidence": 0.89
+          },
+          "CompetitorsMentioned": {
+            "type": "array",
+            "valueArray": [],
+            "confidence": 0.8
+          },
+          "InsuranceProductsMentioned": {
+            "type": "array",
+            "valueArray": [
+              {
+                "type": "string",
+                "valueString": "Auto insurance",
+                "confidence": 0.96
+              }
+            ],
+            "confidence": 0.96
+          },
+          "Characters": {
+            "type": "array",
+            "valueArray": [
+              {
+                "type": "string",
+                "valueString": "Flo",
+                "confidence": 0.95
+              },
+              {
+                "type": "string",
+                "valueString": "new seasonal employee",
+                "confidence": 0.95
+              }
+            ],
+            "confidence": 0.95
+          },
+          "CharacterRoles": {
+            "type": "string",
+            "valueString": "Flo is the confident store mentor; the new seasonal employee is eager but visibly nervous on his first shift.",
+            "confidence": 0.89
+          },
+          "MusicAndAudio": {
+            "type": "string",
+            "valueString": "Bouncy comedic instrumental cue that stumbles briefly when the trainee fumbles his line, then resolves cleanly.",
+            "confidence": 0.9
+          },
+          "Setting": {
+            "type": "string",
+            "valueString": "The Progressive Store, near the front training station.",
+            "confidence": 0.87
+          },
+          "KeyActions": {
+            "type": "array",
+            "valueArray": [
+              {
+                "type": "string",
+                "valueString": "Flo quizzes the trainee on the kiosk script",
+                "confidence": 0.81
+              },
+              {
+                "type": "string",
+                "valueString": "Trainee stumbles over the pitch to a waiting customer",
+                "confidence": 0.81
+              },
+              {
+                "type": "string",
+                "valueString": "Flo gives an encouraging nudge",
+                "confidence": 0.81
+              },
+              {
+                "type": "string",
+                "valueString": "Trainee lands the pitch and the customer smiles",
+                "confidence": 0.81
+              }
+            ],
+            "confidence": 0.81
+          },
+          "OnScreenText": {
+            "type": "array",
+            "valueArray": [
+              {
+                "type": "string",
+                "valueString": "Name Your Price Tool",
+                "confidence": 0.86
+              },
+              {
+                "type": "string",
+                "valueString": "Progressive.com",
+                "confidence": 0.86
+              }
+            ],
+            "confidence": 0.86
+          },
+          "CommercialMessage": {
+            "type": "string",
+            "valueString": "Anyone at Progressive can help you find a price that fits your budget.",
+            "confidence": 0.97
+          },
+          "CallToAction": {
+            "type": "string",
+            "valueString": "Visit Progressive.com to find your price.",
+            "confidence": 0.96
+          },
+          "HumorMechanism": {
+            "type": "string",
+            "valueString": "The trainee's nervous overcorrection played against Flo's calm coaching.",
+            "confidence": 0.81
+          },
+          "EmotionSentiment": {
+            "type": "string",
+            "valueString": "Light embarrassment resolving into pride.",
+            "confidence": 0.96
+          },
+          "SportsOrEntertainmentReferences": {
+            "type": "array",
+            "valueArray": [],
+            "confidence": 0.81
+          },
+          "BrandSafetyNotes": {
+            "type": "string",
+            "valueString": "No obvious brand-safety concerns are visible or spoken.",
+            "confidence": 0.91
+          }
+        }
+      }
+    ]
+  }
+}

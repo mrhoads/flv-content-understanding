@@ -1,0 +1,159 @@
+{
+  "id": "5145c9f0-d48d-58cb-9950-cad338913717",
+  "status": "Succeeded",
+  "result": {
+    "analyzerId": "flvCommercialVideoAnalyzer",
+    "apiVersion": "2025-11-01",
+    "createdAt": "2026-03-10T03:11:05Z",
+    "contents": [
+      {
+        "kind": "audioVisual",
+        "startTimeMs": 0,
+        "endTimeMs": 30000,
+        "markdown": "## Jamie organizes a one-man parade\n\nJamie recruits two other employees into an impromptu mini-parade down the main aisle to celebrate a sales milestone, while Flo tries to keep shoppers moving.",
+        "fields": {
+          "AdvertiserBrand": {
+            "type": "string",
+            "valueString": "Progressive Insurance",
+            "confidence": 0.98
+          },
+          "VisibleProducts": {
+            "type": "array",
+            "valueArray": [
+              {
+                "type": "string",
+                "valueString": "Progressive Store shelf display",
+                "confidence": 0.95
+              },
+              {
+                "type": "string",
+                "valueString": "Handmade parade banner",
+                "confidence": 0.95
+              }
+            ],
+            "confidence": 0.95
+          },
+          "CompetitorsMentioned": {
+            "type": "array",
+            "valueArray": [],
+            "confidence": 0.75
+          },
+          "InsuranceProductsMentioned": {
+            "type": "array",
+            "valueArray": [
+              {
+                "type": "string",
+                "valueString": "Auto insurance",
+                "confidence": 0.97
+              }
+            ],
+            "confidence": 0.97
+          },
+          "Characters": {
+            "type": "array",
+            "valueArray": [
+              {
+                "type": "string",
+                "valueString": "Jamie",
+                "confidence": 0.91
+              },
+              {
+                "type": "string",
+                "valueString": "Flo",
+                "confidence": 0.91
+              },
+              {
+                "type": "string",
+                "valueString": "two coworkers",
+                "confidence": 0.91
+              }
+            ],
+            "confidence": 0.91
+          },
+          "CharacterRoles": {
+            "type": "string",
+            "valueString": "Jamie leads an enthusiastic, self-organized parade; Flo manages the shoppers caught in the middle of it.",
+            "confidence": 0.96
+          },
+          "MusicAndAudio": {
+            "type": "string",
+            "valueString": "Mock-triumphant marching-band instrumental with a kazoo lead line and a small cowbell sound effect.",
+            "confidence": 0.95
+          },
+          "Setting": {
+            "type": "string",
+            "valueString": "The Progressive Store's main aisle.",
+            "confidence": 0.84
+          },
+          "KeyActions": {
+            "type": "array",
+            "valueArray": [
+              {
+                "type": "string",
+                "valueString": "Jamie leads a small parade with a handmade banner",
+                "confidence": 0.95
+              },
+              {
+                "type": "string",
+                "valueString": "Two coworkers follow along half-heartedly",
+                "confidence": 0.95
+              },
+              {
+                "type": "string",
+                "valueString": "Flo redirects confused shoppers around the parade",
+                "confidence": 0.95
+              },
+              {
+                "type": "string",
+                "valueString": "Jamie takes an exaggerated bow at the register",
+                "confidence": 0.95
+              }
+            ],
+            "confidence": 0.95
+          },
+          "OnScreenText": {
+            "type": "array",
+            "valueArray": [
+              {
+                "type": "string",
+                "valueString": "Progressive.com",
+                "confidence": 0.91
+              }
+            ],
+            "confidence": 0.91
+          },
+          "CommercialMessage": {
+            "type": "string",
+            "valueString": "Progressive's team celebrates the wins, even small ones, while still helping you save.",
+            "confidence": 0.85
+          },
+          "CallToAction": {
+            "type": "string",
+            "valueString": "Visit Progressive.com for a quote.",
+            "confidence": 0.95
+          },
+          "HumorMechanism": {
+            "type": "string",
+            "valueString": "A full parade staged for an extremely minor achievement.",
+            "confidence": 0.8
+          },
+          "EmotionSentiment": {
+            "type": "string",
+            "valueString": "Comedic and high-energy, ending in a shared laugh.",
+            "confidence": 0.8
+          },
+          "SportsOrEntertainmentReferences": {
+            "type": "array",
+            "valueArray": [],
+            "confidence": 0.74
+          },
+          "BrandSafetyNotes": {
+            "type": "string",
+            "valueString": "No obvious brand-safety concerns are visible or spoken.",
+            "confidence": 0.93
+          }
+        }
+      }
+    ]
+  }
+}

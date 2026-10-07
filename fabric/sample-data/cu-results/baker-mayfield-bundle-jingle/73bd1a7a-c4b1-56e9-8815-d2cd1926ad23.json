@@ -1,0 +1,175 @@
+{
+  "id": "73bd1a7a-c4b1-56e9-8815-d2cd1926ad23",
+  "status": "Succeeded",
+  "result": {
+    "analyzerId": "flvCommercialVideoAnalyzer",
+    "apiVersion": "2025-11-01",
+    "createdAt": "2026-03-12T03:11:05Z",
+    "contents": [
+      {
+        "kind": "audioVisual",
+        "startTimeMs": 0,
+        "endTimeMs": 30000,
+        "markdown": "## Baker Mayfield sings the bundle jingle\n\nNFL quarterback Baker Mayfield breaks into a living room, singing a short original 'bundle and save' jingle to a surprised homeowner family.",
+        "fields": {
+          "AdvertiserBrand": {
+            "type": "string",
+            "valueString": "Progressive Insurance",
+            "confidence": 0.93
+          },
+          "VisibleProducts": {
+            "type": "array",
+            "valueArray": [
+              {
+                "type": "string",
+                "valueString": "Living room furniture",
+                "confidence": 0.87
+              },
+              {
+                "type": "string",
+                "valueString": "Progressive bundle offer card",
+                "confidence": 0.87
+              }
+            ],
+            "confidence": 0.87
+          },
+          "CompetitorsMentioned": {
+            "type": "array",
+            "valueArray": [],
+            "confidence": 0.85
+          },
+          "InsuranceProductsMentioned": {
+            "type": "array",
+            "valueArray": [
+              {
+                "type": "string",
+                "valueString": "Auto insurance",
+                "confidence": 0.93
+              },
+              {
+                "type": "string",
+                "valueString": "Home insurance",
+                "confidence": 0.93
+              },
+              {
+                "type": "string",
+                "valueString": "Bundled home and auto",
+                "confidence": 0.93
+              }
+            ],
+            "confidence": 0.93
+          },
+          "Characters": {
+            "type": "array",
+            "valueArray": [
+              {
+                "type": "string",
+                "valueString": "Baker Mayfield",
+                "confidence": 0.96
+              },
+              {
+                "type": "string",
+                "valueString": "homeowner family",
+                "confidence": 0.96
+              }
+            ],
+            "confidence": 0.96
+          },
+          "CharacterRoles": {
+            "type": "string",
+            "valueString": "Baker Mayfield appears as a celebrity spokesperson delivering a musical pitch; the homeowner family reacts with surprised amusement.",
+            "confidence": 0.96
+          },
+          "MusicAndAudio": {
+            "type": "string",
+            "valueString": "Baker Mayfield sings an original short jingle about bundling and saving, backed by a simple acoustic guitar.",
+            "confidence": 0.95
+          },
+          "Setting": {
+            "type": "string",
+            "valueString": "A suburban family living room.",
+            "confidence": 0.89
+          },
+          "KeyActions": {
+            "type": "array",
+            "valueArray": [
+              {
+                "type": "string",
+                "valueString": "Baker Mayfield appears unannounced in the living room",
+                "confidence": 0.95
+              },
+              {
+                "type": "string",
+                "valueString": "He sings the bundle-and-save jingle",
+                "confidence": 0.95
+              },
+              {
+                "type": "string",
+                "valueString": "Family reacts with surprised laughter",
+                "confidence": 0.95
+              }
+            ],
+            "confidence": 0.95
+          },
+          "OnScreenText": {
+            "type": "array",
+            "valueArray": [
+              {
+                "type": "string",
+                "valueString": "Bundle & Save",
+                "confidence": 0.91
+              },
+              {
+                "type": "string",
+                "valueString": "Progressive.com",
+                "confidence": 0.91
+              }
+            ],
+            "confidence": 0.91
+          },
+          "CommercialMessage": {
+            "type": "string",
+            "valueString": "Bundling home and auto insurance with Progressive saves money.",
+            "confidence": 0.96
+          },
+          "CallToAction": {
+            "type": "string",
+            "valueString": "Bundle your policies at Progressive.com.",
+            "confidence": 0.87
+          },
+          "HumorMechanism": {
+            "type": "string",
+            "valueString": "Incongruous celebrity-musical intrusion into an ordinary living room.",
+            "confidence": 0.92
+          },
+          "EmotionSentiment": {
+            "type": "string",
+            "valueString": "Fun and high-energy, ending on a cheerful note.",
+            "confidence": 0.81
+          },
+          "SportsOrEntertainmentReferences": {
+            "type": "array",
+            "valueArray": [
+              {
+                "type": "string",
+                "valueString": "NFL",
+                "confidence": 0.72
+              },
+              {
+                "type": "string",
+                "valueString": "Baker Mayfield (celebrity spokesperson)",
+                "confidence": 0.72
+              }
+            ],
+            "confidence": 0.72
+          },
+          "BrandSafetyNotes": {
+            "type": "string",
+            "valueString": "No obvious brand-safety concerns are visible or spoken.",
+            "confidence": 0.91
+          }
+        }
+      }
+    ]
+  }
+}

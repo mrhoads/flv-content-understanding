@@ -1,0 +1,144 @@
+{
+  "id": "39a5a906-046e-51d5-be8e-1cbe238c3c98",
+  "status": "Succeeded",
+  "result": {
+    "analyzerId": "flvCommercialVideoAnalyzer",
+    "apiVersion": "2025-11-01",
+    "createdAt": "2026-05-13T02:11:05Z",
+    "contents": [
+      {
+        "kind": "audioVisual",
+        "startTimeMs": 0,
+        "endTimeMs": 15000,
+        "markdown": "## Flo's quick Name Your Price Tool recap\n\nA 15-second cut-down: Flo reminds returning viewers that the Name Your Price Tool is still there whenever they need to adjust their budget.",
+        "fields": {
+          "AdvertiserBrand": {
+            "type": "string",
+            "valueString": "Progressive Insurance",
+            "confidence": 0.97
+          },
+          "VisibleProducts": {
+            "type": "array",
+            "valueArray": [
+              {
+                "type": "string",
+                "valueString": "Name Your Price Tool kiosk",
+                "confidence": 0.97
+              },
+              {
+                "type": "string",
+                "valueString": "Progressive Store shelf display",
+                "confidence": 0.97
+              }
+            ],
+            "confidence": 0.97
+          },
+          "CompetitorsMentioned": {
+            "type": "array",
+            "valueArray": [],
+            "confidence": 0.77
+          },
+          "InsuranceProductsMentioned": {
+            "type": "array",
+            "valueArray": [
+              {
+                "type": "string",
+                "valueString": "Auto insurance",
+                "confidence": 0.96
+              }
+            ],
+            "confidence": 0.96
+          },
+          "Characters": {
+            "type": "array",
+            "valueArray": [
+              {
+                "type": "string",
+                "valueString": "Flo",
+                "confidence": 0.91
+              }
+            ],
+            "confidence": 0.91
+          },
+          "CharacterRoles": {
+            "type": "string",
+            "valueString": "Flo delivers a quick direct-to-camera reminder.",
+            "confidence": 0.91
+          },
+          "MusicAndAudio": {
+            "type": "string",
+            "valueString": "Short upbeat jingle sting, no spoken lyrics.",
+            "confidence": 0.91
+          },
+          "Setting": {
+            "type": "string",
+            "valueString": "The Progressive Store checkout counter.",
+            "confidence": 0.89
+          },
+          "KeyActions": {
+            "type": "array",
+            "valueArray": [
+              {
+                "type": "string",
+                "valueString": "Flo waves to camera",
+                "confidence": 0.9
+              },
+              {
+                "type": "string",
+                "valueString": "Flo gestures to the kiosk",
+                "confidence": 0.9
+              }
+            ],
+            "confidence": 0.9
+          },
+          "OnScreenText": {
+            "type": "array",
+            "valueArray": [
+              {
+                "type": "string",
+                "valueString": "Name Your Price Tool",
+                "confidence": 0.94
+              },
+              {
+                "type": "string",
+                "valueString": "1-800-PROGRESSIVE",
+                "confidence": 0.94
+              }
+            ],
+            "confidence": 0.94
+          },
+          "CommercialMessage": {
+            "type": "string",
+            "valueString": "The Name Your Price Tool is always available to fit your budget.",
+            "confidence": 0.97
+          },
+          "CallToAction": {
+            "type": "string",
+            "valueString": "Call or visit Progressive.com for a quote.",
+            "confidence": 0.97
+          },
+          "HumorMechanism": {
+            "type": "string",
+            "valueString": "Quick callback to the store premise for familiarity.",
+            "confidence": 0.94
+          },
+          "EmotionSentiment": {
+            "type": "string",
+            "valueString": "Friendly and brisk.",
+            "confidence": 0.87
+          },
+          "SportsOrEntertainmentReferences": {
+            "type": "array",
+            "valueArray": [],
+            "confidence": 0.71
+          },
+          "BrandSafetyNotes": {
+            "type": "string",
+            "valueString": "No obvious brand-safety concerns are visible or spoken.",
+            "confidence": 0.91
+          }
+        }
+      }
+    ]
+  }
+}

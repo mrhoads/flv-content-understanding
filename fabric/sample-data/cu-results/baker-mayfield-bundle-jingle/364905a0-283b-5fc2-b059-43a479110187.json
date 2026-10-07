@@ -1,0 +1,185 @@
+{
+  "id": "364905a0-283b-5fc2-b059-43a479110187",
+  "status": "Succeeded",
+  "result": {
+    "analyzerId": "flvCommercialVideoAnalyzer",
+    "apiVersion": "2025-11-01",
+    "createdAt": "2025-11-04T21:11:05Z",
+    "contents": [
+      {
+        "kind": "audioVisual",
+        "startTimeMs": 0,
+        "endTimeMs": 30000,
+        "markdown": "## Baker Mayfield crashes a backyard BBQ\n\nBaker Mayfield hops the fence into a neighborhood backyard BBQ, grabs a spatula as a microphone, and serenades surprised guests with the bundle jingle before flipping a burger.",
+        "fields": {
+          "AdvertiserBrand": {
+            "type": "string",
+            "valueString": "Progressive Insurance",
+            "confidence": 0.95
+          },
+          "VisibleProducts": {
+            "type": "array",
+            "valueArray": [
+              {
+                "type": "string",
+                "valueString": "Backyard grill",
+                "confidence": 0.97
+              },
+              {
+                "type": "string",
+                "valueString": "Progressive bundle offer card",
+                "confidence": 0.97
+              }
+            ],
+            "confidence": 0.97
+          },
+          "CompetitorsMentioned": {
+            "type": "array",
+            "valueArray": [],
+            "confidence": 0.86
+          },
+          "InsuranceProductsMentioned": {
+            "type": "array",
+            "valueArray": [
+              {
+                "type": "string",
+                "valueString": "Auto insurance",
+                "confidence": 0.99
+              },
+              {
+                "type": "string",
+                "valueString": "Home insurance",
+                "confidence": 0.99
+              },
+              {
+                "type": "string",
+                "valueString": "Bundled home and auto",
+                "confidence": 0.99
+              }
+            ],
+            "confidence": 0.99
+          },
+          "Characters": {
+            "type": "array",
+            "valueArray": [
+              {
+                "type": "string",
+                "valueString": "Baker Mayfield",
+                "confidence": 0.93
+              },
+              {
+                "type": "string",
+                "valueString": "BBQ host",
+                "confidence": 0.93
+              },
+              {
+                "type": "string",
+                "valueString": "backyard guests",
+                "confidence": 0.93
+              }
+            ],
+            "confidence": 0.93
+          },
+          "CharacterRoles": {
+            "type": "string",
+            "valueString": "Baker Mayfield is the uninvited celebrity performer; the host and guests react with surprised amusement.",
+            "confidence": 0.96
+          },
+          "MusicAndAudio": {
+            "type": "string",
+            "valueString": "Baker Mayfield sings the bundle jingle a cappella into a spatula, backed by ambient backyard chatter and a grill-sizzle sound effect.",
+            "confidence": 0.86
+          },
+          "Setting": {
+            "type": "string",
+            "valueString": "A suburban backyard during a weekend BBQ.",
+            "confidence": 0.85
+          },
+          "KeyActions": {
+            "type": "array",
+            "valueArray": [
+              {
+                "type": "string",
+                "valueString": "Baker Mayfield hops the backyard fence",
+                "confidence": 0.88
+              },
+              {
+                "type": "string",
+                "valueString": "He grabs a spatula and sings the jingle",
+                "confidence": 0.88
+              },
+              {
+                "type": "string",
+                "valueString": "Guests laugh and start recording on their phones",
+                "confidence": 0.88
+              },
+              {
+                "type": "string",
+                "valueString": "He flips a burger and hands it to the host",
+                "confidence": 0.88
+              }
+            ],
+            "confidence": 0.88
+          },
+          "OnScreenText": {
+            "type": "array",
+            "valueArray": [
+              {
+                "type": "string",
+                "valueString": "Bundle & Save",
+                "confidence": 0.85
+              },
+              {
+                "type": "string",
+                "valueString": "Progressive.com",
+                "confidence": 0.85
+              }
+            ],
+            "confidence": 0.85
+          },
+          "CommercialMessage": {
+            "type": "string",
+            "valueString": "Bundling home and auto insurance with Progressive saves money.",
+            "confidence": 0.93
+          },
+          "CallToAction": {
+            "type": "string",
+            "valueString": "Bundle your policies at Progressive.com.",
+            "confidence": 0.86
+          },
+          "HumorMechanism": {
+            "type": "string",
+            "valueString": "A celebrity treating an ordinary BBQ like a concert stage.",
+            "confidence": 0.87
+          },
+          "EmotionSentiment": {
+            "type": "string",
+            "valueString": "Fun and high-energy, ending in a friendly laugh.",
+            "confidence": 0.81
+          },
+          "SportsOrEntertainmentReferences": {
+            "type": "array",
+            "valueArray": [
+              {
+                "type": "string",
+                "valueString": "NFL",
+                "confidence": 0.79
+              },
+              {
+                "type": "string",
+                "valueString": "Baker Mayfield (celebrity spokesperson)",
+                "confidence": 0.79
+              }
+            ],
+            "confidence": 0.79
+          },
+          "BrandSafetyNotes": {
+            "type": "string",
+            "valueString": "No obvious brand-safety concerns are visible or spoken.",
+            "confidence": 0.92
+          }
+        }
+      }
+    ]
+  }
+}

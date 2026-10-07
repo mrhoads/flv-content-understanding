@@ -1,0 +1,139 @@
+{
+  "id": "12a2b09b-17c9-5a81-b89d-633757d2fe33",
+  "status": "Succeeded",
+  "result": {
+    "analyzerId": "flvCommercialVideoAnalyzer",
+    "apiVersion": "2025-11-01",
+    "createdAt": "2026-05-23T07:11:05Z",
+    "contents": [
+      {
+        "kind": "audioVisual",
+        "startTimeMs": 0,
+        "endTimeMs": 15000,
+        "markdown": "## Quick Motaur discount recap\n\nA 15-second cut-down: the Motaur gallops past camera and shouts a one-line reminder about motorcycle savings.",
+        "fields": {
+          "AdvertiserBrand": {
+            "type": "string",
+            "valueString": "Progressive Insurance",
+            "confidence": 0.96
+          },
+          "VisibleProducts": {
+            "type": "array",
+            "valueArray": [
+              {
+                "type": "string",
+                "valueString": "Progressive motorcycle policy flyer",
+                "confidence": 0.91
+              }
+            ],
+            "confidence": 0.91
+          },
+          "CompetitorsMentioned": {
+            "type": "array",
+            "valueArray": [],
+            "confidence": 0.83
+          },
+          "InsuranceProductsMentioned": {
+            "type": "array",
+            "valueArray": [
+              {
+                "type": "string",
+                "valueString": "Motorcycle insurance",
+                "confidence": 0.91
+              }
+            ],
+            "confidence": 0.91
+          },
+          "Characters": {
+            "type": "array",
+            "valueArray": [
+              {
+                "type": "string",
+                "valueString": "The Motaur",
+                "confidence": 0.93
+              }
+            ],
+            "confidence": 0.93
+          },
+          "CharacterRoles": {
+            "type": "string",
+            "valueString": "The Motaur delivers a brief, high-energy direct-to-camera reminder.",
+            "confidence": 0.98
+          },
+          "MusicAndAudio": {
+            "type": "string",
+            "valueString": "Short driving guitar riff sting with an engine-rev sound effect.",
+            "confidence": 0.86
+          },
+          "Setting": {
+            "type": "string",
+            "valueString": "An open parking lot.",
+            "confidence": 0.88
+          },
+          "KeyActions": {
+            "type": "array",
+            "valueArray": [
+              {
+                "type": "string",
+                "valueString": "The Motaur gallops past camera",
+                "confidence": 0.91
+              },
+              {
+                "type": "string",
+                "valueString": "The Motaur shouts the savings reminder",
+                "confidence": 0.91
+              }
+            ],
+            "confidence": 0.91
+          },
+          "OnScreenText": {
+            "type": "array",
+            "valueArray": [
+              {
+                "type": "string",
+                "valueString": "Motorcycle insurance starting at $75/year*",
+                "confidence": 0.91
+              },
+              {
+                "type": "string",
+                "valueString": "Progressive.com",
+                "confidence": 0.91
+              }
+            ],
+            "confidence": 0.91
+          },
+          "CommercialMessage": {
+            "type": "string",
+            "valueString": "Motorcycle riders can save with usage-based Progressive discounts.",
+            "confidence": 0.96
+          },
+          "CallToAction": {
+            "type": "string",
+            "valueString": "Get a quote at Progressive.com.",
+            "confidence": 0.9
+          },
+          "HumorMechanism": {
+            "type": "string",
+            "valueString": "Quick callback to the mascot's exaggerated enthusiasm.",
+            "confidence": 0.83
+          },
+          "EmotionSentiment": {
+            "type": "string",
+            "valueString": "High-energy and brief.",
+            "confidence": 0.85
+          },
+          "SportsOrEntertainmentReferences": {
+            "type": "array",
+            "valueArray": [],
+            "confidence": 0.72
+          },
+          "BrandSafetyNotes": {
+            "type": "string",
+            "valueString": "No riding shown; mascot appears in an empty lot only.",
+            "confidence": 0.91
+          }
+        }
+      }
+    ]
+  }
+}

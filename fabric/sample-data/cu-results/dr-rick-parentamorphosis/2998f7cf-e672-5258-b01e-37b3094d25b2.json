@@ -1,0 +1,144 @@
+{
+  "id": "2998f7cf-e672-5258-b01e-37b3094d25b2",
+  "status": "Succeeded",
+  "result": {
+    "analyzerId": "flvCommercialVideoAnalyzer",
+    "apiVersion": "2025-11-01",
+    "createdAt": "2026-09-15T16:11:05Z",
+    "contents": [
+      {
+        "kind": "audioVisual",
+        "startTimeMs": 0,
+        "endTimeMs": 15000,
+        "markdown": "## Dr. Rick's quick check-in\n\nA short cut-down where Dr. Rick catches a homeowner refolding takeout menus 'for the drawer' and offers a one-line intervention.",
+        "fields": {
+          "AdvertiserBrand": {
+            "type": "string",
+            "valueString": "Progressive Insurance",
+            "confidence": 0.91
+          },
+          "VisibleProducts": {
+            "type": "array",
+            "valueArray": [
+              {
+                "type": "string",
+                "valueString": "Dr. Rick's clipboard",
+                "confidence": 0.93
+              }
+            ],
+            "confidence": 0.93
+          },
+          "CompetitorsMentioned": {
+            "type": "array",
+            "valueArray": [],
+            "confidence": 0.75
+          },
+          "InsuranceProductsMentioned": {
+            "type": "array",
+            "valueArray": [
+              {
+                "type": "string",
+                "valueString": "Home insurance",
+                "confidence": 0.92
+              }
+            ],
+            "confidence": 0.92
+          },
+          "Characters": {
+            "type": "array",
+            "valueArray": [
+              {
+                "type": "string",
+                "valueString": "Dr. Rick",
+                "confidence": 0.95
+              },
+              {
+                "type": "string",
+                "valueString": "young homeowner",
+                "confidence": 0.95
+              }
+            ],
+            "confidence": 0.95
+          },
+          "CharacterRoles": {
+            "type": "string",
+            "valueString": "Dr. Rick delivers a quick deadpan intervention.",
+            "confidence": 0.85
+          },
+          "MusicAndAudio": {
+            "type": "string",
+            "valueString": "Single soft piano sting, brief record-scratch effect.",
+            "confidence": 0.95
+          },
+          "Setting": {
+            "type": "string",
+            "valueString": "A suburban kitchen.",
+            "confidence": 0.93
+          },
+          "KeyActions": {
+            "type": "array",
+            "valueArray": [
+              {
+                "type": "string",
+                "valueString": "Homeowner refolds takeout menus",
+                "confidence": 0.91
+              },
+              {
+                "type": "string",
+                "valueString": "Dr. Rick interrupts",
+                "confidence": 0.91
+              }
+            ],
+            "confidence": 0.91
+          },
+          "OnScreenText": {
+            "type": "array",
+            "valueArray": [
+              {
+                "type": "string",
+                "valueString": "Parentamorphosis",
+                "confidence": 0.85
+              },
+              {
+                "type": "string",
+                "valueString": "Progressive.com/home",
+                "confidence": 0.85
+              }
+            ],
+            "confidence": 0.85
+          },
+          "CommercialMessage": {
+            "type": "string",
+            "valueString": "Don't let homeownership turn you into your parents.",
+            "confidence": 0.86
+          },
+          "CallToAction": {
+            "type": "string",
+            "valueString": "Visit Progressive.com/home for a quote.",
+            "confidence": 0.91
+          },
+          "HumorMechanism": {
+            "type": "string",
+            "valueString": "Quick callback gag to a recognizable parent habit.",
+            "confidence": 0.84
+          },
+          "EmotionSentiment": {
+            "type": "string",
+            "valueString": "Light and comedic.",
+            "confidence": 0.92
+          },
+          "SportsOrEntertainmentReferences": {
+            "type": "array",
+            "valueArray": [],
+            "confidence": 0.72
+          },
+          "BrandSafetyNotes": {
+            "type": "string",
+            "valueString": "No obvious brand-safety concerns are visible or spoken.",
+            "confidence": 0.94
+          }
+        }
+      }
+    ]
+  }
+}
