@@ -1,5 +1,31 @@
 # Azure Deployment Plan
 
+## 2026-10-19: Logic App search indexing
+
+- Status: Deployed and Verified
+- Approved scope: Update existing Consumption Logic App `mcr-content-understanding` in `demo-metlife-azcli-rg`, subscription `c8fad4c4-3897-42b5-bbc2-5d96f255f209`, region `northcentralus`.
+- Change: Add `Run_town_hall_indexer` after `Save_result_to_blob` succeeds inside `Is_video_file`. POST to `https://mcr20260720.search.windows.net/indexers/cu-town-hall-indexer/run?api-version=2025-09-01` with system-assigned managed identity and audience `https://search.azure.com`.
+- Target: Existing `cu-town-hall-indexer`, data source `cu-results-datasource`, container `cu-results`, index `cu-town-hall-index`. Existing mappings and index schema remain unchanged.
+- Authorization: Grant the Logic App identity `2f72ecec-6156-47c2-a013-991a91822c37` the built-in Search Service Contributor role scoped only to search service `mcr20260720`. No keys or secrets.
+- Reliability: Exponential HTTP retries for transient failures. A rejected run, including an overlapping indexer run conflict, fails visibly rather than being reported as successful. The HTTP action requests asynchronous incremental indexing; it does not reset the indexer or wait for indexing completion.
+- Deployment: Back up the existing workflow to session artifacts, preserve existing definition and connection parameters, validate through the Logic Apps validation endpoint, then PUT the existing workflow with only the definition changed. Compare definition, parameters, state, identity, and version immediately before writing; this API does not return an ETag. PATCH cannot update workflow properties (`PatchWorkflowPropertiesNotSupported`); use the documented create-or-update PUT.
+- Verification: Read back the action and role assignment; run the indexer once for existing results, inspect completion/errors, and query the resulting document by source URL.
+- Rollback: Restore the backed-up definition and remove only the newly created role assignment if needed. Do not change unrelated resources.
+- Approval: User approved workflow update, scoped permission, and one incremental indexing run.
+- Recipe: AZCLI, targeted existing-resource REST update. The unrelated Container App Bicep deployment is outside this change.
+- All validation checks pass:
+  - [x] Core validation: Azure CLI authentication, exact existing-resource discovery, definition preservation assertions, and Logic Apps server-side validate endpoint.
+  - [x] Docker build: Not applicable; no containers or app code change.
+  - [x] Azure Policy validation: No applicable assignments returned for the target resource group including inherited scopes.
+  - [x] Role verification: Search Service Contributor covers indexer management; approved assignment is restricted to the exact Search service and existing Logic App identity. Existing blob and analysis permissions remain unchanged.
+- Validation proof: Logic Apps `POST /validate` succeeded; preparation asserts every preexisting action and all definition properties remain identical except the one new action. No application build is needed for this JSON-only workflow change.
+- Deployment proof (2026-10-19): Workflow PUT succeeded; readback matched the proposed definition exactly. Existing connection parameters, enabled state, and managed identity were preserved. Search-service-scoped role assignment `d631e3f6-224f-4a14-91d8-55388e669fad` was created and read back.
+- Indexing proof: Incremental run completed successfully at `2026-10-19T16:29:03.354Z`, processing two documents with zero failures. A Search query returned the uploaded video's source `https://cuoutput20261013.blob.core.windows.net/cu-results/4mjXPWPkWo8.mp4.json` and title `AI and Technology-Driven Solutions for Employee Well-being and Productivity`.
+- Remaining observation: Existing mappings emitted warnings for absent optional array values. No index schema or mappings were changed. The new managed-identity action has not yet executed in a new ingestion run; the backfill was invoked separately using the deployer's Entra identity, without rerunning video analysis.
+- Recovery artifacts: Original workflow, proposed definition, and deployed workflow are saved in this session's `files/` directory.
+
+## Previous deployment history
+
 - Status: Deployed and Verified
 - Mode: MODIFY
 - Target: Existing Azure Container App `ca-flv-demo-dev-e9fd`
