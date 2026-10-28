@@ -1,0 +1,238 @@
+{
+  "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "sharePointHost": { "type": "String" },
+    "sharingUrl": { "type": "SecureString" },
+    "expectedFileName": { "type": "String" },
+    "contentUnderstandingEndpoint": { "type": "String" },
+    "analyzerId": { "type": "String" },
+    "contentUnderstandingApiVersion": { "type": "String" }
+  },
+  "triggers": {
+    "manual": {
+      "type": "Request",
+      "kind": "Http",
+      "inputs": { "schema": {} }
+    }
+  },
+  "actions": {
+    "Read_SharePoint_root_site": {
+      "type": "Http",
+      "inputs": {
+        "method": "GET",
+        "uri": "@concat('https://graph.microsoft.com/v1.0/sites/', parameters('sharePointHost'), '?$select=id,webUrl')",
+        "authentication": {
+          "type": "ManagedServiceIdentity",
+          "audience": "https://graph.microsoft.com"
+        },
+        "retryPolicy": { "type": "none" }
+      },
+      "runAfter": {}
+    },
+    "Resolve_shared_file": {
+      "type": "Http",
+      "inputs": {
+        "method": "GET",
+        "uri": "@concat('https://graph.microsoft.com/v1.0/shares/u!', replace(replace(replace(base64(parameters('sharingUrl')), '=', ''), '/', '_'), '+', '-'), '/driveItem')",
+        "authentication": {
+          "type": "ManagedServiceIdentity",
+          "audience": "https://graph.microsoft.com"
+        },
+        "retryPolicy": { "type": "none" }
+      },
+      "runtimeConfiguration": {
+        "secureData": { "properties": ["inputs", "outputs"] }
+      },
+      "runAfter": { "Read_SharePoint_root_site": ["Succeeded"] }
+    },
+    "Verify_target_file": {
+      "type": "If",
+      "expression": {
+        "and": [
+          { "equals": ["@body('Resolve_shared_file')?['name']", "@parameters('expectedFileName')"] },
+          { "equals": ["@body('Resolve_shared_file')?['file']?['mimeType']", "video/mp4"] },
+          { "greater": ["@int(body('Resolve_shared_file')?['size'])", 1023] }
+        ]
+      },
+      "actions": {
+        "Read_file_content": {
+          "type": "Http",
+          "inputs": {
+            "method": "GET",
+            "uri": "@body('Resolve_shared_file')?['@microsoft.graph.downloadUrl']",
+            "retryPolicy": { "type": "none" }
+          },
+          "runtimeConfiguration": {
+            "secureData": { "properties": ["inputs", "outputs"] }
+          },
+          "runAfter": {}
+        },
+        "Read_summary": {
+          "type": "Compose",
+          "inputs": {
+            "httpStatus": "@outputs('Read_file_content')?['statusCode']",
+            "bytesRead": "@int(coalesce(outputs('Read_file_content')?['headers']?['Content-Length'], outputs('Read_file_content')?['headers']?['content-length'], '0'))"
+          },
+          "runAfter": { "Read_file_content": ["Succeeded"] }
+        },
+        "Verify_file_content": {
+          "type": "If",
+          "expression": {
+            "and": [
+              { "equals": ["@outputs('Read_summary')?['httpStatus']", 200] },
+              { "equals": ["@outputs('Read_summary')?['bytesRead']", "@int(body('Resolve_shared_file')?['size'])"] }
+            ]
+          },
+          "actions": {
+            "Submit_to_town_hall_analyzer": {
+              "type": "Http",
+              "inputs": {
+                "method": "POST",
+                "uri": "@concat(parameters('contentUnderstandingEndpoint'), '/contentunderstanding/analyzers/', parameters('analyzerId'), ':analyzeBinary?api-version=', parameters('contentUnderstandingApiVersion'))",
+                "headers": { "Content-Type": "video/mp4" },
+                "body": "@body('Read_file_content')",
+                "authentication": {
+                  "type": "ManagedServiceIdentity",
+                  "audience": "https://cognitiveservices.azure.com"
+                },
+                "retryPolicy": { "type": "none" }
+              },
+              "operationOptions": "DisableAsyncPattern",
+              "runtimeConfiguration": {
+                "secureData": { "properties": ["inputs", "outputs"] }
+              },
+              "runAfter": {}
+            },
+            "Return_submission": {
+              "type": "Response",
+              "kind": "Http",
+              "inputs": {
+                "statusCode": 202,
+                "body": {
+                  "status": "Submitted",
+                  "analyzerId": "@parameters('analyzerId')",
+                  "fileName": "@body('Resolve_shared_file')?['name']",
+                  "fileSizeBytes": "@body('Resolve_shared_file')?['size']",
+                  "bytesRead": "@outputs('Read_summary')?['bytesRead']",
+                  "operationId": "@body('Submit_to_town_hall_analyzer')?['id']",
+                  "operationLocation": "@coalesce(outputs('Submit_to_town_hall_analyzer')?['headers']?['Operation-Location'], outputs('Submit_to_town_hall_analyzer')?['headers']?['operation-location'])",
+                  "workflowRunId": "@workflow().run.name",
+                  "authentication": "System-assigned managed identity for Microsoft Graph and Content Understanding",
+                  "sharePointConnectorUsed": false
+                }
+              },
+              "runAfter": { "Submit_to_town_hall_analyzer": ["Succeeded"] }
+            },
+            "Poll_town_hall_analysis": {
+              "type": "Until",
+              "expression": "@contains(createArray('succeeded', 'failed', 'canceled', 'cancelled'), toLower(coalesce(body('Get_analysis_result')?['status'], '')))",
+              "limit": { "count": 180, "timeout": "PT30M" },
+              "operationOptions": "FailWhenLimitsReached",
+              "actions": {
+                "Get_analysis_result": {
+                  "type": "Http",
+                  "inputs": {
+                    "method": "GET",
+                    "uri": "@coalesce(outputs('Submit_to_town_hall_analyzer')?['headers']?['Operation-Location'], outputs('Submit_to_town_hall_analyzer')?['headers']?['operation-location'])",
+                    "authentication": {
+                      "type": "ManagedServiceIdentity",
+                      "audience": "https://cognitiveservices.azure.com"
+                    }
+                  },
+                  "runtimeConfiguration": {
+                    "secureData": { "properties": ["inputs", "outputs"] }
+                  },
+                  "runAfter": {}
+                },
+                "Wait_before_next_poll": {
+                  "type": "Wait",
+                  "inputs": { "interval": { "count": 10, "unit": "Second" } },
+                  "runAfter": { "Get_analysis_result": ["Succeeded"] }
+                }
+              },
+              "runAfter": { "Return_submission": ["Succeeded"] }
+            },
+            "Verify_analysis_succeeded": {
+              "type": "If",
+              "expression": {
+                "and": [
+                  { "equals": ["@toLower(coalesce(body('Get_analysis_result')?['status'], ''))", "succeeded"] },
+                  { "greater": ["@length(coalesce(body('Get_analysis_result')?['result']?['contents'], json('[]')))", 0] }
+                ]
+              },
+              "actions": {
+                "Analysis_completed": {
+                  "type": "Compose",
+                  "inputs": {
+                    "status": "Succeeded",
+                    "analyzerId": "@parameters('analyzerId')",
+                    "operationId": "@body('Submit_to_town_hall_analyzer')?['id']",
+                    "fileName": "@body('Resolve_shared_file')?['name']",
+                    "bytesRead": "@outputs('Read_summary')?['bytesRead']",
+                    "contentCount": "@length(body('Get_analysis_result')?['result']?['contents'])",
+                    "workflowRunId": "@workflow().run.name",
+                    "result": "@body('Get_analysis_result')?['result']"
+                  },
+                  "runtimeConfiguration": {
+                    "secureData": { "properties": ["inputs"] }
+                  },
+                  "runAfter": {}
+                }
+              },
+              "else": {
+                "actions": {
+                  "Fail_town_hall_analysis": {
+                    "type": "Terminate",
+                    "inputs": {
+                      "runStatus": "Failed",
+                      "runError": {
+                        "code": "ContentUnderstandingAnalysisFailed",
+                        "message": "@concat('Town hall analysis did not return a successful nonempty result. Service status: ', coalesce(body('Get_analysis_result')?['status'], 'missing'), '. Retrieve the operation URL returned at submission for error details.')"
+                      }
+                    },
+                    "runAfter": {}
+                  }
+                }
+              },
+              "runAfter": { "Poll_town_hall_analysis": ["Succeeded"] }
+            }
+          },
+          "else": {
+            "actions": {
+              "Fail_file_content": {
+                "type": "Terminate",
+                "inputs": {
+                  "runStatus": "Failed",
+                  "runError": {
+                    "code": "UnexpectedFileContent",
+                    "message": "Expected HTTP 200 and a content length matching the file size returned by Microsoft Graph."
+                  }
+                },
+                "runAfter": {}
+              }
+            }
+          },
+          "runAfter": { "Read_summary": ["Succeeded"] }
+        }
+      },
+      "else": {
+        "actions": {
+          "Fail_target_file": {
+            "type": "Terminate",
+            "inputs": {
+              "runStatus": "Failed",
+              "runError": {
+                "code": "UnexpectedFile",
+                "message": "The sharing link must resolve to the expected MP4 file with at least 1024 bytes."
+              }
+            },
+            "runAfter": {}
+          }
+        }
+      },
+      "runAfter": { "Resolve_shared_file": ["Succeeded"] }
+    }
+  },
+  "outputs": {}
+}

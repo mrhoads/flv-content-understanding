@@ -236,6 +236,52 @@ propagation and managed-identity token caches to refresh after changes.
 
 ## 4. Build the HTTP-only Logic App workflow
 
+### Deploy the included code
+
+[`workflow.json`](workflow.json) is the complete workflow definition, based on the
+working demonstration. It parameterizes the SharePoint host, sharing URL, expected
+filename, analyzer endpoint, analyzer ID, and API version, and additionally checks
+that Graph identifies the input as `video/mp4`.
+[`main.bicep`](main.bicep) loads that definition, enables the Logic App's
+system-assigned identity, and passes the sharing URL as a secure parameter.
+Neither file contains the video's sharing URL or generated credentials.
+
+From the repository root, after signing in to the intended subscription, run:
+
+```powershell
+az deployment group create `
+    --resource-group "demo-metlife-azcli-rg" `
+    --template-file "sharepoint\main.bicep" `
+    --parameters `
+        logicAppName="cu-sp-demo" `
+        location="northcentralus" `
+        sharePointHost="mngenvmcap024329.sharepoint.com" `
+        expectedFileName="4mjXPWPkWo8.mp4" `
+        contentUnderstandingEndpoint="https://aif-flv-cu-dev-e9fd04.services.ai.azure.com" `
+        analyzerId="cuTownHallAnalyzer"
+```
+
+Azure CLI prompts for the required secure `sharingUrl` parameter. Supply the
+complete sharing URL interactively, not as a command-line argument or a committed
+parameter value. Do not use `--no-prompt` for this interactive deployment.
+
+**Deploying over an existing Logic App replaces its definition and workflow
+parameters.** Back it up first, preserve its existing location, and do not use
+this template on a resource with unrelated workflows or additional configuration.
+It enables the workflow but does not invoke its manual trigger.
+
+The template does not assign Graph application permissions, grant Content
+Understanding RBAC, or create the analyzer. For a new Logic App, deploy it first
+to obtain its `managedIdentityPrincipalId` output, then perform steps 2 and 3
+using that principal ID before running the workflow. When updating the same
+resource without disabling or recreating its identity, its existing identity
+and grants remain in place.
+
+The sections below explain the actions in the JSON so the workflow can also be
+reviewed or adapted in the Logic App designer.
+
+### Configure the trigger and parameters
+
 The demonstrated Logic App is a Consumption resource
 (`Microsoft.Logic/workflows`), so the workflow is the Logic App itself. Back up
 any existing definition before replacing it; do not overwrite unrelated work.
@@ -249,6 +295,8 @@ Define these workflow parameters:
 | Parameter | Type | Value |
 |---|---|---|
 | `sharingUrl` | `SecureString` | Supply your video sharing URL at deployment; no committed default |
+| `sharePointHost` | `String` | `mngenvmcap024329.sharepoint.com` |
+| `expectedFileName` | `String` | `4mjXPWPkWo8.mp4` |
 | `contentUnderstandingEndpoint` | `String` | `https://aif-flv-cu-dev-e9fd04.services.ai.azure.com` |
 | `analyzerId` | `String` | `cuTownHallAnalyzer` |
 | `contentUnderstandingApiVersion` | `String` | `2025-11-01` |
@@ -286,7 +334,9 @@ different environment. Resolve the file by its known site/drive/item path instea
 
 Check that the resolved name is the expected file and that its size is valid.
 The current demonstration expects `4mjXPWPkWo8.mp4` with at least 1,024 bytes.
-Change that guard when choosing another video; reject mismatches explicitly.
+The included code uses `expectedFileName` for this guard and also requires MIME
+type `video/mp4`. Supply a different expected filename when choosing another
+MP4; reject mismatches explicitly.
 
 Inside that successful condition, add `Read_file_content`:
 

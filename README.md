@@ -94,7 +94,8 @@ See [`sharepoint/README.md`](sharepoint/README.md) for the Microsoft Graph
 PowerShell setup, managed-identity permissions, and HTTP-only Logic App workflow
 that reads a SharePoint video and submits its bytes to the Content Understanding
 town hall analyzer. The integration uses `analyzeBinary`, polls for completion,
-and requires no SharePoint connector, API keys, or staging storage.
+and requires no SharePoint connector, API keys, or staging storage. Deployable
+workflow JSON and a Bicep template are included in `sharepoint/`.
 
 ## Report on marketing campaigns in Microsoft Fabric
 
